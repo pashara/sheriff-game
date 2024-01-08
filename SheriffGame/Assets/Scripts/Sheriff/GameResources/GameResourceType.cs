@@ -14,8 +14,8 @@ namespace Sheriff.GameResources
         
         Pepper = 201,
         Honeydew = 202,
-        Silk = 202,
-        Сrossbow = 203
+        Silk = 203,
+        Сrossbow = 204
         
     }
 }

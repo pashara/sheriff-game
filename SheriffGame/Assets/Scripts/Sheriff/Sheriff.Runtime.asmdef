@@ -1,3 +1,17 @@
 {
-	"name": "Sheriff.Runtime"
+    "name": "Sheriff.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "JEditorTools",
+        "Unity.TextMeshPro"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

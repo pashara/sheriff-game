@@ -6,16 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-public sealed partial class AffectorContext : Entitas.Context<AffectorEntity> {
+public sealed partial class PlayerContext : Entitas.Context<PlayerEntity> {
 
-    public AffectorContext()
+    public PlayerContext()
         : base(
-            AffectorComponentsLookup.TotalComponents,
+            PlayerComponentsLookup.TotalComponents,
             0,
             new Entitas.ContextInfo(
-                "Affector",
-                AffectorComponentsLookup.componentNames,
-                AffectorComponentsLookup.componentTypes
+                "Player",
+                PlayerComponentsLookup.componentNames,
+                PlayerComponentsLookup.componentTypes
             ),
             (entity) =>
 
@@ -24,7 +24,7 @@ public sealed partial class AffectorContext : Entitas.Context<AffectorEntity> {
 #else
                 new Entitas.SafeAERC(entity),
 #endif
-            () => new AffectorEntity()
+            () => new PlayerEntity()
         ) {
     }
 }

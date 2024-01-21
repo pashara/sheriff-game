@@ -1,6 +1,5 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
-using MyNamespace.CodeGeneration.Attributes;
 using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components

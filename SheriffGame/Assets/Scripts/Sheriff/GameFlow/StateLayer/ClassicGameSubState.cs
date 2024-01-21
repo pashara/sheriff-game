@@ -41,7 +41,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
 
         public sealed override void Exit()
         {
-            foreach (var applyHandler in _environment.ResolveId<IEnumerable<IStateApplyable>>(_stateInstance))
+            foreach (var applyHandler in _environment.Container.ResolveAll<IStateApplyable>(InjectSources.Local))
                 applyHandler.Apply();
             
             OnExit();

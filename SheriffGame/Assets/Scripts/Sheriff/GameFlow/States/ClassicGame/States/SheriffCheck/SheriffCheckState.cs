@@ -1,16 +1,17 @@
 ﻿using Sheriff.ECS;
 using Sheriff.GameFlow.IterationEnvironments;
+using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Zenject;
 
-namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
+namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
 {
-    public class SetSheriffStatusState : ClassicGameState
+    public class SheriffCheckState : ClassicGameState
     {
         private readonly ClassicGameController _classicGameController;
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly IterationEnvironment _iterationEnvironment;
 
-        public SetSheriffStatusState(
+        public SheriffCheckState(
             ClassicGameController classicGameController,
             EcsContextProvider ecsContextProvider,
             IterationEnvironment iterationEnvironment)
@@ -23,18 +24,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
         
         public override void Enter()
         {
-            var gameEntity = _ecsContextProvider.Context.game.gameIdEntity;
-
-            var actualAction = _iterationEnvironment.Instantiate<SelectSheriffAction>();
-            
-            var simulationResult = actualAction.Simulate(new SelectSheriffActionParam()
-            {
-                round = gameEntity.round.Value,
-                playersQueue = gameEntity.potentialPlayersSequence.Value
-            });
-
-            actualAction.Emulate(simulationResult);
-            
             _classicGameController.OnReady<SetSheriffStatusState>();
         }
 
@@ -43,7 +32,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
         {
             container.BindInterfacesAndSelfTo<SherifSelectService>().AsSingle();
         }
-
 
         public override void Exit()
         {

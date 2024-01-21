@@ -1,7 +1,8 @@
 ﻿using Sheriff.GameFlow.States.ClassicGame.States;
 using Sheriff.GameFlow.States.ClassicGame.States.Initialize;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
-using Sheriff.GameFlow.States.ClassicGame.States.StopState;
+using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
+using Sheriff.GameFlow.States.ClassicGame.States.Shopping;
 
 namespace Sheriff.GameFlow.States.ClassicGame
 {
@@ -28,9 +29,15 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 return;
             }
             
-            if (typeof(T) == typeof(InitializeGameState))
+            if (typeof(T) == typeof(SetSheriffStatusState))
             {
-                _gameStateMachine.Enter<ShopSubState>();
+                _gameStateMachine.Enter<ShoppingSubState>();
+                return;
+            }
+            
+            if (typeof(T) == typeof(ShoppingState))
+            {
+                _gameStateMachine.Enter<SherifCheckSubState>();
                 return;
             }
         }

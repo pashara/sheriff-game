@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using Sheriff.GameFlow.States.ClassicGame;
 using Zenject;
 
 namespace Sheriff.GameFlow.IterationEnvironments
@@ -34,6 +37,11 @@ namespace Sheriff.GameFlow.IterationEnvironments
         {
             _container.UnbindAll();
             _container = null;
+        }
+
+        public List<T> ResolveIdAll<T>(object identifier)
+        {
+            return Container.ResolveIdAll<T>(identifier);
         }
     }
 }

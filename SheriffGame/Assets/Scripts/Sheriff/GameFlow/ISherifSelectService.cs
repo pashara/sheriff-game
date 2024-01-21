@@ -15,8 +15,6 @@ namespace Sheriff.GameFlow
     public interface ISherifSelectService
     {
         void SelectSherif(PlayerEntityId paramSheriffId);
-
-        void Clear();
     }
     
     public class SherifSelectService : ISherifSelectService, IStateApplyable, IInitializable
@@ -45,6 +43,7 @@ namespace Sheriff.GameFlow
                 entity.isSheriff = isSheriff;
                 entity.isDealer = !isSheriff;
             }
+            potentialSheriff = new PlayerEntityId(-1);
         }
 
         public void Clear()

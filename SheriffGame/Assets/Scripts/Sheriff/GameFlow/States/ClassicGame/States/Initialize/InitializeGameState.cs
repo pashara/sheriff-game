@@ -3,6 +3,7 @@ using System.Linq;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
+using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
 
@@ -13,17 +14,20 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly IRandomService _randomService;
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly ClassicGameController _classicGameController;
+        private readonly GameViewController _gameViewController;
         private readonly ClassicRuleConfig _ruleConfig;
 
         public InitializeGameState(
             IRandomService randomService,
             EcsContextProvider ecsContextProvider, 
             ClassicGameController classicGameController,
+            GameViewController gameViewController,
             ClassicRuleConfig ruleConfig)
         {
             _randomService = randomService.CreateSubService();
             _ecsContextProvider = ecsContextProvider;
             _classicGameController = classicGameController;
+            _gameViewController = gameViewController;
             _ruleConfig = ruleConfig;
         }
 
@@ -45,19 +49,29 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         
         private void CreateCards()
         {
-            int cardId = 0;
+
+            List<CardsConfig> cardsQueue = new();
+            
             foreach (var cardsConfig in _ruleConfig.intitalCardsConfig.cardsConfigs)
             {
                 for (int i = 0; i < cardsConfig.cardsCount; i++)
                 {
-                    cardId++;
-                    var cardEntity = _ecsContextProvider.Context.card.CreateEntity();
-                    cardEntity.AddResourceCategory(cardsConfig.category);
-                    cardEntity.AddResourceType(cardsConfig.resourceType);
-                    cardEntity.AddCardId(cardId);
-                    cardEntity.isInDec = true;
+                    cardsQueue.Add(cardsConfig);
                 }
             }
+            cardsQueue.Shuffle();
+
+            int cardId = 0;
+            foreach (var cardConfig in cardsQueue)
+            {
+                cardId++;
+                var cardEntity = _ecsContextProvider.Context.card.CreateEntity();
+                cardEntity.AddResourceCategory(cardConfig.category);
+                cardEntity.AddResourceType(cardConfig.resourceType);
+                cardEntity.AddCardId(cardId);
+                cardEntity.isInDec = true;
+            }
+            
         }
 
         private long CreatePlayer()
@@ -80,6 +94,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
 
             CreateCards();
             
+            
+            _gameViewController.LinkAllPlayers();
             _classicGameController.OnReady<InitializeGameState>();
         }
 

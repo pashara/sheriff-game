@@ -4,7 +4,8 @@ using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.States;
 using Sheriff.GameFlow.States.ClassicGame.States.Initialize;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
-using Sheriff.GameFlow.States.ClassicGame.States.StopState;
+using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
+using Sheriff.GameFlow.States.ClassicGame.States.Shopping;
 using Sheriff.Rules;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
@@ -41,8 +42,9 @@ namespace Sheriff.GameFlow
             subContainer.BindInterfacesAndSelfTo<ClassicRuleConfig>().FromInstance(rules);
             subContainer.BindInterfacesAndSelfTo<ClassicGameController>().AsSingle();
             
-            _gameStateMachine.Put(subContainer.Instantiate<ShopSubState>());
+            _gameStateMachine.Put(subContainer.Instantiate<ShoppingSubState>());
             _gameStateMachine.Put(subContainer.Instantiate<SetSherifStatusSubState>());
+            _gameStateMachine.Put(subContainer.Instantiate<SherifCheckSubState>());
             _gameStateMachine.Put(subContainer.Instantiate<InitializeGameSubState>());
 
 

@@ -3,6 +3,7 @@
     "rootNamespace": "",
     "references": [
         "JEditorTools",
+        "UniRx",
         "Unity.TextMeshPro",
         "StateMachine.Runtime",
         "Shared.Random",

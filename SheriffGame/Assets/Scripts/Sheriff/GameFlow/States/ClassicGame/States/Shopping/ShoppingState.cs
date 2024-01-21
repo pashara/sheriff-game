@@ -1,13 +1,13 @@
 ﻿using Sheriff.GameFlow.IterationEnvironments;
 using Zenject;
 
-namespace Sheriff.GameFlow.States.ClassicGame.States.StopState
+namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
 {
-    public class ShopState : ClassicGameState
+    public class ShoppingState : ClassicGameState
     {
         private readonly DiContainer _container;
 
-        public ShopState(
+        public ShoppingState(
             IterationEnvironment iterationEnvironment,
             ActionHandleService actionHandleService
             )

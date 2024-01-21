@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using MyNamespace.CodeGeneration.Attributes;
 using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components
@@ -40,6 +41,11 @@ namespace Sheriff.ECS.Components
         public PlayerEntityId(long id)
         {
             EntityID = id;
+        }
+
+        public override string ToString()
+        {
+            return $"PlayerId: {EntityID}";
         }
 
         public static bool operator ==(PlayerEntityId a, PlayerEntityId b)

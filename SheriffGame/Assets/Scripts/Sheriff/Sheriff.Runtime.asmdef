@@ -3,7 +3,10 @@
     "rootNamespace": "",
     "references": [
         "JEditorTools",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "StateMachine.Runtime",
+        "Shared.Random",
+        "Zenject"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

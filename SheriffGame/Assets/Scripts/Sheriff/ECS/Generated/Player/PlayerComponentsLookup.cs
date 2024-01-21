@@ -8,15 +8,24 @@
 //------------------------------------------------------------------------------
 public static class PlayerComponentsLookup {
 
+    public const int Dealer = 0;
+    public const int Id = 1;
+    public const int PlayerId = 2;
+    public const int Sheriff = 3;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-
+        "Dealer",
+        "Id",
+        "PlayerId",
+        "Sheriff"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Sheriff.ECS.Components.DealerComponent),
+        typeof(Sheriff.ECS.Components.IdComponent),
+        typeof(Sheriff.ECS.Components.PlayerIdComponent),
+        typeof(Sheriff.ECS.Components.SheriffComponent)
     };
 }

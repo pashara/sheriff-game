@@ -22,5 +22,159 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes:
     - Name: config
-      Entry: 6
+      Entry: 7
+      Data: 0|Sheriff.Rules.ClassicRules.ClassicRuleConfig, Sheriff.Runtime
+    - Name: intitalCardsConfig
+      Entry: 7
+      Data: 1|Sheriff.Rules.ClassicRules.InitialCardsConfig, Sheriff.Runtime
+    - Name: cardsConfigs
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[Sheriff.Rules.ClassicRules.CardsConfig,
+        Sheriff.Runtime]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 8
+    - Name: 
+      Entry: 7
+      Data: 3|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 12
+    - Name: resourceType
+      Entry: 3
+      Data: 101
+    - Name: category
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 36
+    - Name: resourceType
+      Entry: 3
+      Data: 102
+    - Name: category
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 5|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 36
+    - Name: resourceType
+      Entry: 3
+      Data: 103
+    - Name: category
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 6|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 24
+    - Name: resourceType
+      Entry: 3
+      Data: 104
+    - Name: category
+      Entry: 3
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 7|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 18
+    - Name: resourceType
+      Entry: 3
+      Data: 201
+    - Name: category
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 8|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 16
+    - Name: resourceType
+      Entry: 3
+      Data: 202
+    - Name: category
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 9|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 9
+    - Name: resourceType
+      Entry: 3
+      Data: 203
+    - Name: category
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 10|Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
+    - Name: cardsCount
+      Entry: 3
+      Data: 5
+    - Name: resourceType
+      Entry: 3
+      Data: 204
+    - Name: category
+      Entry: 3
+      Data: 2
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: bankConfig
+      Entry: 7
+      Data: 11|Sheriff.Rules.ClassicRules.InitialBankConfig, Sheriff.Runtime
+    - Name: perPlayer
+      Entry: 3
+      Data: 50
+    - Name: totalBank
+      Entry: 3
+      Data: 9999
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
       Data: 

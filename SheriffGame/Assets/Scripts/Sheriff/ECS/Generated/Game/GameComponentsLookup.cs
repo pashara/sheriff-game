@@ -8,15 +8,24 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
+    public const int GameId = 0;
+    public const int Id = 1;
+    public const int PotentialPlayersSequence = 2;
+    public const int Round = 3;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 4;
 
     public static readonly string[] componentNames = {
-
+        "GameId",
+        "Id",
+        "PotentialPlayersSequence",
+        "Round"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Sheriff.ECS.Components.GameIdComponent),
+        typeof(Sheriff.ECS.Components.IdComponent),
+        typeof(Sheriff.ECS.Components.PotentialPlayersSequence),
+        typeof(Sheriff.ECS.Components.RoundComponent)
     };
 }

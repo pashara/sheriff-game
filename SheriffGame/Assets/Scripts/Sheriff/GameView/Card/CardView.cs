@@ -7,6 +7,13 @@ namespace Sheriff.GameView
         [SerializeField] private Transform innerViewRoot;
         [SerializeField] private Transform cardShirtRoot;
 
+        public CardEntity CardEntity { get; private set; }
+
+        public void Link(CardEntity cardEntity)
+        {
+            CardEntity = cardEntity;
+        }
+
         
         public void SetShirt(ShirtView shirtView)
         {

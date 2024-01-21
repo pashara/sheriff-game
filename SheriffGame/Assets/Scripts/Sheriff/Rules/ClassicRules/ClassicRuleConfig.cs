@@ -5,13 +5,23 @@ using Sheriff.GameResources;
 namespace Sheriff.Rules.ClassicRules
 {
     
-    public class ClassicRuleConfig : BaseRuleConfig
+    public class ClassicRuleConfig : BaseRuleConfig, ICardsPerStepConfig
     {
         public InitialCardsConfig intitalCardsConfig;
         public InitialBankConfig bankConfig;
+        public ClassicCardsPerStepConfig cardsPerStepConfig;
+        
+        CardsPerStepConfig ICardsPerStepConfig.Config => cardsPerStepConfig;
     }
 
 
+    
+    [Serializable]
+    public class ClassicCardsPerStepConfig : CardsPerStepConfig
+    {
+        public int cardsPerStep;
+    }
+    
     [Serializable]
     public class CardsConfig
     {

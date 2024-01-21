@@ -8,15 +8,30 @@
 //------------------------------------------------------------------------------
 public static class CardComponentsLookup {
 
+    public const int CardId = 0;
+    public const int CardOwner = 1;
+    public const int Id = 2;
+    public const int InDec = 3;
+    public const int ResourceCategory = 4;
+    public const int ResourceType = 5;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 6;
 
     public static readonly string[] componentNames = {
-
+        "CardId",
+        "CardOwner",
+        "Id",
+        "InDec",
+        "ResourceCategory",
+        "ResourceType"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Sheriff.ECS.Components.CardIdComponent),
+        typeof(Sheriff.ECS.Components.CardOwnerComponent),
+        typeof(Sheriff.ECS.Components.IdComponent),
+        typeof(Sheriff.ECS.Components.InDecComponent),
+        typeof(Sheriff.ECS.Components.ResourceCategoryComponent),
+        typeof(Sheriff.ECS.Components.ResourceTypeComponent)
     };
 }

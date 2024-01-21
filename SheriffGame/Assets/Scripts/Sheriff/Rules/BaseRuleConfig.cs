@@ -1,7 +1,17 @@
 ﻿namespace Sheriff.Rules
 {
-    public abstract class BaseRuleConfig
+    public interface ICardsPerStepConfig
+    {
+        CardsPerStepConfig Config { get; }
+    }
+
+    public abstract class CardsPerStepConfig
     {
         
+    }
+    
+    
+    public abstract class BaseRuleConfig
+    {
     }
 }

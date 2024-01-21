@@ -70,13 +70,26 @@ namespace ThirdParty.StateMachine
         private void ExitActualState()
         {
             if (ActualState.Value == null) return;
+
+            BeforeExitState(ActualState.Value);
             ActualState.Value.Exit();
         }
 
         private void ProcessEnterState(T stateHandler)
         {
             _actualState.Value = stateHandler;
+            BeforeEnterState(ActualState.Value);
             stateHandler.Enter();
+        }
+
+
+        protected virtual void BeforeExitState(T actualStateValue)
+        {
+        }
+
+
+        protected virtual void BeforeEnterState(T actualStateValue)
+        {
         }
     }
 }

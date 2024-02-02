@@ -17,15 +17,10 @@ namespace Sheriff
             Container.BindInterfacesAndSelfTo<RandomService>().FromInstance(new RandomService(0));
             Container.BindInterfacesAndSelfTo<ClassicGameStateMachine>().AsSingle();
             Container.BindInterfacesAndSelfTo<GameViewController>().FromInstance(gameViewController);
-            Container.BindInterfacesAndSelfTo<TestScript>().AsSingle()
-                .WithArguments(new object[]  { new Ee("SimpleMonoBehaviourInstaller") });
+            Container.BindInterfacesAndSelfTo<CommandsApplyService>().AsSingle();
 
 
             Container.Bind<IterationEnvironmentFactory>().FromSubContainerResolve().ByInstaller<EnvironemntSubContainerInstaller>().AsCached();
-            
-            
-            
-            Container.Resolve<TestScript>();
         }
     }
 }

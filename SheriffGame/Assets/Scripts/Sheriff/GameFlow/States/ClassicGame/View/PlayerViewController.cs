@@ -1,4 +1,4 @@
-﻿using Sirenix.OdinInspector;
+﻿using Sheriff.GameFlow.States.ClassicGame.View.Player;
 using UnityEngine;
 
 namespace Sheriff.GameFlow.States.ClassicGame.View
@@ -7,13 +7,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
     {
         public void Link(PlayerEntity playerEntity)
         {
+            GetComponent<PlayerEditorComponents>().Link(playerEntity);
             gameObject.name = $"Player {playerEntity.playerId.Value}";
-        }
-
-        [Button]
-        private void TryGet()
-        {
-            
         }
     }
 }

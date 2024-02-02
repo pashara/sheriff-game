@@ -1,4 +1,7 @@
-﻿using Sheriff.GameFlow.IterationEnvironments;
+﻿using System;
+using System.Collections.Generic;
+using Sheriff.ECS;
+using Sheriff.GameFlow.IterationEnvironments;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
@@ -9,14 +12,25 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
 
         public ShoppingState(
             IterationEnvironment iterationEnvironment,
-            ActionHandleService actionHandleService
+            EcsContextProvider ecsContextProvider
             )
         {
-            iterationEnvironment.Container.BindInterfacesAndSelfTo<CardsOnHandService>().AsSingle();
-            iterationEnvironment.Container.BindInterfacesAndSelfTo<UsersBagService>().AsSingle();
-            iterationEnvironment.Container.BindInterfacesAndSelfTo<TestScript>().AsSingle().WithArguments(new object[] { new Ee("ShopState") });
-
-            PutAllowedActions(actionHandleService, iterationEnvironment.Container);
+            foreach (var playerEntity in ecsContextProvider.Context.player.GetEntities())
+            {
+                if (playerEntity.isDealer)
+                {
+                    var allowedActions = new AllowedActionsProvider();
+                    allowedActions.ApplyAllowedActions(new List<Type>()
+                    {
+                        typeof(DeclareCommand),
+                        typeof(GetCardsFromDeckCommand),
+                        typeof(PopCardFromBagCommand),
+                        typeof(PutCardInBagCommand),
+                    });
+                    playerEntity.ReplaceAllowedActions(allowedActions);
+                }
+            }
+            
         }
         
         public override void Enter()
@@ -25,13 +39,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
 
         public override void Exit()
         {
-        }
-        
-        static void PutAllowedActions(ActionHandleService handleService, IInstantiator container)
-        {
-            handleService.Put(container.Instantiate<GetCardsFromDeckAction>());
-            handleService.Put(container.Instantiate<PutCardInBagAction>());
-            handleService.Put(container.Instantiate<PopCardFromBagAction>());
         }
     }
 }

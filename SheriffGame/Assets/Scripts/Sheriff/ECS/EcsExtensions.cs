@@ -8,15 +8,15 @@ namespace Sheriff.ECS
     public static class EcsExtensions
     {
         private static readonly Dictionary<IComponent, object> _cache = new();
-        private static readonly Dictionary<Type, Dictionary<int, object>> _cacheGeneric = new();
+        private static readonly Dictionary<IEntity, Dictionary<int, object>> _cacheGeneric = new();
 
         public static IReadOnlyReactiveProperty<T> OnChange<T>(this IEntity entity, int componentId)
             where T : IComponent
         {
-            if (!_cacheGeneric.TryGetValue(entity.GetType(), out var elementsCache))
+            if (!_cacheGeneric.TryGetValue(entity, out var elementsCache))
             {
                 var dictionary = new Dictionary<int, object>();
-                _cacheGeneric[entity.GetType()] = dictionary;
+                _cacheGeneric[entity] = dictionary;
                 elementsCache = dictionary;
             }
 
@@ -25,8 +25,13 @@ namespace Sheriff.ECS
                 return property as IReadOnlyReactiveProperty<T>;
             }
             ReactiveProperty<T> value = new();
+
+            if (entity.HasComponent(componentId))
+            {
+                value.Value = (T)entity.GetComponent(componentId);
+            }
+            
             elementsCache[componentId] = value;
-            property = value;
             
             
             entity.OnComponentAdded += EntityOnOnComponentAdded;
@@ -48,6 +53,7 @@ namespace Sheriff.ECS
             void EntityOnOnDestroyEntity(IEntity entity1)
             {
                 value.Dispose();
+                _cacheGeneric.Remove(entity1);
                 elementsCache.Remove(componentId);
                 
                 entity.OnComponentAdded -= EntityOnOnComponentAdded;
@@ -58,16 +64,22 @@ namespace Sheriff.ECS
 
             void EntityOnOnComponentReplaced(IEntity entity1, int index, IComponent previouscomponent, IComponent newcomponent)
             {
+                if (index != componentId)
+                    return;
                 value.Value = (T) newcomponent;
             }
 
             void EntityOnOnComponentAdded(IEntity entity1, int index, IComponent component1)
             {
+                if (index != componentId)
+                    return;
                 value.Value = (T) component1;
             }
             
             void EntityOnOnComponentRemoved(IEntity entity, int index, IComponent component)
             {
+                if (index != componentId)
+                    return;
                 value.Value = default;
             }
         }

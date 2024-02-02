@@ -1,4 +1,5 @@
-﻿using Sheriff.GameFlow.States.ClassicGame.States;
+﻿using System;
+using Sheriff.GameFlow.States.ClassicGame.States;
 using Sheriff.GameFlow.States.ClassicGame.States.Initialize;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
@@ -23,21 +24,32 @@ namespace Sheriff.GameFlow.States.ClassicGame
 
         public void OnReady<T>() where T : ClassicGameState
         {
-            if (typeof(T) == typeof(InitializeGameState))
+            OnReady(typeof(T));
+        }
+
+        public void OnReady(Type type)
+        {
+            if (type == typeof(InitializeGameState))
             {
                 _gameStateMachine.Enter<SetSherifStatusSubState>();
                 return;
             }
             
-            if (typeof(T) == typeof(SetSheriffStatusState))
+            if (type == typeof(SetSheriffStatusState))
             {
                 _gameStateMachine.Enter<ShoppingSubState>();
                 return;
             }
             
-            if (typeof(T) == typeof(ShoppingState))
+            if (type == typeof(ShoppingSubState))
             {
                 _gameStateMachine.Enter<SherifCheckSubState>();
+                return;
+            }
+            
+            if (type == typeof(SheriffCheckState))
+            {
+                _gameStateMachine.Enter<SetSherifStatusSubState>();
                 return;
             }
         }

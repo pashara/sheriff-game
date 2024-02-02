@@ -6,6 +6,7 @@ using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
+using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States
 {
@@ -16,18 +17,24 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly ClassicGameController _classicGameController;
         private readonly GameViewController _gameViewController;
         private readonly ClassicRuleConfig _ruleConfig;
+        private readonly CommandsApplyService _commandsApplyService;
+        private readonly DiContainer _container;
 
         public InitializeGameState(
             IRandomService randomService,
             EcsContextProvider ecsContextProvider, 
             ClassicGameController classicGameController,
             GameViewController gameViewController,
+            CommandsApplyService commandsApplyService,
+            DiContainer container,
             ClassicRuleConfig ruleConfig)
         {
             _randomService = randomService.CreateSubService();
             _ecsContextProvider = ecsContextProvider;
             _classicGameController = classicGameController;
             _gameViewController = gameViewController;
+            _commandsApplyService = commandsApplyService;
+            _container = container;
             _ruleConfig = ruleConfig;
         }
 
@@ -79,6 +86,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             var entity = _ecsContextProvider.Context.player.CreateEntity();
             var id = entity.id.ID;
             entity.AddPlayerId(id);
+            entity.ReplaceGoldCashCurrency(0);
+            entity.AddActualStateProvider(new UserActionsList());
 
 
             return id;
@@ -93,10 +102,35 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             CreateSession();
 
             CreateCards();
+
+            GiveCardsToPlayers();
+            GiveGoldToPlayers();
             
             
             _gameViewController.LinkAllPlayers();
+            _gameViewController.LinkDeck();
             _classicGameController.OnReady<InitializeGameState>();
+        }
+
+        private void GiveGoldToPlayers()
+        {
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
+            {
+                playerEntity.ReplaceGoldCashCurrency(180);
+            }
+        }
+
+        private void GiveCardsToPlayers()
+        {
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
+            {
+                var action = _container.Instantiate<GetCardsFromDeckCommand>().Calculate(new GetCardsFromDeckCommand.Params()
+                {
+                    cardsCount = 5,
+                    playerEntityId = playerEntity.playerId.Value
+                });
+                _commandsApplyService.Apply(action);
+            }
         }
 
         public override void Exit()

@@ -23,6 +23,12 @@ namespace Sheriff.GameFlow.IterationEnvironments
             return Container.Instantiate<T>();
         }
 
+
+        public T Command<T>() where T : IGameCommand
+        {
+            return Container.Instantiate<T>();
+        }
+        
         public T Resolve<T>()
         {
             return Container.Resolve<T>();

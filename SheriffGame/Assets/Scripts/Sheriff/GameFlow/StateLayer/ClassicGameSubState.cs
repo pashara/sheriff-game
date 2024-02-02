@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Sheriff.ECS;
 using Sheriff.GameFlow.IterationEnvironments;
 using ThirdParty.StateMachine.States;
 using Zenject;
@@ -9,10 +11,21 @@ namespace Sheriff.GameFlow.States.ClassicGame
     {
         
     }
+
+    public interface IClassicSubState : ISubState
+    {
+        
+    }
+
+    public interface ISubState
+    {
+        
+    }
     
-    public class ClassicGameSubState<T> : SubState<T>, IClassicSubState<T> where T : ClassicGameState
+    public class ClassicGameSubState<T> : SubState<T>, IClassicSubState, IClassicSubState<T> where T : ClassicGameState
     {
         private readonly DiContainer _container;
+        private readonly EcsContextProvider _ecsContextProvider;
         private readonly IterationEnvironmentFactory _environmentFactory;
         private IterationEnvironment _environment;
         private T _stateInstance;
@@ -23,6 +36,8 @@ namespace Sheriff.GameFlow.States.ClassicGame
             )
         {
             _container = container;
+            
+            _ecsContextProvider = container.Resolve<EcsContextProvider>();
             _environmentFactory = environmentFactory;
         }
 
@@ -34,7 +49,12 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 _environment = null;
             }
             _environment = CreateEnvironment();
-            _environment.Container.BindInterfacesAndSelfTo<ActionHandleService>().AsSingle();
+            
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
+            {
+                playerEntity.actualStateProvider.Value.SetState(this);
+            }
+            
             
             OnEnter();
         }

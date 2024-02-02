@@ -37,7 +37,8 @@ namespace Sheriff.GameFlow
 
         private void Initialize()
         {
-            var subContainer = _container.CreateSubContainer();
+            // var subContainer = _container.CreateSubContainer();
+            var subContainer = _container;
             var rules = configProvider.Rules<ClassicRuleConfig>();
             subContainer.BindInterfacesAndSelfTo<ClassicRuleConfig>().FromInstance(rules);
             subContainer.BindInterfacesAndSelfTo<ClassicGameController>().AsSingle();
@@ -46,11 +47,6 @@ namespace Sheriff.GameFlow
             _gameStateMachine.Put(subContainer.Instantiate<SetSherifStatusSubState>());
             _gameStateMachine.Put(subContainer.Instantiate<SherifCheckSubState>());
             _gameStateMachine.Put(subContainer.Instantiate<InitializeGameSubState>());
-
-
-
-            subContainer.Resolve<ClassicGameController>().StartGame();
         }
-
     }
 }

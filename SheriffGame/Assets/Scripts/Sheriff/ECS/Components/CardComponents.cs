@@ -1,5 +1,6 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using Newtonsoft.Json;
 using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components
@@ -35,6 +36,7 @@ namespace Sheriff.ECS.Components
 
     public struct PlayerEntityId
     {
+        [JsonProperty("ID")]
         public readonly long EntityID;
 
         public PlayerEntityId(long id)
@@ -65,6 +67,7 @@ namespace Sheriff.ECS.Components
 
     public struct CardEntityId
     {
+        [JsonProperty("ID")]
         public readonly long EntityID;
 
         public CardEntityId(long id)
@@ -86,6 +89,11 @@ namespace Sheriff.ECS.Components
         public static implicit operator CardEntityId(long value)
         {
             return new CardEntityId(value);
+        }
+
+        public override string ToString()
+        {
+            return $"CardID: {EntityID}";
         }
     }
 

@@ -8,24 +8,39 @@
 //------------------------------------------------------------------------------
 public static class PlayerComponentsLookup {
 
-    public const int Dealer = 0;
-    public const int Id = 1;
-    public const int PlayerId = 2;
-    public const int Sheriff = 3;
+    public const int ActualStateProvider = 0;
+    public const int AllowedActions = 1;
+    public const int Dealer = 2;
+    public const int DeclareResourcesByPlayer = 3;
+    public const int GoldCashCurrency = 4;
+    public const int Id = 5;
+    public const int PlayerId = 6;
+    public const int SelectedCards = 7;
+    public const int Sheriff = 8;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
+        "ActualStateProvider",
+        "AllowedActions",
         "Dealer",
+        "DeclareResourcesByPlayer",
+        "GoldCashCurrency",
         "Id",
         "PlayerId",
+        "SelectedCards",
         "Sheriff"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Sheriff.ECS.Components.ActualStateProviderComponent),
+        typeof(Sheriff.ECS.Components.AllowedActionsComponent),
         typeof(Sheriff.ECS.Components.DealerComponent),
+        typeof(Sheriff.ECS.Components.DeclareResourcesByPlayerComponent),
+        typeof(Sheriff.ECS.Components.GoldCashCurrencyComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
+        typeof(Sheriff.ECS.Components.SelectedCardsComponent),
         typeof(Sheriff.ECS.Components.SheriffComponent)
     };
 }

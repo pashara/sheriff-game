@@ -17,7 +17,7 @@ namespace Sheriff.GameFlow
         void SelectSherif(PlayerEntityId paramSheriffId);
     }
     
-    public class SherifSelectService : ISherifSelectService, IStateApplyable, IInitializable
+    public class SherifSelectService : ISherifSelectService, IInitializable
     {
         private readonly EcsContextProvider _ecsContextProvider;
         private PlayerEntityId potentialSheriff = new PlayerEntityId();
@@ -32,6 +32,7 @@ namespace Sheriff.GameFlow
         public void SelectSherif(PlayerEntityId paramSheriffId)
         {
             potentialSheriff = paramSheriffId;
+            Apply();
         }
         
 

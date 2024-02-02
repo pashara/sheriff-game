@@ -6,6 +6,7 @@ using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameResources;
 using Sirenix.OdinInspector;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -26,13 +27,7 @@ namespace Sheriff.GameFlow
             public PlayerEntityId playerEntityId;
         }
         
-        private readonly EcsContextProvider _ecsContextProvider;
-
-        public ResetDeclarationCommand(
-            EcsContextProvider ecsContextProvider) 
-        {
-            _ecsContextProvider = ecsContextProvider;
-        }
+        [Inject] private readonly EcsContextProvider _ecsContextProvider;
 
         [JsonProperty("result")]
         private EmulateParams _result = null;

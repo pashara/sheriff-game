@@ -21,7 +21,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
             _commandsApplyService = commandsApplyService;
             _ecsContextProvider = ecsContextProvider;
             _iterationEnvironment = iterationEnvironment;
-            BindEnvironment(_iterationEnvironment.Container);
         }
         
         public override void Enter()
@@ -39,12 +38,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
             
             _classicGameController.OnReady<SetSheriffStatusState>();
         }
-
-
-        protected void BindEnvironment(DiContainer container)
-        {
-            container.BindInterfacesAndSelfTo<SherifSelectService>().AsSingle();
-        }
+        
 
 
         public override void Exit()

@@ -49,4 +49,11 @@ namespace Sheriff.ECS.Components
     {
         public int Value;
     }
+
+
+    [Player]
+    public class ReadyForCheckComponent : IComponent
+    {
+        
+    }
 }

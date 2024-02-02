@@ -6,6 +6,7 @@ using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameResources;
 using Sirenix.OdinInspector;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -13,10 +14,18 @@ namespace Sheriff.GameFlow
     public class ProductDeclaration
     {
         [ShowInInspector]
+        [JsonProperty("count")]
         public int Count { get; private set; }
         
+        
+        [JsonProperty("resource")]
         [ShowInInspector]
         public GameResourceType ResourceType { get; private set; }
+
+
+        public ProductDeclaration()
+        {
+        }
         
         
         public ProductDeclaration(int count, GameResourceType resourceType)
@@ -36,6 +45,7 @@ namespace Sheriff.GameFlow
     public class ProductsDeclaration
     {
         [ShowInInspector]
+        [JsonProperty("declarations")]
         public List<ProductDeclaration> Declarations { get; }
 
         public ProductsDeclaration()
@@ -71,13 +81,7 @@ namespace Sheriff.GameFlow
             public ProductsDeclaration declarations;
         }
         
-        private readonly EcsContextProvider _ecsContextProvider;
-
-        public DeclareCommand(
-            EcsContextProvider ecsContextProvider) 
-        {
-            _ecsContextProvider = ecsContextProvider;
-        }
+        [Inject] private readonly EcsContextProvider _ecsContextProvider;
 
         [JsonProperty("result")]
         private EmulateParams _result = null;

@@ -24,9 +24,12 @@ public partial class PlayerEntity
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerIdComponent> OnPlayerId() =>
         this.OnChange<Sheriff.ECS.Components.PlayerIdComponent>(6);
 
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.ReadyForCheckComponent> OnReadyForCheck() =>
+        this.OnChange<Sheriff.ECS.Components.ReadyForCheckComponent>(7);
+
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SelectedCardsComponent> OnSelectedCards() =>
-        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(7);
+        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(8);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffComponent> OnSheriff() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(8);
+        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(9);
 }

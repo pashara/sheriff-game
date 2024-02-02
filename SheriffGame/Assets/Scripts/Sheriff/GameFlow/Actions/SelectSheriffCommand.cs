@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Sheriff.ECS.Components;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -26,15 +27,10 @@ namespace Sheriff.GameFlow
             public List<PlayerEntityId> dealers;
         }
         
-        private readonly ISherifSelectService _sherifSelectService;
+        [Inject] private readonly ISherifSelectService _sherifSelectService;
         
         [JsonProperty("result")]
         private SelectSheriffEmulateParam _result;
-
-        public SelectSheriffCommand(ISherifSelectService sherifSelectService)
-        {
-            _sherifSelectService = sherifSelectService;
-        }
         
         public override void Apply()
         {

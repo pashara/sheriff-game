@@ -7,6 +7,7 @@ using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using ThirdParty.Randoms;
 using UnityEngine;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -29,18 +30,9 @@ namespace Sheriff.GameFlow
             public List<CardEntityId> cardIds;
         }
         
-        private readonly IRandomService _randomService;
-        private readonly IGroup<CardEntity> _cardsInDec;
-        private readonly EcsContextProvider _ecsContextProvider;
-
-        public GetCardsFromDeckCommand(
-            EcsContextProvider ecsContextProvider,
-            IRandomService randomService) 
-        {
-            _randomService = randomService;
-            _cardsInDec = ecsContextProvider.Context.card.GetGroup(CardMatcher.InDec);
-            _ecsContextProvider = ecsContextProvider;
-        }
+        [Inject] private readonly IRandomService _randomService;
+        [Inject] private readonly EcsContextProvider _ecsContextProvider;
+        
 
         [JsonProperty("result")]
         private GetCardsFromDeckEmulateParams _result = null;
@@ -48,7 +40,8 @@ namespace Sheriff.GameFlow
         public override GetCardsFromDeckCommand Calculate(Params param)
         {
             var cardsCount = param.cardsCount;
-            var entities = _cardsInDec.GetEntities();
+            var cardsInDec = _ecsContextProvider.Context.card.GetGroup(CardMatcher.InDec);
+            var entities = cardsInDec.GetEntities();
 
             var actualCardsCount = Mathf.Min(cardsCount, entities.Length);
             var indexes = Enumerable.Range(0, entities.Length).ToList();

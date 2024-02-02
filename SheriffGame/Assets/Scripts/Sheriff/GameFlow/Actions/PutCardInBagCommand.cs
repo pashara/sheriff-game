@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -26,7 +27,7 @@ namespace Sheriff.GameFlow
         }
         
         
-        private readonly EcsContextProvider _ecsContextProvider;
+        [Inject] private readonly EcsContextProvider _ecsContextProvider;
         
         [JsonProperty("result")]
         private PutCardInBagEmulateParam _result;

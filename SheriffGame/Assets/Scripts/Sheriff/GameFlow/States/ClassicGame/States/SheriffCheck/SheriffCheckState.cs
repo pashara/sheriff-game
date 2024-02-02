@@ -33,11 +33,9 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     var allowedActions = new AllowedActionsProvider();
                     allowedActions.ApplyAllowedActions(new List<Type>()
                     {
-                        typeof(DeclareCommand),
-                        typeof(GetCardsFromDeckCommand),
-                        typeof(PopCardFromBagCommand),
-                        typeof(PutCardInBagCommand),
+                        typeof(AffectGoldCommand),
                     });
+                    playerEntity.isReadyForCheck = true;
                     playerEntity.ReplaceAllowedActions(allowedActions);
                 }
                 else if (playerEntity.isSheriff)
@@ -45,10 +43,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     var allowedActions = new AllowedActionsProvider();
                     allowedActions.ApplyAllowedActions(new List<Type>()
                     {
-                        typeof(DeclareCommand),
-                        typeof(GetCardsFromDeckCommand),
-                        typeof(PopCardFromBagCommand),
-                        typeof(PutCardInBagCommand),
+                        typeof(AffectGoldCommand),
+                        typeof(CheckDealersCommand),
                     });
                     playerEntity.ReplaceAllowedActions(allowedActions);
                     
@@ -59,9 +55,9 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
         
         public override void Enter()
         {
-            ResetDeclaration();
+            // ResetDeclaration();
             
-            _classicGameController.OnReady<SheriffCheckState>();
+            // _classicGameController.OnReady<SheriffCheckState>();
         }
 
         private void IncRound()
@@ -81,6 +77,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                         playerEntityId = e.playerId.Value
                     });
                 _commandsApplyService.Apply(actualAction);
+                e.isReadyForCheck = false;
             }
         }
 

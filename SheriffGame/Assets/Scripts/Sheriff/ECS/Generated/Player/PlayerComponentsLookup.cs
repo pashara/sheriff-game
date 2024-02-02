@@ -15,10 +15,11 @@ public static class PlayerComponentsLookup {
     public const int GoldCashCurrency = 4;
     public const int Id = 5;
     public const int PlayerId = 6;
-    public const int SelectedCards = 7;
-    public const int Sheriff = 8;
+    public const int ReadyForCheck = 7;
+    public const int SelectedCards = 8;
+    public const int Sheriff = 9;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
@@ -28,6 +29,7 @@ public static class PlayerComponentsLookup {
         "GoldCashCurrency",
         "Id",
         "PlayerId",
+        "ReadyForCheck",
         "SelectedCards",
         "Sheriff"
     };
@@ -40,6 +42,7 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.GoldCashCurrencyComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
+        typeof(Sheriff.ECS.Components.ReadyForCheckComponent),
         typeof(Sheriff.ECS.Components.SelectedCardsComponent),
         typeof(Sheriff.ECS.Components.SheriffComponent)
     };

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Sheriff.ECS;
+using Sheriff.ECS.Components;
 using Sheriff.GameResources;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -28,6 +29,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.Player
         [Inject] private CommandsApplyService _commandsApplyService;
         [Inject] private DiContainer _container;
         [Inject] private EcsContextProvider _ecsContextProvider;
+        [Inject] private SheriffCheckHandler _sheriffCheckHandler;
         private PlayerEntity _playerEntity;
 
 
@@ -210,6 +212,34 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.Player
             {
                 playerEntityId = _playerEntity.playerId.Value,
                 cardEntityId = cardId
+            });
+            _commandsApplyService.Apply(action);
+        }
+        
+
+        private bool CanCheckAsSheriff => AllowedActions.AllowedActions.Contains(typeof(CheckDealersCommand));
+        [ShowIf(nameof(CanCheckAsSheriff))]
+        [Button]
+        private void CheckAsSherif(long playerId)
+        {
+            var check = _sheriffCheckHandler.Check(_playerEntity.playerId.Value, new PlayerEntityId(playerId));
+            
+            var action = _container.Instantiate<CheckDealersCommand>().Calculate(new CheckDealersCommand.Params()
+            {
+                CheckResult = check
+            });
+            _commandsApplyService.Apply(action);
+        }
+
+        [ShowIf(nameof(CanCheckAsSheriff))]
+        [Button]
+        private void SkipCharacterAsSherif(long playerId)
+        {
+            var check = _sheriffCheckHandler.Skip(_playerEntity.playerId.Value, new PlayerEntityId(playerId));
+            
+            var action = _container.Instantiate<CheckDealersCommand>().Calculate(new CheckDealersCommand.Params()
+            {
+                CheckResult = check
             });
             _commandsApplyService.Apply(action);
         }

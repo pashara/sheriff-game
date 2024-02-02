@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Zenject;
 
 namespace Sheriff.GameFlow
 {
@@ -15,8 +16,6 @@ namespace Sheriff.GameFlow
             public PlayerEntityId playerEntityId;
             public CardEntityId cardEntityId;
         }
-        
-        private readonly EcsContextProvider _ecsContextProvider;
 
         [Serializable]
         public class PopCardFromBagEmulateParam : EmulateActionParams
@@ -28,13 +27,11 @@ namespace Sheriff.GameFlow
             public CardEntityId cardEntityId;
         }
         
+        
+        [Inject] private readonly EcsContextProvider _ecsContextProvider;
+        
         [JsonProperty("result")]
         private PopCardFromBagEmulateParam _result;
-
-        public PopCardFromBagCommand(EcsContextProvider ecsContextProvider)
-        {
-            _ecsContextProvider = ecsContextProvider;
-        }
 
         public override PopCardFromBagCommand Calculate(Params param)
         {

@@ -911,6 +911,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc603df40833477e9bc6a9b7f1b67a33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialCommands: "[\r\n  {\r\n    \"Id\": 4,\r\n    \"Command\": {\r\n      \"$type\":
+    \"Sheriff.GameFlow.PutCardInBagCommand, Sheriff.Runtime\",\r\n      \"result\":
+    {\r\n        \"playerEntityId\": {\r\n          \"ID\": 1\r\n        },\r\n       
+    \"cardEntityId\": {\r\n          \"ID\": 68\r\n        }\r\n      }\r\n    }\r\n 
+    },\r\n  {\r\n    \"Id\": 5,\r\n    \"Command\": {\r\n      \"$type\": \"Sheriff.GameFlow.PutCardInBagCommand,
+    Sheriff.Runtime\",\r\n      \"result\": {\r\n        \"playerEntityId\": {\r\n         
+    \"ID\": 1\r\n        },\r\n        \"cardEntityId\": {\r\n          \"ID\": 77\r\n       
+    }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"Id\": 6,\r\n    \"Command\": {\r\n     
+    \"$type\": \"Sheriff.GameFlow.DeclareCommand, Sheriff.Runtime\",\r\n      \"result\":
+    {\r\n        \"player_id\": {\r\n          \"ID\": 1\r\n        },\r\n       
+    \"declarations\": {\r\n          \"declarations\": [\r\n            {\r\n             
+    \"count\": 2,\r\n              \"resource\": 103\r\n            }\r\n         
+    ]\r\n        }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"Id\": 7,\r\n    \"Command\":
+    {\r\n      \"$type\": \"Sheriff.GameFlow.PutCardInBagCommand, Sheriff.Runtime\",\r\n     
+    \"result\": {\r\n        \"playerEntityId\": {\r\n          \"ID\": 2\r\n       
+    },\r\n        \"cardEntityId\": {\r\n          \"ID\": 44\r\n        }\r\n     
+    }\r\n    }\r\n  },\r\n  {\r\n    \"Id\": 8,\r\n    \"Command\": {\r\n      \"$type\":
+    \"Sheriff.GameFlow.PutCardInBagCommand, Sheriff.Runtime\",\r\n      \"result\":
+    {\r\n        \"playerEntityId\": {\r\n          \"ID\": 2\r\n        },\r\n       
+    \"cardEntityId\": {\r\n          \"ID\": 102\r\n        }\r\n      }\r\n    }\r\n 
+    },\r\n  {\r\n    \"Id\": 9,\r\n    \"Command\": {\r\n      \"$type\": \"Sheriff.GameFlow.PutCardInBagCommand,
+    Sheriff.Runtime\",\r\n      \"result\": {\r\n        \"playerEntityId\": {\r\n         
+    \"ID\": 2\r\n        },\r\n        \"cardEntityId\": {\r\n          \"ID\": 38\r\n       
+    }\r\n      }\r\n    }\r\n  },\r\n  {\r\n    \"Id\": 10,\r\n    \"Command\": {\r\n     
+    \"$type\": \"Sheriff.GameFlow.DeclareCommand, Sheriff.Runtime\",\r\n      \"result\":
+    {\r\n        \"player_id\": {\r\n          \"ID\": 2\r\n        },\r\n       
+    \"declarations\": {\r\n          \"declarations\": [\r\n            {\r\n             
+    \"count\": 1,\r\n              \"resource\": 103\r\n            },\r\n           
+    {\r\n              \"count\": 1,\r\n              \"resource\": 102\r\n           
+    },\r\n            {\r\n              \"count\": 1,\r\n              \"resource\":
+    104\r\n            }\r\n          ]\r\n        }\r\n      }\r\n    }\r\n  }\r\n]"
 --- !u!4 &2134382144
 Transform:
   m_ObjectHideFlags: 0

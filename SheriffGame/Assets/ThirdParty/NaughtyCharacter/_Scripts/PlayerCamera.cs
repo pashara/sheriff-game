@@ -9,7 +9,6 @@ namespace NaughtyCharacter
         public float PositionSmoothDamp = 0.0f;
         public Transform Rig; // The root transform of the camera rig
         public Transform Pivot; // The point at which the camera pivots around
-        public Camera Camera;
 
         private Vector3 _cameraVelocity;
 

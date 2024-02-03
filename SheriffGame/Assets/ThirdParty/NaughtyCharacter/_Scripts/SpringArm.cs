@@ -1,4 +1,5 @@
 using UnityEngine;
+using Cinemachine;
 
 namespace NaughtyCharacter
 {
@@ -9,27 +10,27 @@ namespace NaughtyCharacter
         public Transform CollisionSocket;
         public float CollisionRadius = 0.25f;
         public LayerMask CollisionMask = 0;
-        public Camera Camera;
+        public CinemachineVirtualCamera VirtualCamera;
         public float CameraViewportExtentsMultipllier = 1.0f;
 
         private Vector3 _socketVelocity;
 
         private void LateUpdate()
         {
-            if (Camera != null)
+            if (VirtualCamera != null)
             {
-                CollisionRadius = GetCollisionRadiusForCamera(Camera);
-                Camera.transform.localPosition = -Vector3.forward * Camera.nearClipPlane;
+                CollisionRadius = GetCollisionRadiusForCamera(VirtualCamera.m_Lens.FieldOfView, VirtualCamera.m_Lens.NearClipPlane);
+                VirtualCamera.transform.localPosition = -Vector3.forward * VirtualCamera.m_Lens.NearClipPlane;
             }
 
             UpdateLength();
         }
 
-        private float GetCollisionRadiusForCamera(Camera cam)
+        private float GetCollisionRadiusForCamera(float fieldOfView, float nearClipPlane)
         {
-            float halfFOV = (cam.fieldOfView / 2.0f) * Mathf.Deg2Rad; // vertical FOV in radians
-            float nearClipPlaneHalfHeight = Mathf.Tan(halfFOV) * cam.nearClipPlane * CameraViewportExtentsMultipllier;
-            float nearClipPlaneHalfWidth = nearClipPlaneHalfHeight * cam.aspect;
+            float halfFOV = (fieldOfView / 2.0f) * Mathf.Deg2Rad; // vertical FOV in radians
+            float nearClipPlaneHalfHeight = Mathf.Tan(halfFOV) * nearClipPlane * CameraViewportExtentsMultipllier;
+            float nearClipPlaneHalfWidth = nearClipPlaneHalfHeight * VirtualCamera.m_Lens.Aspect;
             float collisionRadius = new Vector2(nearClipPlaneHalfWidth, nearClipPlaneHalfHeight).magnitude; // Pythagoras
 
             return collisionRadius;

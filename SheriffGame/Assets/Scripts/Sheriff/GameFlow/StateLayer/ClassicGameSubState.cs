@@ -50,11 +50,8 @@ namespace Sheriff.GameFlow.States.ClassicGame
             }
             _environment = CreateEnvironment();
             
-            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
-            {
-                playerEntity.actualStateProvider.Value.SetState(this);
-            }
-            
+
+            _ecsContextProvider.Context.game.gameIdEntity?.actualStateProviderWritable.Value.SetState(this);
             
             OnEnter();
         }

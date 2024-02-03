@@ -17,12 +17,12 @@ namespace Sheriff.GameFlow
         void ClearAllowedActions();
     }
 
-    public interface IUserActionsList
+    public interface IActualStateProvider
     {
         IReadOnlyReactiveProperty<ISubState> ActualState { get; }
     }
     
-    public interface IUserActionsListWritable
+    public interface IActualStateProviderWritable : IActualStateProvider
     {
         void SetState(ISubState actualState);
     }
@@ -51,7 +51,7 @@ namespace Sheriff.GameFlow
     }
 
 
-    public class UserActionsList : IUserActionsList, IUserActionsListWritable
+    public class ActualStateProviderProvider : IActualStateProvider, IActualStateProviderWritable
     {
         private readonly ReactiveProperty<ISubState> _actualState = new();
 

@@ -51,7 +51,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.Player
         
         [ShowInInspector]
         [ReadOnly]
-        private UserActionsList ActualState
+        private IActualStateProvider ActualState
         {
             get;
             set;

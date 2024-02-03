@@ -39,10 +39,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         }
 
 
-        private void CreateSession()
+        private void CreateSession(ActualStateProviderProvider actualStateProvider)
         {
             var gameEntity = _ecsContextProvider.Context.game.CreateEntity();
             gameEntity.AddGameId(new GameSessionId(8800));
+            gameEntity.AddActualStateProviderWritable(actualStateProvider);
             gameEntity.ReplaceRound(0);
 
             var allPlayers = _ecsContextProvider.Context.player
@@ -81,13 +82,13 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             
         }
 
-        private long CreatePlayer()
+        private long CreatePlayer(IActualStateProvider actualStateProvider)
         {
             var entity = _ecsContextProvider.Context.player.CreateEntity();
             var id = entity.id.ID;
             entity.AddPlayerId(id);
             entity.ReplaceGoldCashCurrency(0);
-            entity.AddActualStateProvider(new UserActionsList());
+            entity.AddActualStateProvider(actualStateProvider);
 
 
             return id;
@@ -95,11 +96,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
 
         public override void Enter()
         {
-            CreatePlayer();
-            CreatePlayer();
-            CreatePlayer();
+            var actualStateProvider = new ActualStateProviderProvider();
+            CreatePlayer(actualStateProvider);
+            CreatePlayer(actualStateProvider);
+            CreatePlayer(actualStateProvider);
             
-            CreateSession();
+            CreateSession(actualStateProvider);
 
             CreateCards();
 

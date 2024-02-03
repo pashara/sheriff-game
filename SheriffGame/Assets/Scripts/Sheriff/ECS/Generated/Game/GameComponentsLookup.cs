@@ -8,14 +8,16 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int GameId = 0;
-    public const int Id = 1;
-    public const int PotentialPlayersSequence = 2;
-    public const int Round = 3;
+    public const int ActualStateProviderWritable = 0;
+    public const int GameId = 1;
+    public const int Id = 2;
+    public const int PotentialPlayersSequence = 3;
+    public const int Round = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
+        "ActualStateProviderWritable",
         "GameId",
         "Id",
         "PotentialPlayersSequence",
@@ -23,6 +25,7 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Sheriff.ECS.Components.ActualStateProviderWritableComponent),
         typeof(Sheriff.ECS.Components.GameIdComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.PotentialPlayersSequence),

@@ -40,7 +40,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
         }
 
         [Button]
-        private void GoNext()
+        public void GoNext()
         {
             _classicGameController.OnReady(_stateMachine.ActualState.Value.GetType());
         }

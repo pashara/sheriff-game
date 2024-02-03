@@ -22,7 +22,13 @@ namespace Sheriff.ECS.Components
     [Player]
     public class ActualStateProviderComponent : IComponent
     {
-        public UserActionsList Value;
+        public IActualStateProvider Value;
+    }
+    
+    [Game]
+    public class ActualStateProviderWritableComponent : IComponent
+    {
+        public IActualStateProviderWritable Value;
     }
     
     [Player]

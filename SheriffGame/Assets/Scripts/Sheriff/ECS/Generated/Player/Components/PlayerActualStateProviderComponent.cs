@@ -11,14 +11,14 @@ public partial class PlayerEntity {
     public Sheriff.ECS.Components.ActualStateProviderComponent actualStateProvider { get { return (Sheriff.ECS.Components.ActualStateProviderComponent)GetComponent(PlayerComponentsLookup.ActualStateProvider); } }
     public bool hasActualStateProvider { get { return HasComponent(PlayerComponentsLookup.ActualStateProvider); } }
 
-    public void AddActualStateProvider(Sheriff.GameFlow.UserActionsList newValue) {
+    public void AddActualStateProvider(Sheriff.GameFlow.IActualStateProvider newValue) {
         var index = PlayerComponentsLookup.ActualStateProvider;
         var component = (Sheriff.ECS.Components.ActualStateProviderComponent)CreateComponent(index, typeof(Sheriff.ECS.Components.ActualStateProviderComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceActualStateProvider(Sheriff.GameFlow.UserActionsList newValue) {
+    public void ReplaceActualStateProvider(Sheriff.GameFlow.IActualStateProvider newValue) {
         var index = PlayerComponentsLookup.ActualStateProvider;
         var component = (Sheriff.ECS.Components.ActualStateProviderComponent)CreateComponent(index, typeof(Sheriff.ECS.Components.ActualStateProviderComponent));
         component.Value = newValue;

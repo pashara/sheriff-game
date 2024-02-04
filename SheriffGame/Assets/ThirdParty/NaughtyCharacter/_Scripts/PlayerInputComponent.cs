@@ -9,6 +9,7 @@ namespace NaughtyCharacter
         public Vector2 LastMoveInput { get; private set; }
         public Vector2 CameraInput { get; private set; }
         public bool JumpInput { get; private set; }
+        public bool InteractInput { get; private set; }
         public bool HasMoveInput { get; private set; }
 
         public void OnMoveEvent(InputAction.CallbackContext context)
@@ -28,6 +29,18 @@ namespace NaughtyCharacter
         public void OnLookEvent(InputAction.CallbackContext context)
         {
             CameraInput = context.ReadValue<Vector2>();
+        }
+
+        public void OnInteractEvent(InputAction.CallbackContext context)
+        {
+            if (context.started || context.performed)
+            {
+                InteractInput = true;
+            }
+            else
+            {
+                InteractInput = false;
+            }
         }
 
         public void OnJumpEvent(InputAction.CallbackContext context)

@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Ground
   - Character
-  - 
+  - Interactable
   - 
   - 
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Card
+    uniqueID: 3412957759
+    locked: 0
+  - name: OverCard
+    uniqueID: 2499125065
     locked: 0

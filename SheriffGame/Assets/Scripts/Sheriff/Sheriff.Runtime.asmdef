@@ -8,7 +8,9 @@
         "StateMachine.Runtime",
         "Shared.Random",
         "UniTask",
-        "Zenject"
+        "Unity.InputSystem",
+        "Zenject",
+        "NaughtyCharacter"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace NaughtyCharacter
@@ -47,6 +48,14 @@ namespace NaughtyCharacter
         public float SphereCastDistance = 0.15f; // The distance below the character's capsule used for the sphere cast grounded check
     }
 
+    [System.Serializable]
+    public class InteractionSettings
+    {
+        public LayerMask InteractionLayers; // Which layers are considered as ground
+        public float SphereCastRadius = 0.35f; // The radius of the sphere cast for the grounded check
+        public float SphereCastDistance = 0.15f; // The distance below the character's capsule used for the sphere cast grounded check
+    }
+
     public class Character : MonoBehaviour
     {
         public Controller Controller; // The controller that controls the character
@@ -54,6 +63,7 @@ namespace NaughtyCharacter
         public GravitySettings GravitySettings;
         public RotationSettings RotationSettings;
         public GroundSettings GroundSettings;
+        public InteractionSettings InteractionSettings;
 
         private CharacterController _characterController; // The Unity's CharacterController
         private CharacterAnimator _characterAnimator;
@@ -68,6 +78,7 @@ namespace NaughtyCharacter
         private Vector3 _lastMovementInput;
         private bool _hasMovementInput;
         private bool _jumpInput;
+        private bool _interactInput;
 
         public Vector3 Velocity => _characterController.velocity;
         public Vector3 HorizontalVelocity => _characterController.velocity.SetY(0.0f);
@@ -105,8 +116,21 @@ namespace NaughtyCharacter
             OrientToTargetRotation(movement.SetY(0.0f), deltaTime);
 
             UpdateGrounded();
+            UpdateInteraction();
 
             _characterAnimator.UpdateState();
+        }
+
+        private void UpdateInteraction()
+        {
+            if (_interactInput)
+            {
+                var iterator = CheckInteraction();
+                if (iterator != null)
+                {
+                    iterator.Interact(this);
+                }
+            }
         }
 
         public void SetMovementInput(Vector3 movementInput)
@@ -138,6 +162,11 @@ namespace NaughtyCharacter
             _jumpInput = jumpInput;
         }
 
+        public void SetInteract(bool jumpInput)
+        {
+            _interactInput = jumpInput;
+        }
+
         public Vector2 GetControlRotation()
         {
             return _controlRotation;
@@ -164,6 +193,16 @@ namespace NaughtyCharacter
             bool isGrounded = Physics.CheckSphere(spherePosition, GroundSettings.SphereCastRadius, GroundSettings.GroundLayers, QueryTriggerInteraction.Ignore);
 
             return isGrounded;
+        }
+        
+        
+
+        private IInteractableGame CheckInteraction()
+        {
+            Vector3 spherePosition = transform.position;
+            spherePosition.y = transform.position.y + InteractionSettings.SphereCastRadius;
+            var element = Physics.OverlapSphere(spherePosition, InteractionSettings.SphereCastRadius, InteractionSettings.InteractionLayers, QueryTriggerInteraction.Collide);
+            return element.Select(x => x.GetComponent<IInteractableGame>()).FirstOrDefault(x => x != null);
         }
 
         private void UpdateGrounded()

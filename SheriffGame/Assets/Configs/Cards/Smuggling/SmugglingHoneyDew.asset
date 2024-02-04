@@ -16,6 +16,7 @@ MonoBehaviour:
     resourceType: 202
     category: 2
     title: "\u041C\u0435\u0434\u043E\u0432\u0443\u0445\u0430"
-    innerPrefab: {fileID: 0}
     cost: 7
     fine: 4
+    cardPrefab: {fileID: 6084791556672406974, guid: 8faedb2c59f68314e9ee68f1cb6db9e3,
+      type: 3}

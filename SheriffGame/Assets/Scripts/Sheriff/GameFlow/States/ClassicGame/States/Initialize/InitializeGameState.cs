@@ -98,7 +98,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         {
             var actualStateProvider = new ActualStateProviderProvider();
             CreatePlayer(actualStateProvider);
-            CreatePlayer(actualStateProvider);
+            var id = CreatePlayer(actualStateProvider);
             CreatePlayer(actualStateProvider);
             
             CreateSession(actualStateProvider);
@@ -111,6 +111,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             
             _gameViewController.LinkAllPlayers();
             _gameViewController.LinkDeck();
+            
+            _gameViewController.player2.Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(id));
             _classicGameController.OnReady<InitializeGameState>();
         }
 

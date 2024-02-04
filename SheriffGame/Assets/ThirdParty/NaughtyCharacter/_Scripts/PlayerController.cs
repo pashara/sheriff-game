@@ -21,6 +21,7 @@ namespace NaughtyCharacter
             UpdateControlRotation();
             Character.SetMovementInput(GetMovementInput());
             Character.SetJumpInput(_playerInput.JumpInput);
+            Character.SetInteract(_playerInput.InteractInput);
         }
 
         public override void OnCharacterFixedUpdate()

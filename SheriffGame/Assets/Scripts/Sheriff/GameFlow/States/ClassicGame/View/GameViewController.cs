@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Sheriff.ECS;
+using Sheriff.GameFlow.States.ClassicGame.World.Cards;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
         [SerializeField] private Transform playersRoot;
         [SerializeField] private DeckViewController deckViewController;
         [SerializeField] private PlayerViewController playerPrefab;
+        public WorldPlayerCardsController player2;
         
         public void LinkDeck()
         {

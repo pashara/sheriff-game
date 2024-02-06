@@ -335,8 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   declareDropdown: {fileID: 3357448026645549742}
+  sheriffReminderTEMP: {fileID: 5560938326131984739}
   declareButton: {fileID: 8827168920070894562}
-  uiRoot: {fileID: 2591939629278192847}
+  uiRoot: {fileID: 3390503655311034339}
   worldToEcsController: {fileID: 3824689174158439368}
   selectToDeclareWorldCardsInputController: {fileID: 8012577153569665131}
 --- !u!1 &4992197508350945013
@@ -915,12 +916,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ef56e22ddb4247b893fe596fa273ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &2591939629278192847 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 582008406516054623, guid: f41fc50836e64b14fab7f89fad4f25cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 3164868164547534480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2660940286254857537 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1082642663866590161, guid: f41fc50836e64b14fab7f89fad4f25cb,
@@ -945,6 +940,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3390503655311034339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 353149733280553331, guid: f41fc50836e64b14fab7f89fad4f25cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3164868164547534480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5560938326131984739 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7406087270375069683, guid: f41fc50836e64b14fab7f89fad4f25cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3164868164547534480}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7296638303553686624 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5668065125431497456, guid: f41fc50836e64b14fab7f89fad4f25cb,

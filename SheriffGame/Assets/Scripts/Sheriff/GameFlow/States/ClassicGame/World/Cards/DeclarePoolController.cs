@@ -14,6 +14,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
     public class DeclarePoolController : MonoBehaviour
     {
         [SerializeField] private TMP_Dropdown declareDropdown;
+        [SerializeField] private GameObject sheriffReminderTEMP;
         [SerializeField] private Button declareButton;
         [SerializeField] private GameObject uiRoot;
         [SerializeField] private WorldToEcsController worldToEcsController;
@@ -26,6 +27,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
         public int DeclaredCount => _cardsToBag.Count;
 
         private ReactiveProperty<bool> _isAllowedToDeclare = new();
+        private ReactiveProperty<bool> _isAllowedToGetNewCards = new();
         private ReactiveProperty<int> _selectedIndex = new();
         public IReadOnlyCollection<CardView> CardViews => _cardsToBag;
         private CompositeDisposable _initDisposable = new();
@@ -40,6 +42,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
 
 
         private ReactiveProperty<bool> IsDeclareState = new();
+        private ReactiveProperty<bool> IsSheriff = new();
         private ReactiveProperty<bool> IsDeclared = new();
 
         private void EnableController()
@@ -49,11 +52,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             _disposable.Clear();
 
             _isAllowedToDeclare.Subscribe(x => declareButton.interactable = x).AddTo(_disposable);
+            _isAllowedToGetNewCards.Subscribe(x => declareButton.interactable = x).AddTo(_disposable);
 
             declareDropdown.onValueChanged.AsObservable().Subscribe(x =>
             {
                 _selectedIndex.Value = x;
-                _isAllowedToDeclare.Value = true;
             });
             
             declareButton.OnClickAsObservable().Subscribe(x =>
@@ -71,11 +74,16 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
 
         public void Initialize()
         {
+            
+            _isAllowedToDeclare.Value = false;
+            
             _playerEntity.OnAllowedActions().Subscribe(x =>
             {
                 IsDeclareState.Value = x != null && 
                                        x.Value.AllowedActions.Contains(typeof(DeclareCommand));
             }).AddTo(_initDisposable);
+
+            IsSheriff.Value = _playerEntity.isSheriff;
 
             _playerEntity.OnDeclareResourcesByPlayer().Subscribe(x =>
             {
@@ -83,10 +91,14 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             }).AddTo(_initDisposable);
 
 
-            IsDeclareState.CombineLatest(IsDeclared, (isDeclare, isDeclared) => isDeclare && !isDeclared).Subscribe(x =>
-            {
-                selectToDeclareWorldCardsInputController.gameObject.SetActive(x);
-            }).AddTo(_initDisposable);
+            IsDeclareState
+                .CombineLatest(IsDeclared, (isDeclareState, isDeclared) => isDeclareState && !isDeclared)
+                .Subscribe(x =>
+                {
+                    selectToDeclareWorldCardsInputController.gameObject.SetActive(x);
+                    _isAllowedToDeclare.Value = x;
+                    _isAllowedToGetNewCards.Value = x;
+                }).AddTo(_initDisposable);
 
             IsDeclareState.Subscribe(x =>
             {
@@ -99,13 +111,15 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                     DisableController();
                 }
             }).AddTo(_initDisposable);
-
+            
+            IsSheriff.Subscribe(x => sheriffReminderTEMP.SetActive(x)).AddTo(_disposable);
         }
 
 
         public void Dispose()
         {
             DisableController();
+            sheriffReminderTEMP.SetActive(false);
             _initDisposable.Clear();
             _disposable.Clear();
         }

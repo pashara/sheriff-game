@@ -22,20 +22,20 @@ namespace Sheriff.GameFlow.States.ClassicGame
         }
 
 
-        public void OnReady<T>() where T : ClassicGameState
+        public void OnReady<T>() where T : IClassicSubState
         {
             OnReady(typeof(T));
         }
 
         public void OnReady(Type type)
         {
-            if (type == typeof(InitializeGameState))
+            if (type == typeof(InitializeGameSubState))
             {
                 _gameStateMachine.Enter<SetSherifStatusSubState>();
                 return;
             }
             
-            if (type == typeof(SetSheriffStatusState))
+            if (type == typeof(SetSherifStatusSubState))
             {
                 _gameStateMachine.Enter<ShoppingSubState>();
                 return;
@@ -47,7 +47,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 return;
             }
             
-            if (type == typeof(SheriffCheckState))
+            if (type == typeof(SherifCheckSubState))
             {
                 _gameStateMachine.Enter<SetSherifStatusSubState>();
                 return;

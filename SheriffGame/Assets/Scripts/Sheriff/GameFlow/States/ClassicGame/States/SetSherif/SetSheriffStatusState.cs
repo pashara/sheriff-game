@@ -36,7 +36,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
                 });
             _commandsApplyService.Apply(actualAction);
             
-            _classicGameController.OnReady<SetSheriffStatusState>();
+            _classicGameController.OnReady<SetSherifStatusSubState>();
         }
         
 

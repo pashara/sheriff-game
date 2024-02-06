@@ -2,6 +2,7 @@
 using System.Linq;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.States.ClassicGame.States.Initialize;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameResources;
@@ -132,7 +133,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
                 control.Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(ids[i]));
             }
 
-            _classicGameController.OnReady<InitializeGameState>();
+            _classicGameController.OnReady<InitializeGameSubState>();
         }
 
         private void GiveGoldToPlayers()

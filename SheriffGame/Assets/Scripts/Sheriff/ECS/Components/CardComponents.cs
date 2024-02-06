@@ -8,24 +8,28 @@ namespace Sheriff.ECS.Components
 
     [Card]
     [EntityIndex]
+    [ECSSerialize]
     public class InDecComponent : IComponent
     {
     }
 
     [Card]
     [EntityIndex]
+    [ECSSerialize]
     public class SelectToDeclareComponent : IComponent
     {
     }
     
     [Card]
     [EntityIndex]
+    [ECSSerialize]
     public class CardReleaseComponent : IComponent
     {
     }
     
     [Card]
     [EntityIndex]
+    [ECSSerialize]
     public class CardOnHandComponent : IComponent
     {
     }
@@ -34,6 +38,7 @@ namespace Sheriff.ECS.Components
     [Game]
     [Input]
     [Player]
+    [ECSSerialize]
     public class IdComponent : IComponent
     {
         [PrimaryEntityIndex]
@@ -41,12 +46,14 @@ namespace Sheriff.ECS.Components
     }
     
     [Card]
+    [ECSSerialize]
     public class ResourceTypeComponent : IComponent
     {
         public GameResourceType Value;
     }
     
     [Card]
+    [ECSSerialize]
     public class ResourceCategoryComponent : IComponent
     {
         public GameResourceCategory Value;
@@ -116,6 +123,7 @@ namespace Sheriff.ECS.Components
     }
 
     [Card]
+    [ECSSerialize]
     public class CardOwnerComponent : IComponent
     {
         [EntityIndex]
@@ -123,6 +131,7 @@ namespace Sheriff.ECS.Components
     }
 
     [Card]
+    [ECSSerialize]
     public class CardIdComponent : IComponent
     {
         [PrimaryEntityIndex]

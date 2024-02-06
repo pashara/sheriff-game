@@ -866,8 +866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82febcea57e940898c15852b9248b9de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 4703936340970680781, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
-    type: 3}
 --- !u!4 &342275210
 Transform:
   m_ObjectHideFlags: 0
@@ -2811,6 +2809,62 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: e2a35c84c639149449da2ad132d85bb6, type: 3}
+--- !u!1 &830411948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 830411949}
+  - component: {fileID: 830411950}
+  m_Layer: 0
+  m_Name: GameStateSerializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &830411949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830411948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.27, y: 0.91200006, z: 48.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &830411950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 830411948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59977f6011e16c4a8ebec816c69f452, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _data:
+    LastGeneratedId: 0
+  json: 
 --- !u!1 &843965916 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6110023852657897133, guid: 06cb5c7a7c79f16459d37362c9a02f3e,
@@ -6674,3 +6728,4 @@ SceneRoots:
   - {fileID: 8990966043003021739}
   - {fileID: 1930988947}
   - {fileID: 1077176425}
+  - {fileID: 830411949}

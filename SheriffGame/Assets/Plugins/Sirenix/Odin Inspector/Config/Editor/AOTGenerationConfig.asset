@@ -16,41 +16,36 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 090000000d000000ffffffff
-  lastScan: 638312542140913444
+  lastScan: 638428120958614330
   supportSerializedTypes:
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.GameObject,
-      UnityEngine.CoreModule]], mscorlib
+  - TypeName: Sheriff.Rules.BaseRuleConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.Dictionary`2[[System.String, mscorlib],[UnityEngine.Sprite,
-      UnityEngine.CoreModule]], mscorlib
+  - TypeName: Sheriff.Rules.ClassicRules.CardsConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: UnityEngine.GameObject, UnityEngine.CoreModule
+  - TypeName: Sheriff.Rules.ClassicRules.ClassicCardsPerStepConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.GenericEqualityComparer`1[[System.String,
-      mscorlib]], mscorlib
+  - TypeName: Sheriff.Rules.ClassicRules.ClassicRuleConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.IEqualityComparer`1[[System.String, mscorlib]],
-      mscorlib
+  - TypeName: Sheriff.GameResources.GameResourceCategory, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[System.Collections.Generic.List`1[[_IdleGuildTycoon.Scripts.InGamePurchases.OfferType,
-      Application.Main]], mscorlib]], mscorlib
+  - TypeName: Sheriff.GameResources.GameResourceType, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: System.Collections.Generic.List`1[[_IdleGuildTycoon.Scripts.InGamePurchases.OfferType,
-      Application.Main]], mscorlib
+  - TypeName: Sheriff.Rules.ClassicRules.InitialBankConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: _IdleGuildTycoon.Scripts.InGamePurchases.OfferType, Application.Main
+  - TypeName: Sheriff.Rules.ClassicRules.InitialCardsConfig, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
-  - TypeName: UnityEngine.Sprite, UnityEngine.CoreModule
+  - TypeName: System.Int32, mscorlib
     IsCustom: 0
     Emit: 1
-  - TypeName: System.String, mscorlib
+  - TypeName: System.Collections.Generic.List`1[[Sheriff.Rules.ClassicRules.CardsConfig,
+      Sheriff.Runtime]], mscorlib
     IsCustom: 0
     Emit: 1

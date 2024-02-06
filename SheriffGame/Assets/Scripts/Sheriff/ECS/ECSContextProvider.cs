@@ -11,6 +11,7 @@ namespace Sheriff.ECS
 
 
         private long _internalId;
+        public long LastGeneratedId => _internalId;
         
         public EcsContextProvider()
         {

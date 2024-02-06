@@ -4,7 +4,6 @@ using Cysharp.Threading.Tasks;
 using Entitas;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
-using Sheriff.GameFlow.States.ClassicGame.Players;
 using TMPro;
 using UnityEngine;
 using Zenject;
@@ -14,7 +13,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.UI
     public class TempPlayerSwitchHandler : MonoBehaviour
     {
         private EcsContextProvider _ecsContextProvider;
-        [SerializeField] private PlayerEnvironmentController playerEnvironmentController; 
         [SerializeField] private TMP_Dropdown dropdown;
         private List<PlayerEntityId> _actualElements;
 
@@ -55,10 +53,10 @@ namespace Sheriff.GameFlow.States.ClassicGame.UI
         
         private void SelectCharacter(int index)
         {
-            if (_actualElements != null && index < _actualElements.Count)
+            var target = _actualElements[index];
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
             {
-                playerEnvironmentController
-                    .Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(_actualElements[index]));
+                playerEntity.playerController.Value.enabled = target == playerEntity.playerId.Value;
             }
         }
     }

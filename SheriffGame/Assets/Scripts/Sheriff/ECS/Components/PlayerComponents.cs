@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using NaughtyCharacter;
 using Sheriff.GameFlow;
 
 namespace Sheriff.ECS.Components
@@ -18,6 +19,12 @@ namespace Sheriff.ECS.Components
     public class PlayerPositionIdComponent : IComponent
     {
         public int Id;
+    }
+
+    [Player]
+    public class PlayerControllerComponent : IComponent
+    {
+        public PlayerController Value;
     }
 
 

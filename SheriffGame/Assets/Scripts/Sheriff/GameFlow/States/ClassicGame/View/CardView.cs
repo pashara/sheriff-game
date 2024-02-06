@@ -1,5 +1,6 @@
 ﻿using System;
 using Sheriff.DataBase;
+using Sheriff.GameResources;
 using Sheriff.GameStructures;
 using TMPro;
 using UnityEngine;
@@ -31,10 +32,15 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
             FillTitle();
             FillCost();
             FillFee();
-            // cardEntity.OnInDec().Select(x => x != null).Subscribe(x =>
-            // {
-            //     // gameObject.SetActive(x);
-            // }).AddTo(this);
+        }
+        public void Link(GameResourceType gameResourceType)
+        {
+            CardEntity = null;
+            gameObject.name = $"Emulated card";
+            _cardConfig = _cardConfigProvider.Get(gameResourceType);
+            FillTitle();
+            FillCost();
+            FillFee();
         }
 
 

@@ -37,6 +37,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
 
             var instance = Instantiate(prefab, spawnPoint, rotation);
             instance.GetComponent<PlayerController>().enabled = isMain;
+            playerEntity.ReplacePlayerController(instance.GetComponent<PlayerController>());
             instance.GetComponent<Character>().SetPlayerId(playerEntity.playerId.Value.EntityID);
             _container.InjectGameObject(instance);
         }

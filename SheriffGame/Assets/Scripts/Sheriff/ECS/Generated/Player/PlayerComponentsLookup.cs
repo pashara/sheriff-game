@@ -18,13 +18,14 @@ public static class PlayerComponentsLookup {
     public const int Id = 7;
     public const int MaxCardsPopPerStep = 8;
     public const int OnHandCards = 9;
-    public const int PlayerId = 10;
-    public const int PlayerPositionId = 11;
-    public const int ReadyForCheck = 12;
-    public const int SelectedCards = 13;
-    public const int Sheriff = 14;
+    public const int PlayerController = 10;
+    public const int PlayerId = 11;
+    public const int PlayerPositionId = 12;
+    public const int ReadyForCheck = 13;
+    public const int SelectedCards = 14;
+    public const int Sheriff = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
@@ -37,6 +38,7 @@ public static class PlayerComponentsLookup {
         "Id",
         "MaxCardsPopPerStep",
         "OnHandCards",
+        "PlayerController",
         "PlayerId",
         "PlayerPositionId",
         "ReadyForCheck",
@@ -55,6 +57,7 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.MaxCardsPopPerStepComponent),
         typeof(Sheriff.ECS.Components.OnHandCardsComponent),
+        typeof(Sheriff.ECS.Components.PlayerControllerComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
         typeof(Sheriff.ECS.Components.PlayerPositionIdComponent),
         typeof(Sheriff.ECS.Components.ReadyForCheckComponent),

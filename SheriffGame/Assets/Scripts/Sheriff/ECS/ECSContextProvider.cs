@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using Sheriff.GameFlow;
+using UnityEngine;
 using Zenject;
 
 namespace Sheriff.ECS
@@ -18,9 +21,46 @@ namespace Sheriff.ECS
             Context = new();
             _internalId = 0;
 
-            foreach (var context in Context.allContexts)
-                context.OnEntityCreated += GameOnOnEntityCreated;
+            SubscribeCreate();
+        }
+        
+        public EcsContextProvider(ContextSerializeData serializeData)
+        {
+            Context = new();
+            _internalId = serializeData.LastGeneratedId;
+
+            Dictionary<Type, (List<Type>, Func<Entity>)> elements = new()
+            {
+                { typeof(CardContext), (CardComponentsLookup.componentTypes.ToList(), Context.card.CreateEntity) },
+                { typeof(GameContext), (GameComponentsLookup.componentTypes.ToList(), Context.game.CreateEntity) },
+                { typeof(InputContext), (InputComponentsLookup.componentTypes.ToList(), Context.input.CreateEntity) },
+                { typeof(PlayerContext), (PlayerComponentsLookup.componentTypes.ToList(), Context.player.CreateEntity) },
+            };
             
+            foreach (var s in serializeData.SerializeData)
+            {
+                if (elements.TryGetValue(s.Key, out var d))
+                {
+                    foreach (var data in s.Value)
+                    {
+                        var entity = d.Item2.Invoke();
+                        foreach (var component in data.Components)
+                        {
+                            var entityIndex = d.Item1.IndexOf(component.GetType());
+                            if (entityIndex >= 0)
+                            {
+                                entity.AddComponent(entityIndex, component);
+                            }
+                            else
+                            {
+                                Debug.LogError($"Cant set object of type {component.GetType()}");
+                            }
+                        }
+                    }
+                }
+            }
+
+            SubscribeCreate();
         }
         
         public void Initialize()
@@ -32,7 +72,6 @@ namespace Sheriff.ECS
             foreach (var context in Context.allContexts)
                 context.OnEntityCreated -= GameOnOnEntityCreated;
         }
-        
 
         private void GameOnOnEntityCreated(IContext context, IEntity entity)
         {
@@ -42,5 +81,12 @@ namespace Sheriff.ECS
                 _internalId++;
             }
         }
+
+        private void SubscribeCreate()
+        {
+            foreach (var context in Context.allContexts)
+                context.OnEntityCreated += GameOnOnEntityCreated;
+        }
+
     }
 }

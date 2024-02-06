@@ -10,6 +10,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
     {
         [Inject] private CommandsApplyService _commandsApplyService;
         [Inject] private DiContainer _container;
+        [Inject] private ISessionInitializeDataProvider _sessionInitializeDataProvider;
         
         private ClassicGameController _classicGameController;
         private ClassicGameStateMachine _stateMachine;
@@ -21,7 +22,16 @@ namespace Sheriff.GameFlow.States.ClassicGame
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
-            _classicGameController.StartGame();
+
+            var loadData = _sessionInitializeDataProvider.GetLoadData();
+            if (loadData != null)
+            {
+                _classicGameController.StartGame(loadData.StateType);
+            }
+            else
+            {
+                _classicGameController.StartGame();
+            }
         }
 
         [Button]

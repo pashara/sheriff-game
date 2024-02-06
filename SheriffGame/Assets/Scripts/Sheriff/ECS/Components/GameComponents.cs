@@ -16,6 +16,7 @@ namespace Sheriff.ECS.Components
     }
     
     [Game]
+    [ECSSerialize]
     public class RoundComponent : IComponent
     {
         public int Value;
@@ -23,6 +24,7 @@ namespace Sheriff.ECS.Components
     
     [Game]
     [Unique]
+    [ECSSerialize]
     public class GameIdComponent : IComponent
     {
         public GameSessionId Value;
@@ -30,12 +32,14 @@ namespace Sheriff.ECS.Components
 
 
     [Game]
+    [ECSSerialize]
     public class PotentialPlayersSequence : IComponent
     {
         public List<PlayerEntityId> Value;
     }
 
     [Game]
+    [ECSSerialize]
     public class AllowedToDeclareGameResourcesComponent : IComponent
     {
         public List<GameResourceType> Value;

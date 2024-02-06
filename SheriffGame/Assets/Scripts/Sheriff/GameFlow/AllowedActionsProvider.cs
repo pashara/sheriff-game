@@ -19,12 +19,12 @@ namespace Sheriff.GameFlow
 
     public interface IActualStateProvider
     {
-        IReadOnlyReactiveProperty<ISubState> ActualState { get; }
+        IReadOnlyReactiveProperty<ClassicGameState> ActualState { get; }
     }
     
     public interface IActualStateProviderWritable : IActualStateProvider
     {
-        void SetState(ISubState actualState);
+        void SetState(ClassicGameState actualState);
     }
     
     public class AllowedActionsProvider : IAllowedActionsProvider, IAllowedActionsProviderWritable
@@ -53,13 +53,13 @@ namespace Sheriff.GameFlow
 
     public class ActualStateProviderProvider : IActualStateProvider, IActualStateProviderWritable
     {
-        private readonly ReactiveProperty<ISubState> _actualState = new();
+        private readonly ReactiveProperty<ClassicGameState> _actualState = new();
 
         [ShowInInspector]
-        public IReadOnlyReactiveProperty<ISubState> ActualState => _actualState;
+        public IReadOnlyReactiveProperty<ClassicGameState> ActualState => _actualState;
 
 
-        public void SetState(ISubState actualState)
+        public void SetState(ClassicGameState actualState)
         {
             _actualState.Value = actualState;
         }

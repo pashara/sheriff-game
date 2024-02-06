@@ -1,21 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sheriff.ECS;
-using Sheriff.GameFlow.IterationEnvironments;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
 {
     public class ShoppingState : ClassicGameState
     {
+        private readonly EcsContextProvider _ecsContextProvider;
         private readonly DiContainer _container;
 
         public ShoppingState(
-            IterationEnvironment iterationEnvironment,
             EcsContextProvider ecsContextProvider
             )
         {
-            foreach (var playerEntity in ecsContextProvider.Context.player.GetEntities())
+            _ecsContextProvider = ecsContextProvider;
+        }
+        
+        public override void Enter()
+        {
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
             {
                 if (playerEntity.isDealer)
                 {
@@ -31,11 +35,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
                     playerEntity.ReplaceAllowedActions(allowedActions);
                 }
             }
-            
-        }
-        
-        public override void Enter()
-        {
         }
 
         public override void Exit()

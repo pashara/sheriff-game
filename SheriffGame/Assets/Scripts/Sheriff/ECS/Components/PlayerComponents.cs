@@ -13,6 +13,13 @@ namespace Sheriff.ECS.Components
         public PlayerEntityId Value;
     }
 
+    [Player]
+    [ECSSerialize]
+    public class PlayerPositionIdComponent : IComponent
+    {
+        public int Id;
+    }
+
 
     [Player]
     [ECSSerialize]

@@ -2,13 +2,9 @@
 using System.Linq;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
-using Sheriff.GameFlow.States.ClassicGame.States.Initialize;
-using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
-using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameResources;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
-using UnityEngine;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States
@@ -18,26 +14,26 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly IRandomService _randomService;
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly ClassicGameController _classicGameController;
-        private readonly GameViewController _gameViewController;
         private readonly ClassicRuleConfig _ruleConfig;
         private readonly CommandsApplyService _commandsApplyService;
         private readonly DiContainer _container;
+        private readonly LinkWithVisualService _linkWithVisualService;
 
         public InitializeGameState(
             IRandomService randomService,
             EcsContextProvider ecsContextProvider, 
             ClassicGameController classicGameController,
-            GameViewController gameViewController,
             CommandsApplyService commandsApplyService,
             DiContainer container,
+            LinkWithVisualService linkWithVisualService,
             ClassicRuleConfig ruleConfig)
         {
             _randomService = randomService.CreateSubService();
             _ecsContextProvider = ecsContextProvider;
             _classicGameController = classicGameController;
-            _gameViewController = gameViewController;
             _commandsApplyService = commandsApplyService;
             _container = container;
+            _linkWithVisualService = linkWithVisualService;
             _ruleConfig = ruleConfig;
         }
 
@@ -112,28 +108,20 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         public override void Enter()
         {
             var actualStateProvider = new ActualStateProviderProvider();
-            var ids = new List<long>();
-            ids.Add(CreatePlayer(actualStateProvider));
-            ids.Add(CreatePlayer(actualStateProvider));
-            ids.Add(CreatePlayer(actualStateProvider));
-            
+            CreatePlayer(actualStateProvider);
+            CreatePlayer(actualStateProvider);
+            CreatePlayer(actualStateProvider);
             CreateSession(actualStateProvider);
 
             CreateCards();
 
             GiveCardsToPlayers();
             GiveGoldToPlayers();
-            
-            
-            _gameViewController.LinkAllPlayers();
 
-            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerCardsControllers.Count, ids.Count); i++)
-            {
-                var control = _gameViewController.WorldPlayerCardsControllers[i];
-                control.Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(ids[i]));
-            }
+            _linkWithVisualService.Link();
 
-            _classicGameController.OnReady<InitializeGameSubState>();
+
+            _classicGameController.OnReady<InitializeGameState>();
         }
 
         private void GiveGoldToPlayers()

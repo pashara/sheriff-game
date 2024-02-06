@@ -12,7 +12,6 @@ namespace Sheriff.GameFlow
 {
     public class GameStateSerializer : SerializedMonoBehaviour
     {
-        
         [Inject] private EcsContextProvider _ecsContextProvider;
 
         [SerializeField] private ContextSerializeData _data;
@@ -22,8 +21,10 @@ namespace Sheriff.GameFlow
         private void Serialize()
         {
             _data = new();
-
+            
+            
             _data.LastGeneratedId = _ecsContextProvider.LastGeneratedId;
+            _data.StateType = _ecsContextProvider.Context.game.gameIdEntity.actualStateProviderWritable.Value.ActualState.Value.GetType();
             _data.SerializeData = new();
             
             var contexts = new List<(Type, Func<Entity[]>)>()
@@ -69,6 +70,17 @@ namespace Sheriff.GameFlow
                 TypeNameHandling = TypeNameHandling.Auto
             });
         }
+
+
+        [Button]
+        ContextSerializeData DeSerialize()
+        {
+            
+            return JsonConvert.DeserializeObject<ContextSerializeData>(json, new JsonSerializerSettings()
+            {
+                TypeNameHandling = TypeNameHandling.Auto
+            });
+        }
     }
     
     [Serializable]
@@ -77,10 +89,11 @@ namespace Sheriff.GameFlow
         [JsonProperty("components")] public List<IComponent> Components = new();
     }
 
-    [Serializable]
     public class ContextSerializeData
     {
         [JsonProperty("last_id")] public long LastGeneratedId;
+
+        [JsonProperty("state")] public Type StateType;
 
         [JsonProperty("data")] public Dictionary<Type, List<EntitySerializeData>> SerializeData = new();
     }

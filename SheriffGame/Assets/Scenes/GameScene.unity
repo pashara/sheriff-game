@@ -2861,9 +2861,10 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
-  _data:
-    LastGeneratedId: 0
+    SerializationNodes:
+    - Name: _data
+      Entry: 6
+      Data: 
   json: 
 --- !u!1 &843965916 stripped
 GameObject:
@@ -4580,6 +4581,728 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2257780bf3599e24387ab007182a5cd7, type: 3}
+--- !u!1 &1332637152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1332637154}
+  - component: {fileID: 1332637153}
+  m_Layer: 0
+  m_Name: GameStartEmulateConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1332637153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332637152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e200627133a3e3445acce55aba749963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  initialJson: '{"last_id":160,"state":"Sheriff.GameFlow.States.ClassicGame.States.Shopping.ShoppingState,
+    Sheriff.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","data":{"PlayerContext,
+    Sheriff.Runtime, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null":[{"components":[{"$type":"Sheriff.ECS.Components.GoldCashCurrencyComponent,
+    Sheriff.Runtime","Value":180},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":0},{"$type":"Sheriff.ECS.Components.MaxCardsPopPerStepComponent,
+    Sheriff.Runtime","Count":5},{"$type":"Sheriff.ECS.Components.PlayerIdComponent,
+    Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.SheriffComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardsPopPerStepComponent,
+    Sheriff.Runtime","Count":4},{"$type":"Sheriff.ECS.Components.DealerComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.DeclareResourcesByPlayerComponent,
+    Sheriff.Runtime","Value":{"declarations":[{"count":6,"resource":102}]}},{"$type":"Sheriff.ECS.Components.GoldCashCurrencyComponent,
+    Sheriff.Runtime","Value":180},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":1},{"$type":"Sheriff.ECS.Components.MaxCardsPopPerStepComponent,
+    Sheriff.Runtime","Count":5},{"$type":"Sheriff.ECS.Components.PlayerIdComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.SelectedCardsComponent,
+    Sheriff.Runtime","Value":[{"ID":87},{"ID":86},{"ID":156},{"ID":50},{"ID":155},{"ID":133}]}]},{"components":[{"$type":"Sheriff.ECS.Components.DealerComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.DropCardsComponent, Sheriff.Runtime","Value":[{"ID":144},{"ID":92},{"ID":69},{"ID":84}]},{"$type":"Sheriff.ECS.Components.GoldCashCurrencyComponent,
+    Sheriff.Runtime","Value":180},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":2},{"$type":"Sheriff.ECS.Components.MaxCardsPopPerStepComponent,
+    Sheriff.Runtime","Count":5},{"$type":"Sheriff.ECS.Components.PlayerIdComponent,
+    Sheriff.Runtime","Value":{"ID":2}}]}],"GameContext, Sheriff.Runtime, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null":[{"components":[{"$type":"Sheriff.ECS.Components.AllowedToDeclareGameResourcesComponent,
+    Sheriff.Runtime","Value":[101,102,103,104,201,202,203,204]},{"$type":"Sheriff.ECS.Components.GameIdComponent,
+    Sheriff.Runtime","Value":{"id":8800}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":3},{"$type":"Sheriff.ECS.Components.PotentialPlayersSequence,
+    Sheriff.Runtime","Value":[{"ID":0},{"ID":2},{"ID":1}]},{"$type":"Sheriff.ECS.Components.RoundComponent,
+    Sheriff.Runtime","Value":0}]}],"CardContext, Sheriff.Runtime, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null":[{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":4},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":5},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":3}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":6},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":4}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":7},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":5}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":8},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":6}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":9},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":7}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":10},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":8}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":11},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":9}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":12},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":10}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":13},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":11}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":14},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":12}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":15},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":13}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":16},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":14}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":17},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":15}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":18},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":16}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":19},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":17}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":20},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":18}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":21},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":19}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":22},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":20}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":23},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":21}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":24},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":22}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":25},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":23}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":26},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":24}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":27},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":25}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":28},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":26}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":29},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":204}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":27}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":30},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":28}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":31},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":29}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":32},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":30}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":33},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":31}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":34},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":32}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":35},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":33}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":36},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":34}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":37},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":35}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":38},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":36}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":39},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":37}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":40},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":38}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":41},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":39}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":42},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":40}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":43},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":41}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":44},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":42}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":45},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":43}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":46},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":44}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":47},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":45}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":48},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":46}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":49},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":47}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":50},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":48}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":51},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":49}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":52},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":50}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":53},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":51}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":54},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":52}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":55},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":53}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":56},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":54}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":57},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":55}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":58},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":56}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":59},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":57}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":60},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":58}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":61},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":59}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":62},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":60}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":63},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":61}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":64},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":62}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":65},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":63}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":66},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":64}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":67},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":65}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":68},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":66}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":69},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":67}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":70},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":68}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":71},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":204}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":69}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.CardReleaseComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":72},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":70}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":73},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":71}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":74},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":72}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":75},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":204}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":73}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":76},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":204}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":74}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":77},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":75}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":78},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":76}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":0}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":79},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":77}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":80},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":78}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":81},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":79}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":82},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":80}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":83},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":81}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":84},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":82}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":85},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":83}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":86},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":84}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.CardReleaseComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":87},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":85}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":88},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":86}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":89},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":87}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":90},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":88}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":91},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":89}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":92},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":90}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":93},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":91}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":94},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":92}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.CardReleaseComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":95},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":93}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":96},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":94}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":97},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":95}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":98},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":96}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":99},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":97}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":100},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":204}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":98}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":101},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":99}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":102},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":100}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":103},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":101}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":104},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":102}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":105},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":103}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":106},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":104}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":107},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":105}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":108},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":106}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":109},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":107}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":110},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":108}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":111},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":109}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":112},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":110}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":113},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":111}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":114},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":112}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":115},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":113}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":116},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":114}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":117},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":115}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":118},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":116}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":119},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":117}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":120},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":118}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":121},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":119}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":122},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":120}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":123},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":121}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":124},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":122}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":125},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":203}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":123}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":126},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":124}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":127},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":125}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":128},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":126}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":129},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":127}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":130},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":128}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":131},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":129}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":132},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":130}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":133},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":131}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":134},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":132}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":135},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":133}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":136},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":134}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":137},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":135}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":138},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":136}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":139},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":137}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":140},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":138}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":141},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":139}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":142},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":140}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":143},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":141}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":144},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":142}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":145},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":143}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":146},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":144}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.CardReleaseComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.IdComponent, Sheriff.Runtime","ID":147},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":145}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":148},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":146}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":149},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":147}},{"$type":"Sheriff.ECS.Components.CardOnHandComponent,
+    Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.CardOwnerComponent, Sheriff.Runtime","Value":{"ID":2}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":150},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":148}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":151},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":149}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":152},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":202}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":150}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":153},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":101}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":151}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":154},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":2},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":201}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":152}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":155},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":153}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":156},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":154}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":157},{"$type":"Sheriff.ECS.Components.InDecComponent, Sheriff.Runtime"},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":103}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":155}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":158},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":102},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]},{"components":[{"$type":"Sheriff.ECS.Components.CardIdComponent,
+    Sheriff.Runtime","Value":{"ID":156}},{"$type":"Sheriff.ECS.Components.CardOwnerComponent,
+    Sheriff.Runtime","Value":{"ID":1}},{"$type":"Sheriff.ECS.Components.IdComponent,
+    Sheriff.Runtime","ID":159},{"$type":"Sheriff.ECS.Components.ResourceCategoryComponent,
+    Sheriff.Runtime","Value":1},{"$type":"Sheriff.ECS.Components.ResourceTypeComponent,
+    Sheriff.Runtime","Value":104},{"$type":"Sheriff.ECS.Components.SelectToDeclareComponent,
+    Sheriff.Runtime"}]}],"InputContext, Sheriff.Runtime, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null":[]}}'
+--- !u!4 &1332637154
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332637152}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -7.27, y: 0.91200006, z: 48.89}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1345305531
 GameObject:
   m_ObjectHideFlags: 0
@@ -4683,6 +5406,51 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 2257780bf3599e24387ab007182a5cd7, type: 3}
+--- !u!1 &1391650917
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1391650919}
+  - component: {fileID: 1391650918}
+  m_Layer: 0
+  m_Name: PlayerSpawnService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1391650918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391650917}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723340119ece4506bf2c85b9b3e5945c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 8137868451421276760, guid: 3aec3e608fc51954bb34e86f951b10d4, type: 3}
+--- !u!4 &1391650919
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391650917}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.99, y: 0.89, z: 44.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1403049650 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2017194426952040749, guid: 06cb5c7a7c79f16459d37362c9a02f3e,
@@ -5499,79 +6267,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 236f3b14c6c35274da7238033c15c844, type: 3}
---- !u!1001 &1930988947
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8137868451421276760, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_Name
-      value: ReadyCharacter
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -6.99
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 44.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8140879054453922002, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8790826819123059126, guid: 3aec3e608fc51954bb34e86f951b10d4,
-        type: 3}
-      propertyPath: InteractionSettings.InteractionLayers.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3aec3e608fc51954bb34e86f951b10d4, type: 3}
 --- !u!1 &1959572632
 GameObject:
   m_ObjectHideFlags: 0
@@ -5890,6 +6585,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cardsProvider: {fileID: 11400000, guid: 06ef6f46f27e82344bacc249c5997dde, type: 2}
   gameViewController: {fileID: 105647505}
+  playerSpawnService: {fileID: 1391650918}
+  gameStartEmulateConfig: {fileID: 1332637153}
 --- !u!4 &2043386372
 Transform:
   m_ObjectHideFlags: 0
@@ -6726,6 +7423,7 @@ SceneRoots:
   - {fileID: 1959572637}
   - {fileID: 609904220}
   - {fileID: 8990966043003021739}
-  - {fileID: 1930988947}
   - {fileID: 1077176425}
   - {fileID: 830411949}
+  - {fileID: 1332637154}
+  - {fileID: 1391650919}

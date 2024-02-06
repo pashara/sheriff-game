@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Sheriff.ECS;
-using Sheriff.GameFlow.IterationEnvironments;
-using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
@@ -11,22 +9,24 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
     {
         private readonly ClassicGameController _classicGameController;
         private readonly EcsContextProvider _ecsContextProvider;
+        private readonly DiContainer _container;
         private readonly CommandsApplyService _commandsApplyService;
-        private readonly IterationEnvironment _iterationEnvironment;
 
         public SheriffCheckState(
             ClassicGameController classicGameController,
             EcsContextProvider ecsContextProvider,
-            CommandsApplyService commandsApplyService,
-            IterationEnvironment iterationEnvironment)
+            DiContainer container,
+            CommandsApplyService commandsApplyService)
         {
             _classicGameController = classicGameController;
             _ecsContextProvider = ecsContextProvider;
+            _container = container;
             _commandsApplyService = commandsApplyService;
-            _iterationEnvironment = iterationEnvironment;
-            
-            
-            foreach (var playerEntity in ecsContextProvider.Context.player.GetEntities())
+        }
+        
+        public override void Enter()
+        {
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
             {
                 if (playerEntity.isDealer)
                 {
@@ -50,11 +50,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     
                 }
             }
-            
-        }
-        
-        public override void Enter()
-        {
             // ResetDeclaration();
             
             // _classicGameController.OnReady<SheriffCheckState>();
@@ -70,8 +65,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
         {
             foreach (var e in _ecsContextProvider.Context.player.GetEntities())
             {
-                var actualAction = _iterationEnvironment
-                    .Command<ResetDeclarationCommand>()
+                var actualAction = _container
+                    .Instantiate<ResetDeclarationCommand>()
                     .Calculate(new ResetDeclarationCommand.Params()
                     {
                         playerEntityId = e.playerId.Value

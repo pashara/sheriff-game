@@ -101,7 +101,7 @@ namespace NaughtyCharacter
 
         private void FixedUpdate()
         {
-            Tick(Time.deltaTime);
+            Tick(Time.fixedDeltaTime);
             Controller.OnCharacterFixedUpdate();
         }
 
@@ -202,6 +202,7 @@ namespace NaughtyCharacter
             Vector3 spherePosition = transform.position;
             spherePosition.y = transform.position.y + InteractionSettings.SphereCastRadius;
             var element = Physics.OverlapSphere(spherePosition, InteractionSettings.SphereCastRadius, InteractionSettings.InteractionLayers, QueryTriggerInteraction.Collide);
+            Debug.DrawRay(transform.position, Vector3.up * 10f, Color.cyan, 5f);
             return element.Select(x => x.GetComponent<IInteractableGame>()).FirstOrDefault(x => x != null);
         }
 

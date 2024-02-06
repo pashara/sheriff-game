@@ -10,24 +10,32 @@ public static class PlayerComponentsLookup {
 
     public const int ActualStateProvider = 0;
     public const int AllowedActions = 1;
-    public const int Dealer = 2;
-    public const int DeclareResourcesByPlayer = 3;
-    public const int GoldCashCurrency = 4;
-    public const int Id = 5;
-    public const int PlayerId = 6;
-    public const int ReadyForCheck = 7;
-    public const int SelectedCards = 8;
-    public const int Sheriff = 9;
+    public const int CardsPopPerStep = 2;
+    public const int Dealer = 3;
+    public const int DeclareResourcesByPlayer = 4;
+    public const int DropCards = 5;
+    public const int GoldCashCurrency = 6;
+    public const int Id = 7;
+    public const int MaxCardsPopPerStep = 8;
+    public const int OnHandCards = 9;
+    public const int PlayerId = 10;
+    public const int ReadyForCheck = 11;
+    public const int SelectedCards = 12;
+    public const int Sheriff = 13;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
         "AllowedActions",
+        "CardsPopPerStep",
         "Dealer",
         "DeclareResourcesByPlayer",
+        "DropCards",
         "GoldCashCurrency",
         "Id",
+        "MaxCardsPopPerStep",
+        "OnHandCards",
         "PlayerId",
         "ReadyForCheck",
         "SelectedCards",
@@ -37,10 +45,14 @@ public static class PlayerComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Sheriff.ECS.Components.ActualStateProviderComponent),
         typeof(Sheriff.ECS.Components.AllowedActionsComponent),
+        typeof(Sheriff.ECS.Components.CardsPopPerStepComponent),
         typeof(Sheriff.ECS.Components.DealerComponent),
         typeof(Sheriff.ECS.Components.DeclareResourcesByPlayerComponent),
+        typeof(Sheriff.ECS.Components.DropCardsComponent),
         typeof(Sheriff.ECS.Components.GoldCashCurrencyComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
+        typeof(Sheriff.ECS.Components.MaxCardsPopPerStepComponent),
+        typeof(Sheriff.ECS.Components.OnHandCardsComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
         typeof(Sheriff.ECS.Components.ReadyForCheckComponent),
         typeof(Sheriff.ECS.Components.SelectedCardsComponent),

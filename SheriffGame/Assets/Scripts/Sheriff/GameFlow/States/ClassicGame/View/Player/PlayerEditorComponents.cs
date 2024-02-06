@@ -190,31 +190,31 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.Player
             _commandsApplyService.Apply(action);
         }
 
-        private bool CanPutCardInBag => AllowedActions.AllowedActions.Contains(typeof(PutCardInBagCommand));
-        [ShowIf(nameof(CanPutCardInBag))]
-        [Button]
-        private void PutCardInBag(long cardId)
-        {
-            var action = _container.Instantiate<PutCardInBagCommand>().Calculate(new PutCardInBagCommand.Params()
-            {
-                playerEntityId = _playerEntity.playerId.Value,
-                cardEntityId = cardId
-            });
-            _commandsApplyService.Apply(action);
-        }
+        // private bool CanPutCardInBag => AllowedActions.AllowedActions.Contains(typeof(PutCardInBagCommand));
+        // [ShowIf(nameof(CanPutCardInBag))]
+        // [Button]
+        // private void PutCardInBag(long cardId)
+        // {
+        //     var action = _container.Instantiate<PutCardInBagCommand>().Calculate(new PutCardInBagCommand.Params()
+        //     {
+        //         playerEntityId = _playerEntity.playerId.Value,
+        //         cardEntityId = cardId
+        //     });
+        //     _commandsApplyService.Apply(action);
+        // }
 
-        private bool CanPutCardFromBag => AllowedActions.AllowedActions.Contains(typeof(PopCardFromBagCommand));
-        [ShowIf(nameof(CanPutCardFromBag))]
-        [Button]
-        private void PopCardFromBag(long cardId)
-        {
-            var action = _container.Instantiate<PopCardFromBagCommand>().Calculate(new PopCardFromBagCommand.Params()
-            {
-                playerEntityId = _playerEntity.playerId.Value,
-                cardEntityId = cardId
-            });
-            _commandsApplyService.Apply(action);
-        }
+        // private bool CanPutCardFromBag => AllowedActions.AllowedActions.Contains(typeof(PopCardFromBagCommand));
+        // [ShowIf(nameof(CanPutCardFromBag))]
+        // [Button]
+        // private void PopCardFromBag(long cardId)
+        // {
+        //     var action = _container.Instantiate<PopCardFromBagCommand>().Calculate(new PopCardFromBagCommand.Params()
+        //     {
+        //         playerEntityId = _playerEntity.playerId.Value,
+        //         cardEntityId = cardId
+        //     });
+        //     _commandsApplyService.Apply(action);
+        // }
         
 
         private bool CanCheckAsSheriff => AllowedActions.AllowedActions.Contains(typeof(CheckDealersCommand));

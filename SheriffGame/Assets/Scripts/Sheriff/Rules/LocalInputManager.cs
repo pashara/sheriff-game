@@ -44,16 +44,55 @@ public class LocalInputManager
     private void UpdateInput()
     {
         // Очистить все InputActionMap'ы
-        foreach (var inputMap in InputSystem.ListEnabledActions())
+        // foreach (var inputMap in InputSystem.ListEnabledActions())
+        // {
+        //     inputMap.Disable();
+        // }
+
+
+        var element = activeInputMaps.First;
+
+        InputActionMap mapLast = null;
+        while (element != null)
         {
-            inputMap.Disable();
+            if (element.Value != null)
+            {
+                mapLast = element.Value;
+                element.Value.Disable();
+            }
+
+            element = element.Next;
         }
 
-        // Включить только активные InputActionMap'ы (крайний в стеке)
-        if (activeInputMaps.Count > 0)
+        if (mapLast != null)
         {
-            var topInputMap = activeInputMaps.LastOrDefault();
-            topInputMap.Enable();
+            mapLast?.Enable();
         }
+
+        
+        // foreach (var inputMap in activeInputMaps)
+        // {
+        //     if (inputMap != null)
+        //         inputMap.Disable();
+        // }
+        //
+        // foreach (var inputMap in activeInputMaps)
+        // {
+        //     if (inputMap != null)
+        //         inputMap.Disable();
+        // }
+        //
+        // if (activeInputMaps.Count > 0)
+        // {
+        //     var topInputMap = activeInputMaps.LastOrDefault();
+        //     topInputMap.Enable();
+        // }
+        //
+        // // Включить только активные InputActionMap'ы (крайний в стеке)
+        // if (activeInputMaps.Count > 0)
+        // {
+        //     var topInputMap = activeInputMaps.LastOrDefault();
+        //     topInputMap.Enable();
+        // }
     }
 }

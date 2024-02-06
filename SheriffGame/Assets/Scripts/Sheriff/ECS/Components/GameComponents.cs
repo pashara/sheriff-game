@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
+using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components
 {
@@ -32,5 +33,11 @@ namespace Sheriff.ECS.Components
     public class PotentialPlayersSequence : IComponent
     {
         public List<PlayerEntityId> Value;
+    }
+
+    [Game]
+    public class AllowedToDeclareGameResourcesComponent : IComponent
+    {
+        public List<GameResourceType> Value;
     }
 }

@@ -11,6 +11,24 @@ namespace Sheriff.ECS.Components
     public class InDecComponent : IComponent
     {
     }
+
+    [Card]
+    [EntityIndex]
+    public class SelectToDeclareComponent : IComponent
+    {
+    }
+    
+    [Card]
+    [EntityIndex]
+    public class CardReleaseComponent : IComponent
+    {
+    }
+    
+    [Card]
+    [EntityIndex]
+    public class CardOnHandComponent : IComponent
+    {
+    }
     
     [Card]
     [Game]

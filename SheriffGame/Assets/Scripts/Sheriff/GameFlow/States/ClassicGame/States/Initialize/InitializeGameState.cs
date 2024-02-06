@@ -4,8 +4,10 @@ using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.View;
+using Sheriff.GameResources;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
+using UnityEngine;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States
@@ -39,11 +41,22 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         }
 
 
-        private void CreateSession(ActualStateProviderProvider actualStateProvider)
+        private void CreateSession(IActualStateProviderWritable actualStateProvider)
         {
             var gameEntity = _ecsContextProvider.Context.game.CreateEntity();
             gameEntity.AddGameId(new GameSessionId(8800));
             gameEntity.AddActualStateProviderWritable(actualStateProvider);
+            gameEntity.AddAllowedToDeclareGameResources(new List<GameResourceType>()
+            {
+                GameResourceType.Apple,
+                GameResourceType.Cheese,
+                GameResourceType.Bread,
+                GameResourceType.Chicken,
+                GameResourceType.Pepper,
+                GameResourceType.Honeydew,
+                GameResourceType.Silk,
+                GameResourceType.Сrossbow,
+            });
             gameEntity.ReplaceRound(0);
 
             var allPlayers = _ecsContextProvider.Context.player
@@ -77,7 +90,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
                 cardEntity.AddResourceCategory(cardConfig.category);
                 cardEntity.AddResourceType(cardConfig.resourceType);
                 cardEntity.AddCardId(cardId);
-                cardEntity.isInDec = true;
+                cardEntity.PutInDec();
             }
             
         }
@@ -88,6 +101,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             var id = entity.id.ID;
             entity.AddPlayerId(id);
             entity.ReplaceGoldCashCurrency(0);
+            entity.ReplaceMaxCardsPopPerStep(5);
             entity.AddActualStateProvider(actualStateProvider);
 
 
@@ -97,9 +111,10 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         public override void Enter()
         {
             var actualStateProvider = new ActualStateProviderProvider();
-            CreatePlayer(actualStateProvider);
-            var id = CreatePlayer(actualStateProvider);
-            CreatePlayer(actualStateProvider);
+            var ids = new List<long>();
+            ids.Add(CreatePlayer(actualStateProvider));
+            ids.Add(CreatePlayer(actualStateProvider));
+            ids.Add(CreatePlayer(actualStateProvider));
             
             CreateSession(actualStateProvider);
 
@@ -110,9 +125,13 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             
             
             _gameViewController.LinkAllPlayers();
-            _gameViewController.LinkDeck();
-            
-            _gameViewController.player2.Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(id));
+
+            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerCardsControllers.Count, ids.Count); i++)
+            {
+                var control = _gameViewController.WorldPlayerCardsControllers[i];
+                control.Link(_ecsContextProvider.Context.player.GetEntityWithPlayerId(ids[i]));
+            }
+
             _classicGameController.OnReady<InitializeGameState>();
         }
 
@@ -130,8 +149,9 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             {
                 var action = _container.Instantiate<GetCardsFromDeckCommand>().Calculate(new GetCardsFromDeckCommand.Params()
                 {
-                    cardsCount = 5,
-                    playerEntityId = playerEntity.playerId.Value
+                    cardsCount = 6,
+                    playerEntityId = playerEntity.playerId.Value,
+                    ignoreLimits = true
                 });
                 _commandsApplyService.Apply(action);
             }

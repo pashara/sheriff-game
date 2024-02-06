@@ -19,6 +19,7 @@ namespace Sheriff.GameFlow
         {
             public PlayerEntityId playerEntityId;
             public int cardsCount;
+            public bool ignoreLimits;
         }
         
         [Serializable]
@@ -26,6 +27,8 @@ namespace Sheriff.GameFlow
         {
             [JsonProperty("player_id")]
             public PlayerEntityId playerDestination;
+            [JsonProperty("ignore_limits")]
+            public bool ignoreLimits;
             [JsonProperty("cards")]
             public List<CardEntityId> cardIds;
         }
@@ -36,6 +39,8 @@ namespace Sheriff.GameFlow
 
         [JsonProperty("result")]
         private GetCardsFromDeckEmulateParams _result = null;
+
+        public IReadOnlyList<CardEntityId> CalculatedCards => _result.cardIds;
 
         public override GetCardsFromDeckCommand Calculate(Params param)
         {
@@ -50,7 +55,8 @@ namespace Sheriff.GameFlow
             _result = new GetCardsFromDeckEmulateParams()
             {
                 playerDestination = param.playerEntityId,
-                cardIds = indexes.Take(actualCardsCount).Select(index => entities[indexes[index]].cardId.Value).ToList()
+                cardIds = indexes.Take(actualCardsCount).Select(index => entities[indexes[index]].cardId.Value).ToList(),
+                ignoreLimits = param.ignoreLimits
             };
 
             return this;
@@ -62,8 +68,20 @@ namespace Sheriff.GameFlow
             foreach (var cardId in _result.cardIds)
             {
                 var entity = _ecsContextProvider.Context.card.GetEntityWithCardId(cardId);
-                entity.ReplaceCardOwner(_result.playerDestination);
-                entity.isInDec = false;
+                entity.MarkOnHand(_result.playerDestination);
+            }
+
+            if (!_result.ignoreLimits)
+            {
+                var player = _ecsContextProvider.Context.player.GetEntityWithPlayerId(_result.playerDestination);
+                var initialValue = 0;
+                if (player.hasCardsPopPerStep)
+                {
+                    initialValue = player.cardsPopPerStep.Count;
+                }
+
+                initialValue += _result.cardIds.Count;
+                player.ReplaceCardsPopPerStep(initialValue);
             }
         }
     }

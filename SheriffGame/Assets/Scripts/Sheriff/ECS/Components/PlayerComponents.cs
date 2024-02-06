@@ -38,7 +38,19 @@ namespace Sheriff.ECS.Components
     }
     
     [Player]
+    public class OnHandCardsComponent : IComponent
+    {
+        public List<CardEntityId> Value;
+    }
+    
+    [Player]
     public class SelectedCardsComponent : IComponent
+    {
+        public List<CardEntityId> Value;
+    }
+    
+    [Player]
+    public class DropCardsComponent : IComponent
     {
         public List<CardEntityId> Value;
     }
@@ -61,5 +73,18 @@ namespace Sheriff.ECS.Components
     public class ReadyForCheckComponent : IComponent
     {
         
+    }
+
+
+    [Player]
+    public class CardsPopPerStepComponent : IComponent
+    {
+        public int Count;
+    }
+
+    [Player]
+    public class MaxCardsPopPerStepComponent : IComponent
+    {
+        public int Count;
     }
 }

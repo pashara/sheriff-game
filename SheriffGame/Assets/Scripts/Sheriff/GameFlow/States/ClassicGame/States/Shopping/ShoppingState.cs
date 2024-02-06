@@ -24,8 +24,9 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
                     {
                         typeof(DeclareCommand),
                         typeof(GetCardsFromDeckCommand),
-                        typeof(PopCardFromBagCommand),
-                        typeof(PutCardInBagCommand),
+                        typeof(PutCardsInBagCommand),
+                        // typeof(PopCardFromBagCommand),
+                        // typeof(PutCardInBagCommand),
                     });
                     playerEntity.ReplaceAllowedActions(allowedActions);
                 }

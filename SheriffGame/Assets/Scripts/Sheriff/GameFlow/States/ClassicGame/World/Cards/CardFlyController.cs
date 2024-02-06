@@ -32,6 +32,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
         }
         
         [Button]
+        public async UniTask PlayMoveFromBag(int targetIndex)
+        {
+            await PlayMoveFromBag(editorSource, targetIndex);
+        }
+        
+        [Button]
         public async UniTask PlaMoveToDec()
         {
             await PlaMoveToDec(editorSource);
@@ -51,9 +57,22 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             await Play(card, to, flyNewCardConfig);
         }
 
+
+        public GridProvider.GridPositionInfo GetBagTarget(int targetIndex)
+        {
+            return bagGrid.GetAt(targetIndex);
+        }
+        
         public async UniTask PlayMoveToBag(CardView card, int targetIndex)
         {
             var to = bagGrid.GetAt(targetIndex);
+            
+            await Play(card, to, flyBagConfig);
+        }
+
+        public async UniTask PlayMoveFromBag(CardView card, int targetIndex)
+        {
+            var to = playerCards.GetAt(targetIndex);
             
             await Play(card, to, flyBagConfig);
         }

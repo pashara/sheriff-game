@@ -9,29 +9,38 @@
 public static class CardComponentsLookup {
 
     public const int CardId = 0;
-    public const int CardOwner = 1;
-    public const int Id = 2;
-    public const int InDec = 3;
-    public const int ResourceCategory = 4;
-    public const int ResourceType = 5;
+    public const int CardOnHand = 1;
+    public const int CardOwner = 2;
+    public const int CardRelease = 3;
+    public const int Id = 4;
+    public const int InDec = 5;
+    public const int ResourceCategory = 6;
+    public const int ResourceType = 7;
+    public const int SelectToDeclare = 8;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "CardId",
+        "CardOnHand",
         "CardOwner",
+        "CardRelease",
         "Id",
         "InDec",
         "ResourceCategory",
-        "ResourceType"
+        "ResourceType",
+        "SelectToDeclare"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Sheriff.ECS.Components.CardIdComponent),
+        typeof(Sheriff.ECS.Components.CardOnHandComponent),
         typeof(Sheriff.ECS.Components.CardOwnerComponent),
+        typeof(Sheriff.ECS.Components.CardReleaseComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.InDecComponent),
         typeof(Sheriff.ECS.Components.ResourceCategoryComponent),
-        typeof(Sheriff.ECS.Components.ResourceTypeComponent)
+        typeof(Sheriff.ECS.Components.ResourceTypeComponent),
+        typeof(Sheriff.ECS.Components.SelectToDeclareComponent)
     };
 }

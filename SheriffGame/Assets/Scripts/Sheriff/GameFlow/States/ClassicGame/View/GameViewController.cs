@@ -1,7 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.World.Cards;
-using UniRx;
 using UnityEngine;
 using Zenject;
 
@@ -12,14 +11,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
         [Inject] private EcsContextProvider _ecsContextProvider;
         [Inject] private DiContainer _container;
         [SerializeField] private Transform playersRoot;
-        [SerializeField] private DeckViewController deckViewController;
         [SerializeField] private PlayerViewController playerPrefab;
-        public WorldPlayerCardsController player2;
+        [SerializeField] private List<WorldPlayerCardsController> worldCardsControllers;
+
+        public IReadOnlyList<WorldPlayerCardsController> WorldPlayerCardsControllers => worldCardsControllers;
         
-        public void LinkDeck()
-        {
-            deckViewController.Link();
-        }
         
         public void LinkAllPlayers()
         {

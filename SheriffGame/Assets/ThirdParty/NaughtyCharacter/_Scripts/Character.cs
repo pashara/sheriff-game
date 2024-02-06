@@ -79,6 +79,13 @@ namespace NaughtyCharacter
         private bool _hasMovementInput;
         private bool _jumpInput;
         private bool _interactInput;
+        
+        public long PlayerId { get; private set; }
+
+        public void SetPlayerId(long playerId)
+        {
+            PlayerId = playerId;
+        }
 
         public Vector3 Velocity => _characterController.velocity;
         public Vector3 HorizontalVelocity => _characterController.velocity.SetY(0.0f);
@@ -203,7 +210,9 @@ namespace NaughtyCharacter
             spherePosition.y = transform.position.y + InteractionSettings.SphereCastRadius;
             var element = Physics.OverlapSphere(spherePosition, InteractionSettings.SphereCastRadius, InteractionSettings.InteractionLayers, QueryTriggerInteraction.Collide);
             Debug.DrawRay(transform.position, Vector3.up * 10f, Color.cyan, 5f);
-            return element.Select(x => x.GetComponent<IInteractableGame>()).FirstOrDefault(x => x != null);
+            return element
+                .Select(x => x.GetComponent<IInteractableGame>())
+                .FirstOrDefault(x => x != null && x.CanInteract(this));
         }
 
         private void UpdateGrounded()

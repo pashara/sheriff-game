@@ -29,9 +29,9 @@ namespace Sheriff.GameFlow.States.ClassicGame
             players.Sort((a, b) => 
                     (int)(a.playerId.Value.EntityID - b.playerId.Value.EntityID));
             
-            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerCardsControllers.Count, players.Count); i++)
+            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerPlaceControllers.Count, players.Count); i++)
             {
-                var control = _gameViewController.WorldPlayerCardsControllers[i];
+                var control = _gameViewController.WorldPlayerPlaceControllers[i];
                 control.Link(players[i]);
             }
 

@@ -17,22 +17,27 @@ namespace Sheriff.GameFlow.States.ClassicGame
         public void Spawn(PlayerEntity playerEntity, bool isMain)
         {
             Vector3 spawnPoint = Vector3.zero;
+            Quaternion rotation = Quaternion.identity;
+            ;
             if (playerEntity.hasPlayerPositionId)
             {
                 var spawnController =
-                    _gameViewController.WorldPlayerCardsControllers.ElementAtOrDefault(playerEntity.playerPositionId
+                    _gameViewController.WorldPlayerPlaceControllers.ElementAtOrDefault(playerEntity.playerPositionId
                         .Id);
-                spawnPoint = spawnController.transform.position + Vector3.up * 5f;
+                spawnPoint = spawnController.SpawnPoint.position + Vector3.up * 5f;
+                rotation = spawnController.SpawnPoint.rotation;
             }
             else
             {
                 spawnIndex++;
-                var spawnController = _gameViewController.WorldPlayerCardsControllers.ElementAtOrDefault(spawnIndex);
-                spawnPoint = spawnController.transform.position + Vector3.up * 5f;
+                var spawnController = _gameViewController.WorldPlayerPlaceControllers.ElementAtOrDefault(spawnIndex);
+                spawnPoint = spawnController.SpawnPoint.position + Vector3.up * 5f;
+                rotation = spawnController.SpawnPoint.rotation;
             }
 
-            var instance = Instantiate(prefab, spawnPoint, Quaternion.identity);
+            var instance = Instantiate(prefab, spawnPoint, rotation);
             instance.GetComponent<PlayerController>().enabled = isMain;
+            instance.GetComponent<Character>().SetPlayerId(playerEntity.playerId.Value.EntityID);
             _container.InjectGameObject(instance);
         }
     }

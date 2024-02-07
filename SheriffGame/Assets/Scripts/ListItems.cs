@@ -18,9 +18,4 @@ public class ListItems : MonoBehaviour
     {
         PhotonNetwork.JoinRoom(textName.text);
     }
-
-    public void JoinRandRoomButton()
-    {
-        PhotonNetwork.JoinRandomRoom();
-    }
 }

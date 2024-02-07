@@ -7,6 +7,8 @@ using Photon.Realtime;
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] private string region;
+    [SerializeField] private string nickName;
+
     [SerializeField] private TMP_InputField roomName;
     [SerializeField] private ListItems itemPrefab;
     [SerializeField] private Transform content;
@@ -22,6 +24,10 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("You Connected to region " + PhotonNetwork.CloudRegion);
+        if (nickName == "")
+            PhotonNetwork.NickName = "User";
+        else
+            PhotonNetwork.NickName = nickName;
 
         if (!PhotonNetwork.InLobby)
         {

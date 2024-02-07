@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 090000000d000000ffffffff
-  lastScan: 638429456143437183
+  lastScan: 638429494659893001
   supportSerializedTypes:
   - TypeName: Sheriff.Rules.BaseRuleConfig, Sheriff.Runtime
     IsCustom: 0

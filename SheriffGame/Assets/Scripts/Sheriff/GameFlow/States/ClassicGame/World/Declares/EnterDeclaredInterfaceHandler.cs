@@ -30,15 +30,15 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
             var player = _ecsContextProvider.Context.player.GetEntityWithPlayerId(character.PlayerId);
             if (player.isSheriff)
             {
-                declaredBagWorldUI.OpenAsSheriff();
+                declaredBagWorldUI.OpenAsSheriff(player);
             }
-            else if (character.PlayerId == player.playerId.Value)
+            else if (declaredBagWorldUI.Owner == player.playerId.Value)
             {
-                declaredBagWorldUI.OpenAsOwner();
+                declaredBagWorldUI.OpenAsOwner(player);
             }
             else
             {
-                declaredBagWorldUI.OpenAsPlayer();
+                declaredBagWorldUI.OpenAsPlayer(player);
             }
         }
     }

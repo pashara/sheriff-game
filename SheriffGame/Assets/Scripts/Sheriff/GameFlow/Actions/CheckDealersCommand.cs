@@ -49,6 +49,7 @@ namespace Sheriff.GameFlow
                 var dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(skipCheckSherifResult.DealerId);
                 dealerEntity.isReadyForCheck = false;
+                dealerEntity.ReplaceSheriffCheckResult(skipCheckSherifResult);
                 return;
             }
 
@@ -60,9 +61,10 @@ namespace Sheriff.GameFlow
                 var dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifLoseCheckResult.ToPlayerId);
 
-                sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value - sherifLoseCheckResult.Coins);
-                dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value + sherifLoseCheckResult.Coins);
+                // sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value - sherifLoseCheckResult.Coins);
+                // dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value + sherifLoseCheckResult.Coins);
                 dealerEntity.isReadyForCheck = false;
+                dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
                 return;
             }
             
@@ -74,9 +76,10 @@ namespace Sheriff.GameFlow
                 var dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifWinCheckResult.FromPlayerId);
 
-                sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value + sherifWinCheckResult.Coins);
-                dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value - sherifWinCheckResult.Coins);
+                // sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value + sherifWinCheckResult.Coins);
+                // dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value - sherifWinCheckResult.Coins);
                 dealerEntity.isReadyForCheck = false;
+                dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
                 return;
             }
         }

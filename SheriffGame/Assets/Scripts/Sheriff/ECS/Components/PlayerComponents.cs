@@ -3,6 +3,7 @@ using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using NaughtyCharacter;
 using Sheriff.GameFlow;
+using Sheriff.GameFlow.States.ClassicGame;
 
 namespace Sheriff.ECS.Components
 {
@@ -111,5 +112,12 @@ namespace Sheriff.ECS.Components
     public class MaxCardsPopPerStepComponent : IComponent
     {
         public int Count;
+    }
+
+    [Player]
+    [ECSSerialize]
+    public class SheriffCheckResultComponent : IComponent
+    {
+        public SherifCheckResult Value;
     }
 }

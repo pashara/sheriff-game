@@ -1,4 +1,6 @@
-﻿using Sheriff.ECS;
+﻿using System.Collections.Generic;
+using Sheriff.ECS;
+using Sheriff.ECS.Components;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
@@ -25,6 +27,45 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
         public override void Enter()
         {
             var gameEntity = _ecsContextProvider.Context.game.gameIdEntity;
+
+            HashSet<CardEntityId> cardsToRelease = new();
+            foreach (var player in _ecsContextProvider.Context.player.GetEntities())
+            {
+                // bool isSkip = 
+                // if (player.hasSheriffCheckResult)
+                // {
+                //     player.sheriffCheckResult is SkipCheckSherifResult;
+                // }
+                
+                if (player.hasSelectedCards)
+                {
+                    foreach (var cardId in player.selectedCards.Value)
+                        cardsToRelease.Add(cardId);
+                    player.RemoveSelectedCards();
+                }
+
+                if (player.hasDeclareResourcesByPlayer)
+                {
+                    player.RemoveDeclareResourcesByPlayer();
+                }
+
+                if (player.hasSheriffCheckResult)
+                {
+                    player.RemoveSheriffCheckResult();
+                }
+
+                player.ReplaceCardsPopPerStep(0);
+            }
+
+            foreach (var cardEntityId in cardsToRelease)
+            {
+                _ecsContextProvider.Context.card.GetEntityWithCardId(cardEntityId).MarkReleased();
+            }
+            
+            
+            
+            
+            
 
             var actualAction = _container
                 .Instantiate<SelectSheriffCommand>()

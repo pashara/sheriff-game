@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Sheriff.DataBase;
 using Sheriff.ECS;
@@ -8,80 +7,55 @@ using Sheriff.GameFlow.States.ClassicGame.World.Cards;
 using Sheriff.GameResources;
 using UniRx;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 {
-    public class SheriffDeclaredViewUI : MonoBehaviour
+    public class PlayerDeclaredViewUI : MonoBehaviour
     {
         [Inject] private EcsContextProvider _ecsContextProvider;
         [Inject] private ICardConfigProvider _cardConfigProvider;
         [Inject] private DiContainer _container;
 
-        [SerializeField] private Button skip;
-        [SerializeField] private Button check;
         [SerializeField] private GridProvider selectedCardsGrid;
         [SerializeField] private GridProvider declaredCardsGrid;
         
-        private IReadOnlyReactiveProperty<ProductsDeclaration> _declaration;
         private PlayerEntity _playerEntity;
-        private IReadOnlyReactiveProperty<SheriffChoice> _sheriffChoice;
-        private readonly CompositeDisposable _disposable = new();
         private List<CardView> _spawnedCards = new();
+        private IReadOnlyReactiveProperty<SheriffChoice> _sheriffChoice;
+        private CompositeDisposable _disposable = new();
 
-        private Subject<SheriffChoice> _onSelect = new();
-        public IObservable<SheriffChoice> OnSelect => _onSelect;
-
-
-        public void Link(
-            IReadOnlyReactiveProperty<ProductsDeclaration> declaration,
-            PlayerEntity playerEntity,
-            IReadOnlyReactiveProperty<SheriffChoice> sheriffChoice
-            )
+        public void Link(PlayerEntity playerEntity, IReadOnlyReactiveProperty<SheriffChoice> sheriffChoice)
         {
-            _declaration = declaration;
             _playerEntity = playerEntity;
             _sheriffChoice = sheriffChoice;
         }
-
+        
         public void Show()
         {
-            gameObject.SetActive(true);
             _disposable.Clear();
-            _sheriffChoice.Subscribe(x =>
-            {
-                skip.interactable = x is not (SheriffChoice.Check or SheriffChoice.Skip);
-                check.interactable = x is not (SheriffChoice.Check or SheriffChoice.Skip);
-            }).AddTo(_disposable);
-
+            
+            gameObject.SetActive(true);
+            SpawnSelectedCards();
+            SpawnDeclaredCards();
+            AffectVisibilitySelected(true);
+            
             _sheriffChoice.SkipLatestValueOnSubscribe().Subscribe(x =>
             {
                 AffectVisibilitySelected(false);
             }).AddTo(_disposable);
-            
-            skip.OnClickAsObservable().Subscribe(x => { _onSelect.OnNext(SheriffChoice.Skip); }).AddTo(_disposable);
-            check.OnClickAsObservable().Subscribe(x => { _onSelect.OnNext(SheriffChoice.Check); }).AddTo(_disposable);
-
-            AffectVisibilitySelected(true);
-            SpawnDeclaredCards();
-            SpawnSelectedCards();
         }
 
         public void Hide()
         {
             _disposable.Clear();
+            
             gameObject.SetActive(false);
             foreach (var spawnedCard in _spawnedCards)
                 spawnedCard.Dispose();
             _spawnedCards.Clear();
         }
 
-        void AffectVisibilitySelected(bool isImmediately)
-        {
-            bool isVisible = _sheriffChoice.Value == SheriffChoice.Check;
-            selectedCardsGrid.gameObject.SetActive(isVisible);
-        }
 
         private void SpawnDeclaredCards()
         {
@@ -124,5 +98,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
                 _spawnedCards.Add(cardInstance);
             }
         }
+
+        void AffectVisibilitySelected(bool isImmediately)
+        {
+            bool isVisible = _sheriffChoice.Value == SheriffChoice.Check;
+            selectedCardsGrid.gameObject.SetActive(isVisible);
+        }
+
     }
 }

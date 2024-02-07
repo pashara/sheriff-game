@@ -48,6 +48,9 @@ public partial class PlayerEntity
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SelectedCardsComponent> OnSelectedCards() =>
         this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(14);
 
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffCheckResultComponent> OnSheriffCheckResult() =>
+        this.OnChange<Sheriff.ECS.Components.SheriffCheckResultComponent>(15);
+
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffComponent> OnSheriff() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(15);
+        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(16);
 }

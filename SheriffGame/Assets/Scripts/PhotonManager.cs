@@ -11,6 +11,8 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     [SerializeField] private ListItems itemPrefab;
     [SerializeField] private Transform content;
 
+    private List<RoomInfo> allRoomsInfo = new List<RoomInfo>();
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
@@ -20,7 +22,11 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log("You Connected to region " + PhotonNetwork.CloudRegion);
-        PhotonNetwork.JoinLobby();
+
+        if (!PhotonNetwork.InLobby)
+        {
+            PhotonNetwork.JoinLobby();
+        }
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -38,6 +44,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 4;
         bool a = PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
         Debug.Log(a);
+        PhotonNetwork.LoadLevel("GameScene");
     }
 
     public override void OnCreatedRoom()
@@ -53,13 +60,48 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+
+
         foreach (RoomInfo roomInfo in roomList)
         {
+            for (int i = 0; i < allRoomsInfo.Count; i++)
+            {
+                if (allRoomsInfo[i].masterClientId == roomInfo.masterClientId)
+                {
+                    return;
+                }
+            }
+
             ListItems listItem = Instantiate(itemPrefab, content);
             if (listItem != null)
             {
                 listItem.SetInfo(roomInfo);
+                allRoomsInfo.Add(roomInfo);
             }
         }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        PhotonNetwork.LoadLevel("GameScene");
+    }
+    public void JoinRandRoomButton()
+    {
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void JoinButton()
+    {
+        PhotonNetwork.JoinRoom(roomName.text);
+    }
+
+    public void LeaveButton()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public override void OnLeftRoom()
+    {
+        PhotonNetwork.LoadLevel("Login");
     }
 }

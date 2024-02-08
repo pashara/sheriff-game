@@ -55,13 +55,34 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             _commandsApplyService.Apply(action);
         }
 
-        public async UniTask<IReadOnlyList<CardEntityId>> GetNewCard()
+        public int CanReleaseCards()
         {
             var hasLimits = _playerEntity.hasMaxCardsPopPerStep && _playerEntity.maxCardsPopPerStep.Count >= 0;
-            
-            if (hasLimits && 
-                _playerEntity.hasCardsPopPerStep && 
-                _playerEntity.cardsPopPerStep.Count >= _playerEntity.maxCardsPopPerStep.Count)
+            if (!hasLimits)
+            {
+                return 999;
+            }
+
+            var maxCount = 999;
+            if (_playerEntity.hasMaxCardsPopPerStep)
+            {
+                maxCount = _playerEntity.maxCardsPopPerStep.Count;
+            }
+
+            if (_playerEntity.hasCardsPopPerStep)
+            {
+                return maxCount - _playerEntity.cardsPopPerStep.Count;
+            }
+            else
+            {
+                return maxCount;
+            }
+        }
+
+        public async UniTask<IReadOnlyList<CardEntityId>> GetNewCard()
+        {
+            int cardsToRelease = CanReleaseCards();
+            if (cardsToRelease <= 0)
                 return new List<CardEntityId>();
             
             var action = _container.Instantiate<GetCardsFromDeckCommand>().Calculate(new GetCardsFromDeckCommand.Params()

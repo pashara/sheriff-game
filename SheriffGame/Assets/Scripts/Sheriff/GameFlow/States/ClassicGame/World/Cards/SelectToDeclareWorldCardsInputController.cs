@@ -48,7 +48,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                         {
                             if (!cardInteractable.CardView.CardEntity.isCardRelease)
                             {
-                                worldPlayerCardsController.ReleaseCard(cardInteractable.CardView);
+                                if (worldPlayerCardsController.CanReleaseCards() > 0)
+                                {
+                                    worldPlayerCardsController.ReleaseCard(cardInteractable.CardView);
+                                    worldPlayerCardsController.GetNewCard();
+                                }
                             }
 
                             return;

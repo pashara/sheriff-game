@@ -16,7 +16,7 @@ MonoBehaviour:
   deleteDllAfterBuilds: 1
   AutomateForAllAOTPlatforms: 1
   automateForPlatforms: 090000000d000000ffffffff
-  lastScan: 638428120958614330
+  lastScan: 638429066426035017
   supportSerializedTypes:
   - TypeName: Sheriff.Rules.BaseRuleConfig, Sheriff.Runtime
     IsCustom: 0
@@ -28,6 +28,9 @@ MonoBehaviour:
     IsCustom: 0
     Emit: 1
   - TypeName: Sheriff.Rules.ClassicRules.ClassicRuleConfig, Sheriff.Runtime
+    IsCustom: 0
+    Emit: 1
+  - TypeName: Sheriff.GameFlow.ContextSerializeData, Sheriff.Runtime
     IsCustom: 0
     Emit: 1
   - TypeName: Sheriff.GameResources.GameResourceCategory, Sheriff.Runtime

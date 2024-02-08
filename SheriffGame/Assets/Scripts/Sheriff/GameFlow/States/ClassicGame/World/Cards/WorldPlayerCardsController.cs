@@ -49,6 +49,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             }
         }
 
+        public int CanReleaseCards()
+        {
+            return worldToEcsController.CanReleaseCards();
+        }
+
         public async void GetNewCard()
         {
             var ids = await worldToEcsController.GetNewCard();

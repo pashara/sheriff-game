@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyCharacter
 {
-    public abstract class Controller : ScriptableObject
+    public abstract class Controller : MonoBehaviour
     {
         public Character Character { get; set; }
 

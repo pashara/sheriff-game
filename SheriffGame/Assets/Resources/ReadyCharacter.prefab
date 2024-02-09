@@ -485,6 +485,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4950774690878385529}
+    - targetCorrespondingSourceObject: {fileID: 1193220341909240, guid: 3d48f388d7c23f14f9678d7a3acb2255,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7067470787795530342}
   m_SourcePrefab: {fileID: 100100000, guid: 3d48f388d7c23f14f9678d7a3acb2255, type: 3}
 --- !u!1 &8137868451421276760 stripped
 GameObject:
@@ -509,7 +513,7 @@ CharacterController:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Height: 1.62
   m_Radius: 0.35
@@ -525,12 +529,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8137868451421276760}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19895b2297432194286737f0a8f1042d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Controller: {fileID: 11400000, guid: 827c282016b19644d99b2337152dc01b, type: 2}
+  Controller: {fileID: 7067470787795530342}
   MovementSettings:
     Acceleration: 25
     Decceleration: 25
@@ -638,3 +642,16 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
+--- !u!114 &7067470787795530342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8137868451421276760}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1f8bc0f18ee8ab4791101b7157f61a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ControlRotationSensitivity: 2

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace NaughtyCharacter
@@ -6,6 +7,14 @@ namespace NaughtyCharacter
     public class PlayerController : Controller
     {
         public float ControlRotationSensitivity = 1.0f;
+
+        private void OnEnable()
+        {
+        }
+
+        private void OnDisable()
+        {
+        }
 
         private PlayerInputComponent _playerInput;
         private PlayerCamera _playerCamera;
@@ -18,16 +27,22 @@ namespace NaughtyCharacter
 
         public override void OnCharacterUpdate()
         {
-            UpdateControlRotation();
-            Character.SetMovementInput(GetMovementInput());
-            Character.SetJumpInput(_playerInput.JumpInput);
-            Character.SetInteract(_playerInput.InteractInput);
+            if (enabled)
+            {
+                UpdateControlRotation();
+                Character.SetMovementInput(GetMovementInput());
+                Character.SetJumpInput(_playerInput.JumpInput);
+                Character.SetInteract(_playerInput.InteractInput);
+            }
         }
 
         public override void OnCharacterFixedUpdate()
         {
-            _playerCamera.SetPosition(Character.transform.position);
-            _playerCamera.SetControlRotation(Character.GetControlRotation());
+            if (enabled)
+            {
+                _playerCamera.SetPosition(Character.transform.position);
+                _playerCamera.SetControlRotation(Character.GetControlRotation());
+            }
         }
 
         private void UpdateControlRotation()

@@ -4,6 +4,7 @@ using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
 using UnityEngine.SceneManagement;
+using NaughtyCharacter;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -17,6 +18,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
     private List<RoomInfo> allRoomsInfo = new List<RoomInfo>();
 
     private GameObject player;
+
     [SerializeField] private GameObject playerPref;
 
     private void Start()
@@ -27,6 +29,15 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         if (SceneManager.GetActiveScene().name == "GameScene")
         {
             player = PhotonNetwork.Instantiate(playerPref.name, new Vector3(-7, 0, 44), Quaternion.identity);
+            PhotonView photonView = player.GetComponent<PhotonView>();
+            {
+                if (photonView.IsMine)
+                {
+                    player.GetComponent<CharacterController>().enabled = true;
+                    player.GetComponent<PlayerController>().enabled = true;
+                    player.GetComponent<Character>().enabled = true;
+                }
+            }
         }
     }
 

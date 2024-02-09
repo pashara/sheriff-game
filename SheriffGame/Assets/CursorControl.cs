@@ -10,7 +10,7 @@ public class CursorControl : MonoBehaviour
 
     private void Update()
     {
-        if (Keyboard.current != null && Keyboard.current.ctrlKey.isPressed)
+        if (Keyboard.current != null && Keyboard.current.ctrlKey.wasPressedThisFrame)
         {
             ToggleCursorVisibility();
         }

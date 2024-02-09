@@ -4770,6 +4770,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 1262820906}
+  hideInput: 1
 --- !u!1 &1289709648
 GameObject:
   m_ObjectHideFlags: 0

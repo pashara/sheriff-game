@@ -1,10 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Sheriff.Rules;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class LocalInputManager
 {
-    private LinkedList<InputActionMap> activeInputMaps = new LinkedList<InputActionMap>();
+    private LinkedList<(InputActionMap, InputSender)> activeInputMaps = new LinkedList<(InputActionMap, InputSender)>();
     private static LocalInputManager _instance;
 
     public static LocalInputManager Instance
@@ -21,17 +23,17 @@ public class LocalInputManager
     }
 
 
-    public void PushInputMap(InputActionMap inputMap)
+    public void PushInputMap(InputActionMap inputMap, InputSender inputSender)
     {
-        activeInputMaps.AddLast(inputMap);
+        activeInputMaps.AddLast((inputMap, inputSender));
         UpdateInput();
     }
 
-    public void PopInputMap(InputActionMap inputMap)
+    public void PopInputMap(InputActionMap inputMap, InputSender inputSender)
     {
         if (activeInputMaps.Count > 0)
         {
-            var element = activeInputMaps.FindLast(inputMap);
+            var element = activeInputMaps.FindLast((inputMap, inputSender));
             if (element != null)
             {
                 activeInputMaps.Remove(element);
@@ -52,21 +54,24 @@ public class LocalInputManager
 
         var element = activeInputMaps.First;
 
-        InputActionMap mapLast = null;
+        (InputActionMap, InputSender) mapLast = default;
         while (element != null)
         {
-            if (element.Value != null)
+            if (element.Value.Item1 != null)
             {
                 mapLast = element.Value;
-                element.Value.Disable();
+                element.Value.Item1.Disable();
             }
 
             element = element.Next;
         }
 
-        if (mapLast != null)
+        if (mapLast.Item1 != null)
         {
-            mapLast?.Enable();
+            mapLast.Item1?.Enable();
+            
+            Cursor.visible = !(mapLast.Item2 != null && mapLast.Item2.HideInput);
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
         }
 
         

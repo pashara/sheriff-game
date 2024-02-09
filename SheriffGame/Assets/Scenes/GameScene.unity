@@ -1539,10 +1539,10 @@ RectTransform:
   - {fileID: 1102168206}
   m_Father: {fileID: 1450016090}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 46.68}
+  m_SizeDelta: {x: 306.78, y: 59.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451040603
 MonoBehaviour:
@@ -1601,7 +1601,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.39001468, g: 1, b: 0.3066038, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2542,6 +2542,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 729991240}
+  - component: {fileID: 729991241}
   m_Layer: 0
   m_Name: RoomInitialUI
   m_TagString: Untagged
@@ -2565,6 +2566,19 @@ Transform:
   - {fileID: 1450016090}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &729991241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729991239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c20fc2b483b58e4ab0f45b871cca2cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  punManager: {fileID: 2101142036}
 --- !u!1 &733634586 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4761087743418853990, guid: 9fc93746cd21fd242a8ba21364516c37,
@@ -3870,7 +3884,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: READY
+  m_text: READY TO START
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

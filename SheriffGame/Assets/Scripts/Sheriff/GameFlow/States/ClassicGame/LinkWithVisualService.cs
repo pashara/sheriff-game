@@ -68,8 +68,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
             {
                 var playerPun = punPlayers[j];
                 var playerEntity = players[j];
-                var views = GetAllPhotonViewsPerPlayer(playerPun);
-                var controller = views.Select(x => x.GetComponent<DummyPlayer>()?.View.GetComponent<PlayerController>()).FirstOrDefault();
+                var controller = GetMainPhotonView(playerPun);
                 _playerSpawnService.Link(playerEntity, controller);
             }
         }
@@ -91,6 +90,14 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 return list;
             }
             return null;
+        }
+        
+        public static PlayerController GetMainPhotonView(Player player)
+        {
+            var list = GetAllPhotonViewsPerPlayer(player);
+            return list
+                .Select(x => x.GetComponent<DummyPlayer>()?.View.GetComponent<PlayerController>())
+                .FirstOrDefault(x => x != null);
         }
     }
 }

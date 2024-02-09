@@ -10,6 +10,7 @@ using Sheriff.ECS;
 using Sheriff.GameFlow;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.World;
+using Sheriff.Pers;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
@@ -67,6 +68,12 @@ namespace Sheriff.ClientServer.Game
             {
                 CheckEndOfGame();
                 return;
+            }
+
+            if (changedProps.TryGetValue(SheriffGame.PLAYER_VIEW_ID, out var viewIdObj) && viewIdObj is int viewIdInt)
+            {
+                var view = LinkWithVisualService.GetMainPhotonView(targetPlayer).GetComponent<CharacterView>();
+                view?.Apply(viewIdInt);
             }
 
             if (!PhotonNetwork.IsMasterClient)
@@ -249,6 +256,34 @@ namespace Sheriff.ClientServer.Game
                 var array = Encoding.UTF8.GetBytes(json);
                 photonView.RPC(nameof(SetProjectState), RpcTarget.Others, array);
             }
+        }
+
+        public void IncView()
+        {
+            Hashtable props = PhotonNetwork.LocalPlayer.CustomProperties;
+            int id = 0;
+            if (props.ContainsKey(SheriffGame.PLAYER_VIEW_ID))
+            {
+                id = (int) props[SheriffGame.PLAYER_VIEW_ID];
+            }
+            id++;
+            id = Mathf.Max(0, id);
+            
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{SheriffGame.PLAYER_VIEW_ID, id}});
+        }
+
+        public void DecView()
+        {
+            Hashtable props = PhotonNetwork.LocalPlayer.CustomProperties;
+            int id = 0;
+            if (props.ContainsKey(SheriffGame.PLAYER_VIEW_ID))
+            {
+                id = (int) props[SheriffGame.PLAYER_VIEW_ID];
+            }
+            id--;
+            id = Mathf.Max(0, id);
+            
+            PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{SheriffGame.PLAYER_VIEW_ID, id}});
         }
     }
 }

@@ -20,5 +20,16 @@ namespace Sheriff.Pers
                 e.gameObject.SetActive((e == element));
             }
         }
+
+        [Button]
+        public void Apply(int id)
+        {
+            var element = elements.ElementAt(id % elements.Count);
+            if (element == null) return;
+            foreach (var e in elements)
+            {
+                e.gameObject.SetActive((e == element));
+            }
+        }
     }
 }

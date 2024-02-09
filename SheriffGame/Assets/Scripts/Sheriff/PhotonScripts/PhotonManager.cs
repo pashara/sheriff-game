@@ -3,6 +3,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 using Photon.Realtime;
+using UnityEngine.SceneManagement;
 
 public class PhotonManager : MonoBehaviourPunCallbacks
 {
@@ -15,10 +16,18 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     private List<RoomInfo> allRoomsInfo = new List<RoomInfo>();
 
+    private GameObject player;
+    [SerializeField] private GameObject playerPref;
+
     private void Start()
     {
         PhotonNetwork.ConnectUsingSettings();
         PhotonNetwork.ConnectToRegion(region);
+
+        if (SceneManager.GetActiveScene().name == "GameScene")
+        {
+            player = PhotonNetwork.Instantiate(playerPref.name, new Vector3(-7, 0, 44), Quaternion.identity);
+        }
     }
 
     public override void OnConnectedToMaster()
@@ -48,9 +57,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
         }
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.MaxPlayers = 4;
-        bool a = PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
-        Debug.Log(a);
-        PhotonNetwork.LoadLevel("GameScene");
+        PhotonNetwork.CreateRoom(roomName.text, roomOptions, TypedLobby.Default);
     }
 
     public override void OnCreatedRoom()
@@ -108,6 +115,7 @@ public class PhotonManager : MonoBehaviourPunCallbacks
 
     public override void OnLeftRoom()
     {
+        PhotonNetwork.Destroy(player.gameObject);
         PhotonNetwork.LoadLevel("Login");
     }
 }

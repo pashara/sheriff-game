@@ -1680,6 +1680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   region: eu
+  nickName: 
   roomName: {fileID: 1456503155}
   itemPrefab: {fileID: 105737743036515687, guid: 18255ece6a1cd764096b35af0eaa702b,
     type: 3}

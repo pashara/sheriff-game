@@ -68,6 +68,7 @@ namespace NaughtyCharacter
         private CharacterController _characterController; // The Unity's CharacterController
         private CharacterAnimator _characterAnimator;
 
+
         private float _targetHorizontalSpeed; // In meters/second
         private float _horizontalSpeed; // In meters/second
         private float _verticalSpeed; // In meters/second
@@ -92,17 +93,18 @@ namespace NaughtyCharacter
 
             _characterController = GetComponent<CharacterController>();
             _characterAnimator = GetComponent<CharacterAnimator>();
+
         }
 
         private void Update()
         {
-            Controller.OnCharacterUpdate();
+                Controller.OnCharacterUpdate();
         }
 
         private void FixedUpdate()
         {
-            Tick(Time.deltaTime);
-            Controller.OnCharacterFixedUpdate();
+                Tick(Time.deltaTime);
+                Controller.OnCharacterFixedUpdate();
         }
 
         private void Tick(float deltaTime)
@@ -194,8 +196,8 @@ namespace NaughtyCharacter
 
             return isGrounded;
         }
-        
-        
+
+
 
         private IInteractableGame CheckInteraction()
         {

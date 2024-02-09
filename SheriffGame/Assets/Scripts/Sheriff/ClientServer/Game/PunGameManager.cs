@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using Cysharp.Threading.Tasks;
-using NaughtyCharacter;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
-using Sheriff.ClientServer.Players;
 using Sheriff.ECS;
 using Sheriff.GameFlow;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.World;
 using Sirenix.OdinInspector;
+using UniRx;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -25,7 +25,8 @@ namespace Sheriff.ClientServer.Game
         [SerializeField] private ClassicGameControllerWrapper classicGameControllerWrapper;
         [Inject] private DiContainer _container;
         [Inject] private EcsContextProvider _ecsContextProvider;
-
+        [SerializeField] private Button readyButton;
+        [SerializeField] private GameObject readyUI;
 
         [Button]
         public void MarkGameReady()
@@ -35,13 +36,6 @@ namespace Sheriff.ClientServer.Game
                 {SheriffGame.PLAYER_LOADED_LEVEL, true}
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
-            
-            
-            
-            var spawnPoint = worldPlayerPlacementControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
-
-            var instance = PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);      // avoid this call on rejoin (ship was network instantiated before)
-
         }
         
         
@@ -197,10 +191,24 @@ namespace Sheriff.ClientServer.Game
             base.OnEnable();
 
             CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerIsExpired;
-
+            readyUI.SetActive(false);
             await UniTask.DelayFrame(1);
             
-            MarkGameReady();
+            
+            var spawnPoint = worldPlayerPlacementControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
+
+            PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);      
+            // avoid this call on rejoin (ship was network instantiated before)
+            readyUI.SetActive(true);
+
+
+            readyButton.onClick.AsObservable().Subscribe(x =>
+            {
+                MarkGameReady();
+                readyUI.SetActive(false);
+            }).AddTo(this);
+
+            // MarkGameReady();
         }
 
         public override void OnDisable()

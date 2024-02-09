@@ -12,6 +12,8 @@ namespace Sheriff.ClientServer.Players
         [SerializeField] private GameObject playerView;
         [SerializeField] private GameObject view;
         private GameObject _realView = null;
+
+        public GameObject View => _realView;
         
         [Inject]
         private void Construct(DiContainer container)

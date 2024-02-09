@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
+using Photon.Realtime;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -18,26 +19,26 @@ namespace Sheriff.GameFlow.States.ClassicGame
         [SerializeField] private string initialCommands;
 
 
-        public void StartGame()
+        public void StartGame(int playersCount)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
-            _classicGameController.StartGame();
+            _classicGameController.StartGame(playersCount);
+        }
+
+        public void StartGame(Player[] players)
+        {
+            _classicGameController = _container.Resolve<ClassicGameController>();
+            _classicGameController.StartGame(players);
         }
         
-        public void StartGame(ISessionInitializeDataProvider serializeDataProvider)
+        public void StartGame(ISessionInitializeDataProvider serializeDataProvider, Player[] players)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
 
-            var loadData = serializeDataProvider?.GetLoadData();
-            if (loadData != null)
-            {
-                _classicGameController.StartGame(loadData.StateType);
-            }
-            else
-            {
-                _classicGameController.StartGame();
-            }
+            var loadData = serializeDataProvider.GetLoadData();
+            _classicGameController.StartGame(loadData.StateType, players);
+            
         }
 
         // private void Start()

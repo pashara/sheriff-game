@@ -5,11 +5,16 @@ using Sheriff.ECS.Components;
 using Sheriff.GameResources;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
+using ThirdParty.StateMachine.States;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States
 {
-    public class InitializeGameState : ClassicGameState
+    public class InitializeGamePayload : IStatePayload
+    {
+        public int PlayersCount = 0;
+    }
+    public class InitializeGameState : ClassicGameState, IPayloadableState<InitializeGamePayload>
     {
         private readonly IRandomService _randomService;
         private readonly EcsContextProvider _ecsContextProvider;
@@ -18,6 +23,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly CommandsApplyService _commandsApplyService;
         private readonly DiContainer _container;
         private readonly LinkWithVisualService _linkWithVisualService;
+        private int _playersCount;
 
         public InitializeGameState(
             IRandomService randomService,
@@ -108,9 +114,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         public override void Enter()
         {
             var actualStateProvider = new ActualStateProviderProvider();
-            CreatePlayer(actualStateProvider);
-            CreatePlayer(actualStateProvider);
-            CreatePlayer(actualStateProvider);
+            for (int i = 0; i < _playersCount; i++)
+            {
+                CreatePlayer(actualStateProvider);
+            }
+
+            // CreatePlayer(actualStateProvider);
             CreateSession(actualStateProvider);
 
             CreateCards();
@@ -118,7 +127,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             GiveCardsToPlayers();
             GiveGoldToPlayers();
 
-            _linkWithVisualService.Link();
+            // _linkWithVisualService.Link();
 
 
             _classicGameController.OnReady<InitializeGameState>();
@@ -148,6 +157,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
 
         public override void Exit()
         {
+        }
+
+        public void Configure(InitializeGamePayload payload)
+        {
+            _playersCount = payload.PlayersCount;
         }
     }
 }

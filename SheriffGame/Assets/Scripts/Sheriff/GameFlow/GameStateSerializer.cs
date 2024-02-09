@@ -16,13 +16,12 @@ namespace Sheriff.GameFlow
 
         [SerializeField] private ContextSerializeData _data;
         [SerializeField] private string json;
-        
-        [Button]
-        private void Serialize()
+
+
+
+        public string Serialize()
         {
             _data = new();
-            
-            
             _data.LastGeneratedId = _ecsContextProvider.LastGeneratedId;
             _data.StateType = _ecsContextProvider.Context.game.gameIdEntity.actualStateProviderWritable.Value.ActualState.Value.GetType();
             _data.SerializeData = new();
@@ -48,6 +47,16 @@ namespace Sheriff.GameFlow
                 {
                     var entitySerializeData = new EntitySerializeData();
                     entitySerializeData.Components = new();
+                    if (entity is IIdEntity idEntity && idEntity.hasId)
+                    {
+                        entitySerializeData.hasId = true;
+                        entitySerializeData.id = idEntity.id.ID;
+                    }
+                    else
+                    {
+                        entitySerializeData.hasId = false;
+                        entitySerializeData.id = -1;
+                    }
                 
                     foreach (var component in entity.GetComponents())
                     {
@@ -65,10 +74,16 @@ namespace Sheriff.GameFlow
                 }
             }
             
-            json = JsonConvert.SerializeObject(_data, new JsonSerializerSettings()
-            {
-                TypeNameHandling = TypeNameHandling.Auto
-            });
+            return JsonConvert.SerializeObject(_data, new JsonSerializerSettings()
+                {
+                    TypeNameHandling = TypeNameHandling.Auto
+                });
+        }
+        
+        [Button]
+        private void _Serialize()
+        {
+            json = Serialize();
         }
 
 
@@ -86,6 +101,9 @@ namespace Sheriff.GameFlow
     [Serializable]
     public class EntitySerializeData
     {
+        [JsonProperty("has_id")] public bool hasId;
+        [JsonProperty("id")] public long id;
+        
         [JsonProperty("components")] public List<IComponent> Components = new();
     }
 

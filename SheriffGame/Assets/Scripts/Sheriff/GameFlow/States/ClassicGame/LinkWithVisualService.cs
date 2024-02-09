@@ -1,4 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using NaughtyCharacter;
+using Photon.Pun;
+using Photon.Realtime;
+using Sheriff.ClientServer.Players;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using UnityEngine;
@@ -21,7 +26,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _ecsContextProvider = ecsContextProvider;
         }
         
-        public void Link()
+        public void Link(List<PlayerController> spawnedPlayers)
         {
             _gameViewController.LinkAllPlayers();
 
@@ -34,14 +39,58 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 var control = _gameViewController.WorldPlayerPlaceControllers[i];
                 control.Link(players[i]);
             }
-
-
-            int j = 0;
-            foreach (var playerEntity in players)
+    
+            
+            for (int j = 0; j < spawnedPlayers.Count; j++)
             {
-                _playerSpawnService.Spawn(playerEntity, j == 0);
-                j++;
+                var playerEntity = players[j];
+                var controller = spawnedPlayers[j];
+                _playerSpawnService.Link(playerEntity, controller);
             }
+        }
+        
+        public void Link(Player[] punPlayers)
+        {
+            _gameViewController.LinkAllPlayers();
+        
+            var players = _ecsContextProvider.Context.player.GetEntities().ToList();
+            players.Sort((a, b) => 
+                    (int)(a.playerId.Value.EntityID - b.playerId.Value.EntityID));
+            
+            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerPlaceControllers.Count, players.Count); i++)
+            {
+                var control = _gameViewController.WorldPlayerPlaceControllers[i];
+                control.Link(players[i]);
+            }
+
+
+            for (int j = 0; j < punPlayers.Length; j++)
+            {
+                var playerPun = punPlayers[j];
+                var playerEntity = players[j];
+                var views = GetAllPhotonViewsPerPlayer(playerPun);
+                var controller = views.Select(x => x.GetComponent<DummyPlayer>()?.View.GetComponent<PlayerController>()).FirstOrDefault();
+                _playerSpawnService.Link(playerEntity, controller);
+            }
+        }
+        
+        public static List<PhotonView> GetAllPhotonViewsPerPlayer(Player player)
+        {
+            if (player != null)
+            {
+                List<PhotonView> list = new List<PhotonView>();
+                int actorNr = player.ActorNumber;
+                for(int viewId = actorNr * PhotonNetwork.MAX_VIEW_IDS + 1; viewId < (actorNr + 1) * PhotonNetwork.MAX_VIEW_IDS; viewId++)
+                {
+                    PhotonView photonView = PhotonView.Find(viewId);
+                    if (photonView)
+                    {
+                        list.Add(photonView);
+                    }
+                }
+                return list;
+            }
+            return null;
         }
     }
 }

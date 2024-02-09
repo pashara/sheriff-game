@@ -1,10 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
+using Cysharp.Threading.Tasks;
 using NaughtyCharacter;
 using Photon.Pun;
 using Photon.Pun.UtilityScripts;
 using Photon.Realtime;
 using Sheriff.ClientServer.Players;
+using Sheriff.ECS;
+using Sheriff.GameFlow;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.World;
 using Sirenix.OdinInspector;
@@ -19,6 +24,7 @@ namespace Sheriff.ClientServer.Game
         [SerializeField] private List<WorldPlayerPlaceControllers> worldPlayerPlacementControllers;
         [SerializeField] private ClassicGameControllerWrapper classicGameControllerWrapper;
         [Inject] private DiContainer _container;
+        [Inject] private EcsContextProvider _ecsContextProvider;
 
 
         [Button]
@@ -29,6 +35,13 @@ namespace Sheriff.ClientServer.Game
                 {SheriffGame.PLAYER_LOADED_LEVEL, true}
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+            
+            
+            
+            var spawnPoint = worldPlayerPlacementControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
+
+            var instance = PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);      // avoid this call on rejoin (ship was network instantiated before)
+
         }
         
         
@@ -179,12 +192,14 @@ namespace Sheriff.ClientServer.Game
         
         
         
-        public override void OnEnable()
+        public override async void OnEnable()
         {
             base.OnEnable();
 
             CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerIsExpired;
 
+            await UniTask.DelayFrame(1);
+            
             MarkGameReady();
         }
 
@@ -194,22 +209,37 @@ namespace Sheriff.ClientServer.Game
 
             CountdownTimer.OnCountdownTimerHasExpired -= OnCountdownTimerIsExpired;
         }
+
+
+        [SerializeField] private GameStateSerializer _gameStateSerializer;
         
-        private void StartGame()
+        
+        [PunRPC]
+        private void SetProjectState(Byte[] jsonArray)
+        {
+            var jsonGameState = Encoding.UTF8.GetString(jsonArray);
+            var json = new LoadedSessionDataProvider(jsonGameState);
+            
+            var data = json.GetLoadData();
+            _ecsContextProvider.FillData(data);
+            classicGameControllerWrapper.StartGame(json, PhotonNetwork.PlayerList);
+        }
+        
+        
+        private async void StartGame()
         {
             Debug.Log("StartGame!");
 
             // on rejoin, we have to figure out if the spaceship exists or not
             // if this is a rejoin (the ship is already network instantiated and will be setup via event) we don't need to call PN.Instantiate
 
-            var spawnPoint = worldPlayerPlacementControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
-
-            var instance = PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);      // avoid this call on rejoin (ship was network instantiated before)
-            
             if (PhotonNetwork.IsMasterClient)
             {
-                // classicGameControllerWrapper.StartGame();
-                // StartCoroutine(SpawnAsteroid());
+                classicGameControllerWrapper.StartGame(PhotonNetwork.PlayerList);
+                await UniTask.DelayFrame(2);
+                var json = _gameStateSerializer.Serialize();
+                var array = Encoding.UTF8.GetBytes(json);
+                photonView.RPC(nameof(SetProjectState), RpcTarget.Others, array);
             }
         }
     }

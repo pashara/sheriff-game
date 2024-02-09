@@ -14,11 +14,23 @@ namespace Sheriff.GameFlow.States.ClassicGame
 
         private int spawnIndex = -1;
         
-        public void Spawn(PlayerEntity playerEntity, bool isMain)
+        
+        
+        public PlayerController Spawn(PlayerEntity playerEntity, bool isMain)
         {
+            var instance = Instantiate(prefab);
+            instance.GetComponent<PlayerController>().enabled = isMain;
+            playerEntity.ReplacePlayerController(instance.GetComponent<PlayerController>());
+            instance.GetComponent<Character>().SetPlayerId(playerEntity.playerId.Value.EntityID);
+            _container.InjectGameObject(instance);
+            return instance.GetComponent<PlayerController>();
+        }
+        public void Link(PlayerEntity playerEntity, PlayerController playerController)
+        {
+            
             Vector3 spawnPoint = Vector3.zero;
             Quaternion rotation = Quaternion.identity;
-            ;
+            
             if (playerEntity.hasPlayerPositionId)
             {
                 var spawnController =
@@ -35,11 +47,13 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 rotation = spawnController.SpawnPoint.rotation;
             }
 
-            var instance = Instantiate(prefab, spawnPoint, rotation);
-            instance.GetComponent<PlayerController>().enabled = isMain;
-            playerEntity.ReplacePlayerController(instance.GetComponent<PlayerController>());
-            instance.GetComponent<Character>().SetPlayerId(playerEntity.playerId.Value.EntityID);
-            _container.InjectGameObject(instance);
+            // var instance = Instantiate(prefab, spawnPoint, rotation);
+            playerController.transform.position = spawnPoint;
+            playerController.transform.rotation = rotation;
+            
+            playerEntity.ReplacePlayerController(playerController.GetComponent<PlayerController>());
+            playerController.GetComponent<Character>().SetPlayerId(playerEntity.playerId.Value.EntityID);
+            // _container.InjectGameObject(playerController.gameObject);
         }
     }
 }

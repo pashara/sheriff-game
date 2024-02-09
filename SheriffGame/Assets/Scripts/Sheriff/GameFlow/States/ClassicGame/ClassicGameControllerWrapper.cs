@@ -10,7 +10,6 @@ namespace Sheriff.GameFlow.States.ClassicGame
     {
         [Inject] private CommandsApplyService _commandsApplyService;
         [Inject] private DiContainer _container;
-        [Inject] private ISessionInitializeDataProvider _sessionInitializeDataProvider;
         
         private ClassicGameController _classicGameController;
         private ClassicGameStateMachine _stateMachine;
@@ -18,12 +17,19 @@ namespace Sheriff.GameFlow.States.ClassicGame
         [TextArea(1, 20)]
         [SerializeField] private string initialCommands;
 
-        private void Start()
+
+        public void StartGame()
+        {
+            _classicGameController = _container.Resolve<ClassicGameController>();
+            _classicGameController.StartGame();
+        }
+        
+        public void StartGame(ISessionInitializeDataProvider serializeDataProvider)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
 
-            var loadData = _sessionInitializeDataProvider.GetLoadData();
+            var loadData = serializeDataProvider?.GetLoadData();
             if (loadData != null)
             {
                 _classicGameController.StartGame(loadData.StateType);
@@ -33,6 +39,22 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 _classicGameController.StartGame();
             }
         }
+
+        // private void Start()
+        // {
+        //     _classicGameController = _container.Resolve<ClassicGameController>();
+        //     _stateMachine = _container.Resolve<ClassicGameStateMachine>();
+        //
+        //     var loadData = _sessionInitializeDataProvider.GetLoadData();
+        //     if (loadData != null)
+        //     {
+        //         _classicGameController.StartGame(loadData.StateType);
+        //     }
+        //     else
+        //     {
+        //         _classicGameController.StartGame();
+        //     }
+        // }
 
         [Button]
         private void Emulate()

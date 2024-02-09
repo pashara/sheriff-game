@@ -90,6 +90,11 @@ namespace Photon.Pun
             this.m_Target = (PhotonAnimatorView)this.target;
             this.m_Animator = this.m_Target.GetComponent<Animator>();
 
+            if (m_Animator == null)
+            {
+                m_Animator = m_Target.Animator;
+            }
+            
             if (m_Animator)
             {
                 this.m_Controller = this.GetEffectiveController(this.m_Animator) as AnimatorController;

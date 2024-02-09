@@ -10,7 +10,10 @@
         "UniTask",
         "Unity.InputSystem",
         "Zenject",
-        "NaughtyCharacter"
+        "NaughtyCharacter",
+        "PhotonRealtime",
+        "PhotonUnityNetworking",
+        "PhotonUnityNetworking.Utilities"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

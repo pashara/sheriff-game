@@ -20,13 +20,23 @@ namespace Sheriff.ECS
         {
             Context = new();
             _internalId = 0;
-
             SubscribeCreate();
         }
-        
-        public EcsContextProvider(ContextSerializeData serializeData)
+
+
+        public void FillData(ContextSerializeData serializeData)
         {
-            Context = new();
+            {
+                foreach (var context in Context.allContexts)
+                {
+                    context.DestroyAllEntities();
+                }
+
+                foreach (var context in Context.allContexts)
+                    context.OnEntityCreated -= GameOnOnEntityCreated;
+            }
+
+
             _internalId = serializeData.LastGeneratedId;
 
             Dictionary<Type, (List<Type>, Func<Entity>)> elements = new()

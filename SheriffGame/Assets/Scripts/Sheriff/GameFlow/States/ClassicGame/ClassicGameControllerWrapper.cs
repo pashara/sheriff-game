@@ -22,12 +22,14 @@ namespace Sheriff.GameFlow.States.ClassicGame
         public void StartGame(int playersCount)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
+            _stateMachine = _container.Resolve<ClassicGameStateMachine>();
             _classicGameController.StartGame(playersCount);
         }
 
         public void StartGame(Player[] players)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
+            _stateMachine = _container.Resolve<ClassicGameStateMachine>();
             _classicGameController.StartGame(players);
         }
         

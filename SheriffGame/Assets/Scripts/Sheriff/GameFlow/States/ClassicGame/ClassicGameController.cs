@@ -34,6 +34,22 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _punGameManager = punGameManager;
             _linkWithVisualService = linkWithVisualService;
         }
+
+        public void LazySpawnPlayers()
+        {
+            List<PlayerController> spawnedPlayers = new();
+            var playerEntities = _ecsContextProvider.Context.player.GetEntities();
+            for (int j = 0; j < playerEntities.Length; j++)
+            {
+                var playerEntity = playerEntities[j];
+                spawnedPlayers.Add(_playerSpawnService.Spawn(playerEntity, j == 0));
+            }
+            
+            _linkWithVisualService.Link(spawnedPlayers);
+
+            foreach (var playerController in spawnedPlayers)
+                playerController.GetComponent<CharacterController>().enabled = true;
+        }
         
         public void StartGame(int players)
         {

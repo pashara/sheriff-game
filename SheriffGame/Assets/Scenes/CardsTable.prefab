@@ -1902,6 +1902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerInput: {fileID: 6132482578675862853}
+  hideInput: 0
 --- !u!1 &5399086630154800245
 GameObject:
   m_ObjectHideFlags: 0
@@ -2039,7 +2040,7 @@ MonoBehaviour:
     FieldOfView: 40
     OrthographicSize: 0.5
     NearClipPlane: 0.96
-    FarClipPlane: 10
+    FarClipPlane: 40
     Dutch: 0
     ModeOverride: 2
     LensShift: {x: 0, y: 0}

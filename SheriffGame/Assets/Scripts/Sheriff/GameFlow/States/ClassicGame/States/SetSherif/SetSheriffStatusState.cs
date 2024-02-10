@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using Cysharp.Threading.Tasks;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.CommandsApplier;
+using UnityEngine;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
@@ -62,7 +65,16 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
             {
                 _ecsContextProvider.Context.card.GetEntityWithCardId(cardEntityId).MarkReleased();
             }
+
+            await SelectNewSheriff(gameEntity);
+            await GiveCardsToPlayers();
             
+            _classicGameController.OnReady<SetSheriffStatusState>();
+        }
+
+
+        private async UniTask SelectNewSheriff(GameEntity gameEntity)
+        {
             var actualAction = _container
                 .Instantiate<SelectSheriffCommand>()
                 .Calculate(new SelectSheriffCommand.Params()
@@ -71,9 +83,33 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
                     playersQueue = gameEntity.potentialPlayersSequence.Value
                 });
             await _commandsApplyService.Apply(actualAction);
-            
-            _classicGameController.OnReady<SetSheriffStatusState>();
         }
+
+        private async UniTask GiveCardsToPlayers()
+        {
+            foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
+            {
+                var cardsOnHand = _ecsContextProvider
+                    .Context.card
+                    .GetEntitiesWithCardOwner(playerEntity.playerId.Value)
+                    .Count(x => x.isCardOnHand);
+
+                var giveCards = Mathf.Clamp(6 - cardsOnHand, 0, 6 + 1);
+
+                if (giveCards > 0)
+                {
+                    var action = _container.Instantiate<GetCardsFromDeckCommand>().Calculate(
+                        new GetCardsFromDeckCommand.Params()
+                        {
+                            cardsCount = 6,
+                            playerEntityId = playerEntity.playerId.Value,
+                            ignoreLimits = true
+                        });
+                    await _commandsApplyService.Apply(action);
+                }
+            }
+        }
+
         
 
 

@@ -18,6 +18,7 @@ namespace Sheriff
         [SerializeField] private CardsProvider _cardsProvider;
         [SerializeField] private GameViewController gameViewController;
         [SerializeField] private PlayerSpawnService playerSpawnService;
+        [SerializeField] private GameStartEmulateConfig gameStartEmulateConfig;
         [SerializeField] private ClassicGameControllerWrapper classicGameControllerWrapper;
         
         [SerializeField] private PunGameManager punGameManager;
@@ -55,7 +56,11 @@ namespace Sheriff
             {
                 punGameManager.gameObject.SetActive(false);
                 punUi.gameObject.SetActive(false);
-                Container.BindInterfacesAndSelfTo<PunManagerMoq>().FromInstance(new PunManagerMoq(classicGameControllerWrapper)).AsSingle();
+                var instance = new PunManagerMoq(
+                    classicGameControllerWrapper,
+                    Container.Resolve<EcsContextProvider>(),
+                    gameStartEmulateConfig);
+                Container.BindInterfacesAndSelfTo<PunManagerMoq>().FromInstance(instance);
             }
         }
     }

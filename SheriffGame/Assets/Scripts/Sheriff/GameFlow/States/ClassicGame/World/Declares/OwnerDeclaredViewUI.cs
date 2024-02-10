@@ -19,6 +19,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         [SerializeField] private GridProvider selectedCardsGrid;
         [SerializeField] private GridProvider declaredCardsGrid;
+        [SerializeField] private SheriffDeclaredResultViewUI sheriffDeclaredResultViewUI;
         
         private PlayerEntity _playerEntity;
         private List<CardView> _spawnedCards = new();
@@ -33,10 +34,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
             gameObject.SetActive(true);
             SpawnSelectedCards();
             SpawnDeclaredCards();
+            sheriffDeclaredResultViewUI.Show(_playerEntity);
         }
 
         public void Hide()
         {
+            sheriffDeclaredResultViewUI.Hide();
             gameObject.SetActive(false);
             foreach (var spawnedCard in _spawnedCards)
                 spawnedCard.Dispose();
@@ -53,7 +56,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
             List<GameResourceType> gameResourceTypes = new();
             foreach (var declaration in selectedCards.Declarations)
-                for (int i = 0; i < declaration.Count; i++)
+                for (int i = 0; i < declaration.ProductsCount; i++)
                     gameResourceTypes.Add(declaration.ResourceType);
 
             Spawn(gameResourceTypes, declaredCardsGrid);

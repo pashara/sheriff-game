@@ -21,6 +21,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         [SerializeField] private Button skip;
         [SerializeField] private Button check;
+        [SerializeField] private SheriffDeclaredResultViewUI sheriffDeclaredResultViewUI;
         [SerializeField] private GridProvider selectedCardsGrid;
         [SerializeField] private GridProvider declaredCardsGrid;
         
@@ -49,6 +50,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
         {
             gameObject.SetActive(true);
             _disposable.Clear();
+            sheriffDeclaredResultViewUI.Show(_playerEntity);
             _sheriffChoice.Subscribe(x =>
             {
                 skip.interactable = x is not (SheriffChoice.Check or SheriffChoice.Skip);
@@ -72,6 +74,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
         {
             _disposable.Clear();
             gameObject.SetActive(false);
+            sheriffDeclaredResultViewUI.Hide();
             foreach (var spawnedCard in _spawnedCards)
                 spawnedCard.Dispose();
             _spawnedCards.Clear();
@@ -92,7 +95,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
             List<GameResourceType> gameResourceTypes = new();
             foreach (var declaration in selectedCards.Declarations)
-                for (int i = 0; i < declaration.Count; i++)
+                for (int i = 0; i < declaration.ProductsCount; i++)
                     gameResourceTypes.Add(declaration.ResourceType);
 
             Spawn(gameResourceTypes, declaredCardsGrid);

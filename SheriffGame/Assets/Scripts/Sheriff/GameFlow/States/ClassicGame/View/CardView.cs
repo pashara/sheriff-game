@@ -56,7 +56,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
 
         void FillFee()
         {
-            cost.SetText($"-{_cardConfig.Fine} coins");
+            fee.SetText($"-{_cardConfig.Fine} coins");
         }
         
 

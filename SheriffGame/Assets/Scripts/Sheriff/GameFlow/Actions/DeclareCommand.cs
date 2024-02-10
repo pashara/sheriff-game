@@ -15,7 +15,7 @@ namespace Sheriff.GameFlow
     {
         [ShowInInspector]
         [JsonProperty("count")]
-        public int Count { get; private set; }
+        public int ProductsCount { get; private set; }
         
         
         [JsonProperty("resource")]
@@ -28,15 +28,15 @@ namespace Sheriff.GameFlow
         }
         
         
-        public ProductDeclaration(int count, GameResourceType resourceType)
+        public ProductDeclaration(int productsCount, GameResourceType resourceType)
         {
-            Count = count;
+            ProductsCount = productsCount;
             ResourceType = resourceType;
         }
         
         public ProductDeclaration(ProductDeclaration source)
         {
-            Count = source.Count;
+            ProductsCount = source.ProductsCount;
             ResourceType = source.ResourceType;
         }
     }

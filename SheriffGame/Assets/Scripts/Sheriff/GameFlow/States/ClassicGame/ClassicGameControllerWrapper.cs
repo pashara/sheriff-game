@@ -27,6 +27,15 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _classicGameController.StartGame(playersCount);
         }
 
+        public void StartGame(ContextSerializeData serializeDataProvider)
+        {
+            _classicGameController = _container.Resolve<ClassicGameController>();
+            _stateMachine = _container.Resolve<ClassicGameStateMachine>();
+            _classicGameController.ApplyGameState(serializeDataProvider.StateType);
+            _classicGameController.LazySpawnPlayers();
+            
+        }
+
         public void StartGame(Player[] players)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();

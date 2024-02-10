@@ -2,6 +2,7 @@
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.CommandsApplier;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameResources;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
     public class WorldToEcsController : MonoBehaviour
     {
         [Inject] private DiContainer _container;
-        [Inject] private CommandsApplyService _commandsApplyService;
+        [Inject] private ICommandsApplyService _commandsApplyService;
         
         private PlayerEntity _playerEntity;
 
@@ -21,7 +22,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
             _playerEntity = playerEntity;
         }
         
-        public void Declare(GameResourceType resourceType, int count)
+        public async UniTask<bool> Declare(GameResourceType resourceType, int count)
         {
             var declarations = new List<ProductDeclaration>() { new(count, resourceType) };
             
@@ -30,10 +31,10 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                 playerEntityId = _playerEntity.playerId.Value,
                 declarations = new ProductsDeclaration(declarations)
             });
-            _commandsApplyService.Apply(action);
+            return await _commandsApplyService.Apply(action);
         }
         
-        public void MarkSelected(List<CardView> cards)
+        public async UniTask<bool> MarkSelected(List<CardView> cards)
         {
             // var declarations = new List<ProductDeclaration>() { new(count, resourceType) };
             
@@ -42,17 +43,17 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                 playerEntityId = _playerEntity.playerId.Value,
                 cardEntityIds = cards.Where(x => x != null).Select(x => x.CardEntity.cardId.Value).ToList(),
             });
-            _commandsApplyService.Apply(action);
+            return await _commandsApplyService.Apply(action);
         }
 
-        public async UniTask ReleaseCard(CardView cardView)
+        public async UniTask<bool> ReleaseCard(CardView cardView)
         {
             var action = _container.Instantiate<ReleasePlayerCardCommand>().Calculate(new ReleasePlayerCardCommand.Params()
             {
                 playerEntityId = _playerEntity.playerId.Value,
                 cardEntityId = cardView.CardEntity.cardId.Value
             });
-            _commandsApplyService.Apply(action);
+            return await _commandsApplyService.Apply(action);
         }
 
         public int CanReleaseCards()
@@ -90,18 +91,34 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                 cardsCount = 1,
                 playerEntityId = _playerEntity.playerId.Value
             });
-            _commandsApplyService.Apply(action);
-            return action.CalculatedCards;
+            var result = await _commandsApplyService.Apply(action);
+            if (result)
+            {
+                return action.CalculatedCards;
+            }
+            else
+            {
+                return new List<CardEntityId>();
+            }
         }
 
-        public void PutInBag(IReadOnlyList<CardView> cards)
+        // public void PutInBag(IReadOnlyList<CardView> cards)
+        // {
+        //     var action = _container.Instantiate<PutCardsInBagCommand>().Calculate(new PutCardsInBagCommand.Params()
+        //     {
+        //         playerEntityId = _playerEntity.playerId.Value,
+        //         cardEntityIds = cards.Select(x => x.CardEntity.cardId.Value).ToList()
+        //     });
+        //     _commandsApplyService.Apply(action);
+        // }
+        
+        public async UniTask<bool> ApplySheriffChoice(SherifCheckResult checkResult)
         {
-            var action = _container.Instantiate<PutCardsInBagCommand>().Calculate(new PutCardsInBagCommand.Params()
+            var command = _container.Instantiate<CheckDealersCommand>().Calculate(new CheckDealersCommand.Params()
             {
-                playerEntityId = _playerEntity.playerId.Value,
-                cardEntityIds = cards.Select(x => x.CardEntity.cardId.Value).ToList()
+                CheckResult = checkResult
             });
-            _commandsApplyService.Apply(action);
+            return await _commandsApplyService.Apply(command);
         }
     }
 }

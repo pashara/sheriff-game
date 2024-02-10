@@ -23,7 +23,7 @@ namespace Sheriff.GameFlow
         {
             _data = new();
             _data.LastGeneratedId = _ecsContextProvider.LastGeneratedId;
-            _data.StateType = _ecsContextProvider.Context.game.gameIdEntity.actualStateProviderWritable.Value.ActualState.Value.GetType();
+            _data.StateType = _ecsContextProvider.Context.game.gameIdEntity.actualStateProviderWritable.Value?.ActualState?.Value?.GetType();
             _data.SerializeData = new();
             
             var contexts = new List<(Type, Func<Entity[]>)>()

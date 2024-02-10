@@ -3,6 +3,7 @@ using System.Linq;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameResources;
+using Sheriff.InputLock;
 using TMPro;
 using UniRx;
 using UnityEngine;
@@ -59,10 +60,23 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                 _selectedIndex.Value = x;
             });
             
-            declareButton.OnClickAsObservable().Subscribe(x =>
+            declareButton.OnClickAsObservable().Subscribe(async x =>
             {
-                worldToEcsController.Declare(_allowedElements[_selectedIndex.Value].x, DeclaredCount);
-                worldToEcsController.MarkSelected(_cardsToBag);
+                bool result = false;
+                using (LoadingOverlay.Lock())
+                {
+                    result = await worldToEcsController.Declare(_allowedElements[_selectedIndex.Value].x, DeclaredCount);
+                    if (!result)
+                        return;
+                }
+
+                using (LoadingOverlay.Lock())
+                {
+                    result = await worldToEcsController.MarkSelected(_cardsToBag);
+                    if (!result)
+                        return;
+                }
+
             }).AddTo(_disposable);
         }
 

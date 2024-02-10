@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.CommandsApplier;
 using Sheriff.GameResources;
 using Sirenix.OdinInspector;
 using UniRx;
@@ -26,7 +27,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.Player
                 resourceCategory = card.resourceCategory.Value;
             }
         }
-        [Inject] private CommandsApplyService _commandsApplyService;
+        [Inject] private ICommandsApplyService _commandsApplyService;
         [Inject] private DiContainer _container;
         [Inject] private EcsContextProvider _ecsContextProvider;
         [Inject] private SheriffCheckHandler _sheriffCheckHandler;

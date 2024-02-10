@@ -9,22 +9,38 @@ using Photon.Realtime;
 using Sheriff.ECS;
 using Sheriff.GameFlow;
 using Sheriff.GameFlow.States.ClassicGame;
+using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameFlow.States.ClassicGame.World;
 using Sheriff.Pers;
 using Sirenix.OdinInspector;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Zenject;
 using Hashtable = ExitGames.Client.Photon.Hashtable;
 
 namespace Sheriff.ClientServer.Game
 {
-    public class PunGameManager : MonoBehaviourPunCallbacks
+
+    public interface IPunSender
     {
-        [SerializeField] private List<WorldPlayerPlaceControllers> worldPlayerPlacementControllers;
+        void SendCommandToMaster(string json);
+        IReadOnlyReactiveCollection<string> ReceivedFromMasterCommands { get; }
+        IReadOnlyReactiveCollection<string> ReceivedFromSlaveCommands { get; }
+        void NotifyCommand(string serialize);
+        void SendInitialGameState();
+        void SendGameState();
+        void IncView();
+        void DecView();
+    }
+    
+    public class PunGameManager : MonoBehaviourPunCallbacks, IPunSender
+    {
         [SerializeField] private ClassicGameControllerWrapper classicGameControllerWrapper;
+        [Inject] private GameViewController _gameViewController;
         [Inject] private DiContainer _container;
+        [Inject] private PlayersAssociations _playersAssociations;
         [Inject] private EcsContextProvider _ecsContextProvider;
         [SerializeField] private Button readyButton;
         [SerializeField] private GameObject readyUI;
@@ -38,6 +54,16 @@ namespace Sheriff.ClientServer.Game
             };
             PhotonNetwork.LocalPlayer.SetCustomProperties(props);
         }
+
+
+        void MarkLoaded()
+        {
+            Hashtable props = new Hashtable
+            {
+                {SheriffGame.PLAYER_LOADED, true}
+            };
+            PhotonNetwork.LocalPlayer.SetCustomProperties(props);
+        }
         
         
         
@@ -46,8 +72,23 @@ namespace Sheriff.ClientServer.Game
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
             base.OnPlayerEnteredRoom(newPlayer);
+            AddPlayer(newPlayer);
+
         }
 
+        void AddPlayer(Player newPlayer)
+        {
+            
+            var photonView = LinkWithVisualService.GetMainPhotonView(newPlayer);
+            var playerController = LinkWithVisualService.GetPlayerController(newPlayer);
+
+            _playersAssociations[newPlayer] = new()
+            {
+                punPlayer = newPlayer,
+                photonView = photonView,
+                playerController = playerController,
+            };
+        }
 
         public override void OnMasterClientSwitched(Player newMasterClient)
         {
@@ -69,10 +110,18 @@ namespace Sheriff.ClientServer.Game
                 CheckEndOfGame();
                 return;
             }
+            
+            
+            if (changedProps.ContainsKey(SheriffGame.PLAYER_LOADED))
+            {
+                AddPlayer(targetPlayer);
+                return;
+            }
 
             if (changedProps.TryGetValue(SheriffGame.PLAYER_VIEW_ID, out var viewIdObj) && viewIdObj is int viewIdInt)
             {
-                var view = LinkWithVisualService.GetMainPhotonView(targetPlayer).GetComponent<CharacterView>();
+                var playerController = _playersAssociations[targetPlayer].playerController;
+                var view = playerController.GetComponent<CharacterView>();
                 view?.Apply(viewIdInt);
             }
 
@@ -200,11 +249,12 @@ namespace Sheriff.ClientServer.Game
             CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerIsExpired;
             readyUI.SetActive(false);
             await UniTask.DelayFrame(1);
-            
-            
-            var spawnPoint = worldPlayerPlacementControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
 
-            PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);      
+            
+            
+            var spawnPoint = _gameViewController.WorldPlayerPlaceControllers[PhotonNetwork.LocalPlayer.GetPlayerNumber()].SpawnPoint;
+
+            PhotonNetwork.Instantiate("DummyPlayer", spawnPoint.position, spawnPoint.rotation, 0);
             // avoid this call on rejoin (ship was network instantiated before)
             readyUI.SetActive(true);
 
@@ -215,6 +265,7 @@ namespace Sheriff.ClientServer.Game
                 readyUI.SetActive(false);
             }).AddTo(this);
 
+            MarkLoaded();
             // MarkGameReady();
         }
 
@@ -237,7 +288,18 @@ namespace Sheriff.ClientServer.Game
             
             var data = json.GetLoadData();
             _ecsContextProvider.FillData(data);
-            classicGameControllerWrapper.StartGame(json, PhotonNetwork.PlayerList);
+            classicGameControllerWrapper.StartGame(data, PhotonNetwork.PlayerList);
+        }
+        
+        [PunRPC]
+        private void SetActualProjectState(Byte[] jsonArray)
+        {
+            var jsonGameState = Encoding.UTF8.GetString(jsonArray);
+            var json = new LoadedSessionDataProvider(jsonGameState);
+            
+            var data = json.GetLoadData();
+            _ecsContextProvider.FillData(data);
+            classicGameControllerWrapper.ApplyGame(data);
         }
         
         
@@ -251,10 +313,26 @@ namespace Sheriff.ClientServer.Game
             if (PhotonNetwork.IsMasterClient)
             {
                 classicGameControllerWrapper.StartGame(PhotonNetwork.PlayerList);
-                await UniTask.DelayFrame(2);
+            }
+        }
+
+        public void SendInitialGameState()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
                 var json = _gameStateSerializer.Serialize();
                 var array = Encoding.UTF8.GetBytes(json);
                 photonView.RPC(nameof(SetProjectState), RpcTarget.Others, array);
+            }
+        }
+
+        public void SendGameState()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                var json = _gameStateSerializer.Serialize();
+                var array = Encoding.UTF8.GetBytes(json);
+                photonView.RPC(nameof(SetActualProjectState), RpcTarget.Others, array);
             }
         }
 
@@ -285,5 +363,46 @@ namespace Sheriff.ClientServer.Game
             
             PhotonNetwork.LocalPlayer.SetCustomProperties(new Hashtable {{SheriffGame.PLAYER_VIEW_ID, id}});
         }
+
+
+
+
+
+
+        public void SendCommandToMaster(string json)
+        {
+            var array = Encoding.UTF8.GetBytes(json);
+            photonView.RPC(nameof(OnReceiveCommandFromSlave), RpcTarget.MasterClient, array);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="json">serialized CommandData</param>
+        public void NotifyCommand(string json)
+        {
+            var array = Encoding.UTF8.GetBytes(json);
+            photonView.RPC(nameof(OnReceiveCommand), RpcTarget.All, array);
+        }
+
+
+        private readonly ReactiveCollection<string> _receivedFromMasterCommands = new();
+        private readonly ReactiveCollection<string> _receivedFromSlaveCommands = new();
+        public IReadOnlyReactiveCollection<string> ReceivedFromMasterCommands => _receivedFromMasterCommands;
+        public IReadOnlyReactiveCollection<string> ReceivedFromSlaveCommands => _receivedFromSlaveCommands;
+        
+        [PunRPC]
+        private void OnReceiveCommand(Byte[] jsonArray)
+        {
+            var commandJson = Encoding.UTF8.GetString(jsonArray);
+            _receivedFromMasterCommands.Add(commandJson);
+        }
+        [PunRPC]
+        private void OnReceiveCommandFromSlave(Byte[] jsonArray)
+        {
+            var commandJson = Encoding.UTF8.GetString(jsonArray);
+            _receivedFromSlaveCommands.Add(commandJson);
+        }
+
     }
 }

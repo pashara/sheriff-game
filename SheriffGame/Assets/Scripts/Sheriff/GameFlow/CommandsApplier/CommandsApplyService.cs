@@ -1,36 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Sheriff.GameFlow.States.ClassicGame
+namespace Sheriff.GameFlow.CommandsApplier
 {
-    public class CommandsApplyService
+    [Serializable]
+    public class CommandData
     {
-        [Serializable]
-        public class Data
-        {
-            public long Id;
-            public IGameCommand Command;
-        }
+        public string Hash;
+        public IGameCommand Command;
+    }
+    
+    public class CommandsApplyService : ICommandsApplyService, ICommandsSerializable
+    {
 
         private long lastId;
-        private LinkedList<Data> _commands = new();
+        private LinkedList<CommandData> _commands = new();
         public CommandsApplyService()
         {
             
         }
 
 
-        public void Apply(IGameCommand gameCommand)
+        public async UniTask<bool> Apply(IGameCommand gameCommand)
         {
             var id = lastId++;
-            _commands.AddLast(new Data()
+            _commands.AddLast(new CommandData()
             {
-                Id = id,
                 Command = gameCommand
             });
             
             gameCommand.Apply();
+            return true;
         }
 
 

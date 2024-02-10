@@ -4,5 +4,17 @@
     {
         public abstract void Apply();
         public abstract T2 Calculate(T1 param);
+
+        protected abstract T1 AppliedParams { get; }
+        
+        public T2 Recalculate()
+        {
+            if (AppliedParams != null)
+                return Calculate(AppliedParams);
+            
+            return default;
+        }
+
+        void IGameCommand.Recalculate() => Recalculate();
     }
 }

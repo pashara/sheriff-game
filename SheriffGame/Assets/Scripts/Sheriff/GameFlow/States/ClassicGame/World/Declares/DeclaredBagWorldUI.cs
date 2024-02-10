@@ -1,6 +1,9 @@
 ﻿using System.Linq;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.CommandsApplier;
+using Sheriff.GameFlow.States.ClassicGame.World.Cards;
+using Sheriff.InputLock;
 using UniRx;
 using UnityEngine;
 using Zenject;
@@ -14,13 +17,14 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
         [SerializeField] private SheriffDeclaredViewUI sheriffUI;
         [SerializeField] private OwnerDeclaredViewUI ownerUI;
         [SerializeField] private PlayerDeclaredViewUI playerUI;
+        [SerializeField] private WorldToEcsController worldToEcsController;
 
         private ReactiveProperty<ProductsDeclaration> _productsDeclaration = new();
         private ReactiveProperty<SheriffChoice> _sheriffChoice = new();
         [Inject] private EcsContextProvider _contextProvider;
         [Inject] private DiContainer _container;
         [Inject] private SheriffCheckHandler _sheriffCheckHandler;
-        [Inject] private CommandsApplyService _commandsApplyService;
+        [Inject] private ICommandsApplyService _commandsApplyService;
         
         private PlayerEntity _playerEntity;
         private CompositeDisposable _disposable = new();
@@ -80,7 +84,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
             inputHandler.SetActive(true);
             mainUI.SetActive(true);
 
-            sheriffUI.OnSelect.Subscribe(x =>
+            sheriffUI.OnSelect.Subscribe(async x =>
             {
                 if (!player.isSheriff)
                     return;
@@ -95,12 +99,11 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
                     checkResult = _sheriffCheckHandler.Skip(player.playerId.Value, _playerEntity.playerId.Value);
                 }
 
-                var command = _container.Instantiate<CheckDealersCommand>().Calculate(new CheckDealersCommand.Params()
+                using (LoadingOverlay.Lock())
                 {
-                    CheckResult = checkResult
-                });
-                _commandsApplyService.Apply(command);
-                
+                    await worldToEcsController.ApplySheriffChoice(checkResult);
+                }
+
             }).AddTo(_disposable);
 
             _playerEntity.OnSheriffCheckResult().Subscribe(x =>

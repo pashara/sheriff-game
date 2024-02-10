@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.CommandsApplier;
 using Sheriff.GameResources;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
@@ -20,18 +22,20 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly ClassicGameController _classicGameController;
         private readonly ClassicRuleConfig _ruleConfig;
-        private readonly CommandsApplyService _commandsApplyService;
+        private readonly ICommandsApplyService _commandsApplyService;
         private readonly DiContainer _container;
         private readonly LinkWithVisualService _linkWithVisualService;
+        private readonly IPunSender _punManager;
         private int _playersCount;
 
         public InitializeGameState(
             IRandomService randomService,
             EcsContextProvider ecsContextProvider, 
             ClassicGameController classicGameController,
-            CommandsApplyService commandsApplyService,
+            ICommandsApplyService commandsApplyService,
             DiContainer container,
             LinkWithVisualService linkWithVisualService,
+            IPunSender punManager,
             ClassicRuleConfig ruleConfig)
         {
             _randomService = randomService.CreateSubService();
@@ -40,6 +44,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             _commandsApplyService = commandsApplyService;
             _container = container;
             _linkWithVisualService = linkWithVisualService;
+            _punManager = punManager;
             _ruleConfig = ruleConfig;
         }
 
@@ -121,14 +126,12 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
 
             // CreatePlayer(actualStateProvider);
             CreateSession(actualStateProvider);
-
             CreateCards();
-
-            GiveCardsToPlayers();
             GiveGoldToPlayers();
 
-            // _linkWithVisualService.Link();
-
+            _punManager.SendInitialGameState();
+            
+            GiveCardsToPlayers();
 
             _classicGameController.OnReady<InitializeGameState>();
         }
@@ -141,7 +144,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             }
         }
 
-        private void GiveCardsToPlayers()
+        private async void GiveCardsToPlayers()
         {
             foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
             {
@@ -151,7 +154,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
                     playerEntityId = playerEntity.playerId.Value,
                     ignoreLimits = true
                 });
-                _commandsApplyService.Apply(action);
+                await _commandsApplyService.Apply(action);
             }
         }
 

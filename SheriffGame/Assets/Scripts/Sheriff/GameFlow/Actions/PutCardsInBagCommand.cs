@@ -18,6 +18,17 @@ namespace Sheriff.GameFlow
             public PlayerEntityId playerEntityId;
             [JsonProperty("card_ids")]
             public List<CardEntityId> cardEntityIds;
+            
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                playerEntityId = @params.playerEntityId;
+                cardEntityIds = @params.cardEntityIds?.ToList();
+            }
         }
         
         [Serializable]
@@ -30,6 +41,10 @@ namespace Sheriff.GameFlow
         
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
         
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private PutCardInBagEmulateParam _result;
 
@@ -40,6 +55,7 @@ namespace Sheriff.GameFlow
         
         public override PutCardsInBagCommand Calculate(Params param)
         {
+            _params = new Params(param);
             _result = new PutCardInBagEmulateParam()
             {
                 playerEntityId = param.playerEntityId,

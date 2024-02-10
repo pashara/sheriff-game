@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using NaughtyCharacter;
 using Photon.Realtime;
+using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.States;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
 using Sheriff.GameFlow.States.ClassicGame.States.Shopping;
+using UnityEngine;
 
 namespace Sheriff.GameFlow.States.ClassicGame
 {
@@ -15,18 +17,21 @@ namespace Sheriff.GameFlow.States.ClassicGame
         private readonly ClassicGameStateMachine _gameStateMachine;
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly PlayerSpawnService _playerSpawnService;
+        private readonly IPunSender _punGameManager;
         private readonly LinkWithVisualService _linkWithVisualService;
 
         public ClassicGameController(
             ClassicGameStateMachine gameStateMachine,
             EcsContextProvider ecsContextProvider,
             PlayerSpawnService playerSpawnService,
+            IPunSender punGameManager,
             LinkWithVisualService linkWithVisualService
             )
         {
             _gameStateMachine = gameStateMachine;
             _ecsContextProvider = ecsContextProvider;
             _playerSpawnService = playerSpawnService;
+            _punGameManager = punGameManager;
             _linkWithVisualService = linkWithVisualService;
         }
         
@@ -46,6 +51,9 @@ namespace Sheriff.GameFlow.States.ClassicGame
             }
             
             _linkWithVisualService.Link(spawnedPlayers);
+
+            foreach (var playerController in spawnedPlayers)
+                playerController.GetComponent<CharacterController>().enabled = true;
         }
         
         public void StartGame(Player[] players)
@@ -58,18 +66,26 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _linkWithVisualService.Link(players);
         }
 
-        public void StartGame(Type loadDataStateType, Player[] players)
+        public void Link(Player[] players)
         {
             _linkWithVisualService.Link(players);
             
+        }
+
+
+        public void ApplyGameState(Type loadDataStateType)
+        {
             var actualStateProvider = new ActualStateProviderProvider();
             _ecsContextProvider.Context.game.gameIdEntity.ReplaceActualStateProviderWritable(actualStateProvider);
             foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())
             {
                 playerEntity.ReplaceActualStateProvider(actualStateProvider);
             }
-            
-            _gameStateMachine.Enter(loadDataStateType);
+
+            if (loadDataStateType != null)
+            {
+                _gameStateMachine.Enter(loadDataStateType);
+            }
         }
 
         public void OnReady<T>() where T : ClassicGameState
@@ -88,12 +104,14 @@ namespace Sheriff.GameFlow.States.ClassicGame
             if (type == typeof(SetSheriffStatusState))
             {
                 _gameStateMachine.Enter<ShoppingState>();
+                _punGameManager.SendGameState();
                 return;
             }
             
             if (type == typeof(ShoppingState))
             {
                 _gameStateMachine.Enter<SheriffCheckState>();
+                _punGameManager.SendGameState();
                 return;
             }
             

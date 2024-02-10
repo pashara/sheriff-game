@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
-using Sheriff.GameResources;
-using Sirenix.OdinInspector;
 using Zenject;
 
 namespace Sheriff.GameFlow
@@ -19,6 +15,16 @@ namespace Sheriff.GameFlow
         {
             public PlayerEntityId playerEntityId;
             public int additiveGoldValue;
+
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                playerEntityId = @params.playerEntityId;
+                additiveGoldValue = @params.additiveGoldValue;
+            }
         }
         
         [Serializable]
@@ -32,11 +38,16 @@ namespace Sheriff.GameFlow
         
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
 
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private EmulateParams _result = null;
 
         public override AffectGoldCommand Calculate(Params param)
         {
+            _params = new Params(param);
             _result = new EmulateParams()
             {
                 playerEntityId = param.playerEntityId,
@@ -45,7 +56,6 @@ namespace Sheriff.GameFlow
 
             return this;
         }
-
 
         public override void Apply()
         {

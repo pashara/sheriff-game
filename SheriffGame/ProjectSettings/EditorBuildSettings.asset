@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
-    guid: 8fec2d86122c6d947aed1a3cd6558bb6
-  - enabled: 1
     path: Assets/Scenes/Login.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/ThirdParty/Photon/PhotonUnityNetworking/Demos/DemoAsteroids/Scenes/DemoAsteroids-GameScene.unity
-    guid: 98efc37d6307844488eb3e4247dde7e9
+    path: Assets/Scenes/GameScene.unity
+    guid: 8fec2d86122c6d947aed1a3cd6558bb6
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: add33e1bddf8f0d49b53f53ca0eaed29,
       type: 2}

@@ -7,7 +7,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.View
     {
         public void Link(PlayerEntity playerEntity)
         {
-            GetComponent<PlayerEditorComponents>().Link(playerEntity);
+            GetComponent<PlayerEditorComponents>()?.Link(playerEntity);
             gameObject.name = $"Player {playerEntity.playerId.Value}";
         }
     }

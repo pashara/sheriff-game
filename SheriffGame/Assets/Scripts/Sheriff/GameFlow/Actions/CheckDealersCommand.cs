@@ -1,7 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Sheriff.ECS;
-using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame;
 using Zenject;
 
@@ -15,6 +14,15 @@ namespace Sheriff.GameFlow
         public class Params : ActionParam
         {
             public SherifCheckResult CheckResult;
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                CheckResult = @params.CheckResult;
+            }
         }
         
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
@@ -26,11 +34,16 @@ namespace Sheriff.GameFlow
             public SherifCheckResult CheckResult;
         }
         
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private PopCardFromBagEmulateParam _result;
 
         public override CheckDealersCommand Calculate(Params param)
         {
+            _params = new Params(param);
             _result = new PopCardFromBagEmulateParam()
             {
                 CheckResult = param.CheckResult

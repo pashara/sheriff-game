@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 using Photon.Realtime;
+using Sheriff.GameFlow.CommandsApplier;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Zenject;
@@ -9,7 +10,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
 {
     public class ClassicGameControllerWrapper : MonoBehaviour
     {
-        [Inject] private CommandsApplyService _commandsApplyService;
+        [Inject] private ICommandsApplyService _commandsApplyService;
         [Inject] private DiContainer _container;
         
         private ClassicGameController _classicGameController;
@@ -33,14 +34,24 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _classicGameController.StartGame(players);
         }
         
-        public void StartGame(ISessionInitializeDataProvider serializeDataProvider, Player[] players)
+        public void StartGame(ContextSerializeData serializeDataProvider, Player[] players)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
 
-            var loadData = serializeDataProvider.GetLoadData();
-            _classicGameController.StartGame(loadData.StateType, players);
-            
+            var loadData = serializeDataProvider;
+            _classicGameController.Link(players);
+            _classicGameController.ApplyGameState(loadData.StateType);
+        }
+        
+
+        public void ApplyGame(ContextSerializeData serializeDataProvider)
+        {
+            _classicGameController = _container.Resolve<ClassicGameController>();
+            _stateMachine = _container.Resolve<ClassicGameStateMachine>();
+
+            var loadData = serializeDataProvider;
+            _classicGameController.ApplyGameState(loadData.StateType);
         }
 
         // private void Start()
@@ -60,9 +71,9 @@ namespace Sheriff.GameFlow.States.ClassicGame
         // }
 
         [Button]
-        private void Emulate()
+        private async void Emulate()
         {
-            var elements = JsonConvert.DeserializeObject<List<CommandsApplyService.Data>>(initialCommands, new JsonSerializerSettings()
+            var elements = JsonConvert.DeserializeObject<List<CommandData>>(initialCommands, new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.Auto
             });
@@ -70,7 +81,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
             {
                 var e = element.Command;
                 _container.Inject(e);
-                _commandsApplyService.Apply(e);
+                await _commandsApplyService.Apply(e);
             }
         }
 

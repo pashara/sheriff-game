@@ -20,6 +20,17 @@ namespace Sheriff.GameFlow
             public PlayerEntityId playerEntityId;
             public int cardsCount;
             public bool ignoreLimits;
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                playerEntityId = @params.playerEntityId;
+                cardsCount = @params.cardsCount;
+                ignoreLimits = @params.ignoreLimits;
+            }
         }
         
         [Serializable]
@@ -37,6 +48,10 @@ namespace Sheriff.GameFlow
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
         
 
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private GetCardsFromDeckEmulateParams _result = null;
 
@@ -44,6 +59,7 @@ namespace Sheriff.GameFlow
 
         public override GetCardsFromDeckCommand Calculate(Params param)
         {
+            _params = new Params(param);
             var cardsCount = param.cardsCount;
             var cardsInDec = _ecsContextProvider.Context.card.GetGroup(CardMatcher.InDec);
             var entities = cardsInDec.GetEntities();

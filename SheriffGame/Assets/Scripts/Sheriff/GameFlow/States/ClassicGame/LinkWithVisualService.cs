@@ -3,6 +3,7 @@ using System.Linq;
 using NaughtyCharacter;
 using Photon.Pun;
 using Photon.Realtime;
+using Sheriff.ClientServer;
 using Sheriff.ClientServer.Players;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.View;
@@ -14,15 +15,18 @@ namespace Sheriff.GameFlow.States.ClassicGame
     {
         private readonly GameViewController _gameViewController;
         private readonly PlayerSpawnService _playerSpawnService;
+        private readonly PlayersAssociations _playersAssociations;
         private readonly EcsContextProvider _ecsContextProvider;
 
         public LinkWithVisualService(
             GameViewController gameViewController, 
             PlayerSpawnService playerSpawnService,
+            PlayersAssociations playersAssociations,
             EcsContextProvider ecsContextProvider)
         {
             _gameViewController = gameViewController;
             _playerSpawnService = playerSpawnService;
+            _playersAssociations = playersAssociations;
             _ecsContextProvider = ecsContextProvider;
         }
         
@@ -68,8 +72,10 @@ namespace Sheriff.GameFlow.States.ClassicGame
             {
                 var playerPun = punPlayers[j];
                 var playerEntity = players[j];
-                var controller = GetMainPhotonView(playerPun);
-                _playerSpawnService.Link(playerEntity, controller);
+                
+                var data = _playersAssociations[playerPun];
+                data.playerEntity = playerEntity;
+                _playerSpawnService.Link(playerEntity, data.playerController);
             }
         }
         
@@ -92,12 +98,14 @@ namespace Sheriff.GameFlow.States.ClassicGame
             return null;
         }
         
-        public static PlayerController GetMainPhotonView(Player player)
+        public static PlayerController GetPlayerController(Player player)
+        {
+            return GetMainPhotonView(player).GetComponent<DummyPlayer>()?.View.GetComponent<PlayerController>();
+        }
+        public static PhotonView GetMainPhotonView(Player player)
         {
             var list = GetAllPhotonViewsPerPlayer(player);
-            return list
-                .Select(x => x.GetComponent<DummyPlayer>()?.View.GetComponent<PlayerController>())
-                .FirstOrDefault(x => x != null);
+            return list.FirstOrDefault(x => x.GetComponent<DummyPlayer>() != null);
         }
     }
 }

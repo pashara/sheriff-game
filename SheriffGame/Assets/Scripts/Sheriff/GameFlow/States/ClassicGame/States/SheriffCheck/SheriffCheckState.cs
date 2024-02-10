@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Sheriff.ECS;
+using Sheriff.GameFlow.CommandsApplier;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
@@ -10,13 +12,13 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
         private readonly ClassicGameController _classicGameController;
         private readonly EcsContextProvider _ecsContextProvider;
         private readonly DiContainer _container;
-        private readonly CommandsApplyService _commandsApplyService;
+        private readonly ICommandsApplyService _commandsApplyService;
 
         public SheriffCheckState(
             ClassicGameController classicGameController,
             EcsContextProvider ecsContextProvider,
             DiContainer container,
-            CommandsApplyService commandsApplyService)
+            ICommandsApplyService commandsApplyService)
         {
             _classicGameController = classicGameController;
             _ecsContextProvider = ecsContextProvider;
@@ -71,7 +73,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     {
                         playerEntityId = e.playerId.Value
                     });
-                _commandsApplyService.Apply(actualAction);
+                _commandsApplyService.Apply(actualAction).Forget();
                 e.isReadyForCheck = false;
             }
         }

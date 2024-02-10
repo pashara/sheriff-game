@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
+using Sheriff.GameFlow.CommandsApplier;
 using Zenject;
 
 namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
@@ -9,13 +10,13 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
     {
         private readonly DiContainer _container;
         private readonly ClassicGameController _classicGameController;
-        private readonly CommandsApplyService _commandsApplyService;
+        private readonly ICommandsApplyService _commandsApplyService;
         private readonly EcsContextProvider _ecsContextProvider;
 
         public SetSheriffStatusState(
             DiContainer container,
             ClassicGameController classicGameController,
-            CommandsApplyService commandsApplyService,
+            ICommandsApplyService commandsApplyService,
             EcsContextProvider ecsContextProvider)
         {
             _container = container;
@@ -24,7 +25,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
             _ecsContextProvider = ecsContextProvider;
         }
         
-        public override void Enter()
+        public async override void Enter()
         {
             var gameEntity = _ecsContextProvider.Context.game.gameIdEntity;
 
@@ -62,11 +63,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
                 _ecsContextProvider.Context.card.GetEntityWithCardId(cardEntityId).MarkReleased();
             }
             
-            
-            
-            
-            
-
             var actualAction = _container
                 .Instantiate<SelectSheriffCommand>()
                 .Calculate(new SelectSheriffCommand.Params()
@@ -74,7 +70,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
                     round = gameEntity.round.Value,
                     playersQueue = gameEntity.potentialPlayersSequence.Value
                 });
-            _commandsApplyService.Apply(actualAction);
+            await _commandsApplyService.Apply(actualAction);
             
             _classicGameController.OnReady<SetSheriffStatusState>();
         }

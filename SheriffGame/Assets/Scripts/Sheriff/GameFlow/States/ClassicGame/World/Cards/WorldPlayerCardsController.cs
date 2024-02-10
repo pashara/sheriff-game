@@ -6,6 +6,7 @@ using Sheriff.DataBase;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame.View;
+using Sheriff.InputLock;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -56,23 +57,32 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
 
         public async void GetNewCard()
         {
-            var ids = await worldToEcsController.GetNewCard();
-            foreach (var id in ids)
+            using (LoadingOverlay.Lock())
             {
-                SpawnNewCard(id);
+                var ids = await worldToEcsController.GetNewCard();
+                foreach (var id in ids)
+                {
+                    SpawnNewCard(id);
+                }
             }
         }
 
         public async void ReleaseCard(CardView cardView)
         {
+            using (LoadingOverlay.Lock())
+            {
+                var commandResult = await worldToEcsController.ReleaseCard(cardView);
+                if (!commandResult)
+                    return;
+            }
+
             declarePoolController.RemoveFromBag(cardView);
             var cardIndex = cardPlacements.IndexOf(cardView);
             if (cardIndex >= 0)
             {
                 cardPlacements[cardIndex] = null;
             }
-
-            await worldToEcsController.ReleaseCard(cardView);
+            
             await cardFlyController.PlaMoveToDec(cardView);
 
             await UniTask.Delay(1000);

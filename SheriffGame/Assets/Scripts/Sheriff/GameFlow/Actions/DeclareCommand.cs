@@ -70,6 +70,16 @@ namespace Sheriff.GameFlow
         {
             public PlayerEntityId playerEntityId;
             public ProductsDeclaration declarations;
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                playerEntityId = @params.playerEntityId;
+                declarations = new ProductsDeclaration(@params.declarations);
+            }
         }
         
         [Serializable]
@@ -83,11 +93,16 @@ namespace Sheriff.GameFlow
         
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
 
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private EmulateParams _result = null;
 
         public override DeclareCommand Calculate(Params param)
         {
+            _params = new Params(param);
             _result = new EmulateParams()
             {
                 playerDestination = param.playerEntityId,

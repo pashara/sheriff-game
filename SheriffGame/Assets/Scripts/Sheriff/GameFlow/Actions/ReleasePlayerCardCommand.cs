@@ -17,6 +17,16 @@ namespace Sheriff.GameFlow
         {
             public PlayerEntityId playerEntityId;
             public CardEntityId cardEntityId;
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                playerEntityId = @params.playerEntityId;
+                cardEntityId = @params.cardEntityId;
+            }
         }
 
         [Serializable]
@@ -32,11 +42,16 @@ namespace Sheriff.GameFlow
         
         [Inject] private readonly EcsContextProvider _ecsContextProvider;
         
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private PopCardFromBagEmulateParam _result;
 
         public override ReleasePlayerCardCommand Calculate(Params param)
         {
+            _params = new Params(param);
             _result = new PopCardFromBagEmulateParam()
             {
                 playerEntityId = param.playerEntityId,

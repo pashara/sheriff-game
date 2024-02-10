@@ -7,8 +7,6 @@ using Zenject;
 
 namespace Sheriff.GameFlow
 {
-    
-    
     public class SelectSheriffCommand : GameCommand<SelectSheriffCommand.Params, SelectSheriffCommand>
     {
 
@@ -17,6 +15,16 @@ namespace Sheriff.GameFlow
         {
             public int round;
             public List<PlayerEntityId> playersQueue;
+            
+            public Params()
+            {
+            }
+            
+            public Params(Params @params)
+            {
+                round = @params.round;
+                playersQueue = @params.playersQueue?.ToList();
+            }
         }
         [Serializable]
         public class SelectSheriffEmulateParam : EmulateActionParams
@@ -29,6 +37,10 @@ namespace Sheriff.GameFlow
         
         [Inject] private readonly ISherifSelectService _sherifSelectService;
         
+        [JsonIgnore] protected override Params AppliedParams => _params;
+        
+        [JsonProperty("params")]
+        private Params _params = null;
         [JsonProperty("result")]
         private SelectSheriffEmulateParam _result;
         
@@ -39,6 +51,7 @@ namespace Sheriff.GameFlow
 
         public override SelectSheriffCommand Calculate(Params param)
         {
+            _params = new Params(param);
             var actualRound = param.round;
             var neededElement = param.playersQueue[actualRound % param.playersQueue.Count];
             

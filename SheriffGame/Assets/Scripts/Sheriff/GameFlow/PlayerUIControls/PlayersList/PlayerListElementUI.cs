@@ -3,7 +3,6 @@ using System.Linq;
 using TMPro;
 using UniRx;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Sheriff.GameFlow.PlayerUIControls.PlayersList
 {
@@ -14,13 +13,19 @@ namespace Sheriff.GameFlow.PlayerUIControls.PlayersList
         [SerializeField] private TMP_Text allowedCardsTransferred;
         [SerializeField] private TMP_Text smuggledCardsTransferred;
         [SerializeField] private TMP_Text cash;
+        [SerializeField] private GameObject ownRoot;
         
         private readonly CompositeDisposable _disposable = new();
-        
+
+
+        public void MarkOwn(bool isOwn)
+        {
+            ownRoot.SetActive(isOwn);
+        }
         
         public void Initialize(PlayerEntity playerEntity)
         {
-            nameLabel.SetText(playerEntity.playerId.Value.ToString());
+            nameLabel.SetText(playerEntity.nickname.Value);
             playerEntity.OnSheriff().Subscribe(x =>
             {
                 sheriffRoot.SetActive(x != null);

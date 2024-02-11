@@ -23,6 +23,7 @@ namespace Sheriff.GameFlow.PlayerUIControls.PlayersList
             {
                 var instance = _container.InstantiatePrefabForComponent<PlayerListElementUI>(playerPrefab, root);
                 instance.Initialize(playerEntity);
+                instance.MarkOwn(playerEntity.playerId.Value == playerIdValue);
                 _spawned.Add(instance);
             }
         }

@@ -45,6 +45,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         public void OpenAsSheriff(PlayerEntity player)
         {
+            if (_playerEntity == null)
+                return;
             ActivateController(player);
             sheriffUI.Show();
             ownerUI.Hide();
@@ -53,6 +55,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         public void OpenAsOwner(PlayerEntity player)
         {
+            if (_playerEntity == null)
+                return;
             ActivateController(player);
             sheriffUI.Hide();
             ownerUI.Show();
@@ -61,6 +65,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         public void OpenAsPlayer(PlayerEntity player)
         {
+            if (_playerEntity == null)
+                return;
             ActivateController(player);
             sheriffUI.Hide();
             ownerUI.Hide();
@@ -79,6 +85,9 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Declares
 
         private void ActivateController(PlayerEntity player)
         {
+            if (_playerEntity == null)
+                return;
+            
             _disposable.Clear();
             
             inputHandler.SetActive(true);

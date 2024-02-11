@@ -33,7 +33,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
         const int Max = 6;
         public IReadOnlyCollection<CardView> CardsInBag => declarePoolController.CardViews;
 
-        public PlayerEntityId Owner => _playerEntity.playerId.Value;
+        public PlayerEntityId Owner => _playerEntity?.playerId.Value ?? new PlayerEntityId(-1);
 
         public void PutInBag(CardView cardView)
         {

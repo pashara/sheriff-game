@@ -239,7 +239,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -259,9 +259,9 @@
                     "name": "",
                     "id": "628c9498-7530-4bf7-9210-1d7545cb443e",
                     "path": "<Keyboard>/backspace",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Teleport",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -281,9 +281,9 @@
                     "name": "",
                     "id": "dd2c5d3e-0e7d-4c6c-819f-838e4aaf9993",
                     "path": "<Keyboard>/tab",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "MainUI",
                     "isComposite": false,
                     "isPartOfComposite": false

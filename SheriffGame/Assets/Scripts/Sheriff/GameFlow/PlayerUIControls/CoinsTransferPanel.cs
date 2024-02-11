@@ -36,6 +36,7 @@ namespace Sheriff.GameFlow.PlayerUIControls
             FillOptions();
             SubscribeInput();
             SubscribeValidations();
+            ApplyValidation();
 
         }
 
@@ -43,7 +44,6 @@ namespace Sheriff.GameFlow.PlayerUIControls
         
         private void SubscribeValidations()
         {
-            
             _targetPlayer
                 .CombineLatest(
                     _potentialMoneyCount,
@@ -97,14 +97,17 @@ namespace Sheriff.GameFlow.PlayerUIControls
 
         private void SubscribeInput()
         {
+            _targetPlayer.Value = _playersOptions.ElementAtOrDefault(playerDestinationDropdown.value).Item1?.playerId?.Value ?? new PlayerEntityId(-1);
             playerDestinationDropdown.onValueChanged.AsObservable().Subscribe(index =>
             {
                 _targetPlayer.Value = _playersOptions.ElementAt(index).Item1?.playerId?.Value ?? new PlayerEntityId(-1);
             }).AddTo(_disposable);
 
-            coinsCount.onValueChanged.AsObservable().Select(x => int.Parse(x)).Subscribe(x =>
+            _potentialMoneyCount.Value = int.TryParse(coinsCount.text, out var v) ? v : 0;
+
+            coinsCount.onValueChanged.AsObservable().Subscribe(x =>
             {
-                _potentialMoneyCount.Value = x;
+                _potentialMoneyCount.Value = (int.TryParse(x, out var v) ? v : 0);
             }).AddTo(_disposable);
 
             transferButton.onClick.AsObservable().Subscribe(x =>

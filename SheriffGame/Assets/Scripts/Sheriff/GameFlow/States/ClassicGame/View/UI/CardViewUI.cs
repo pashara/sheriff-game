@@ -32,18 +32,18 @@ namespace Sheriff.GameFlow.States.ClassicGame.View.UI
 
         private void FillCost()
         {
-            cost.SetText($"+{_cardConfig.Cost} coins");
+            cost.SetText($"+{_cardConfig.Cost}");
         }
 
         private void FillFee()
         {
-            fee.SetText($"-{_cardConfig.Fine} coins");
+            fee.SetText($"-{_cardConfig.Fine}");
         }
 
 
         public void Dispose()
         {
-            GameObject.Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

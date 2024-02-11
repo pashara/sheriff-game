@@ -39,7 +39,7 @@ namespace Sheriff.GameFlow.PlayerUIControls
         public void Deinitialize()
         {
             ClearCards();
-            _disposable.Dispose();
+            _disposable.Clear();
         }
 
         private void ClearCards()
@@ -65,11 +65,14 @@ namespace Sheriff.GameFlow.PlayerUIControls
         
         private void SpawnCard(GameResourceType resourceType, int count, Transform root)
         {
-            var viewPrefab = _cardConfigProvider.Get(resourceType).UICardCardView;
-            var instance = _container.InstantiatePrefabForComponent<CardViewUI>(viewPrefab, root);
-            instance.Initialize();
-            instance.ApplyCount(count);
-            _spawnedCards.Add(instance);
+            if (count != 0)
+            {
+                var viewPrefab = _cardConfigProvider.Get(resourceType).UICardCardView;
+                var instance = _container.InstantiatePrefabForComponent<CardViewUI>(viewPrefab, root);
+                instance.Initialize();
+                instance.ApplyCount(count);
+                _spawnedCards.Add(instance);
+            }
         }
         
     }

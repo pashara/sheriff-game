@@ -1,5 +1,5 @@
 {
-    "name": "InputActions 1",
+    "name": "CardsPopupInput",
     "maps": [
         {
             "name": "UI",
@@ -20,6 +20,17 @@
                     "name": "",
                     "id": "02d975e4-1661-40c1-9b62-37a360a8c22d",
                     "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0ebd3309-38f8-46a4-a272-b3f5125e22fa",
+                    "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

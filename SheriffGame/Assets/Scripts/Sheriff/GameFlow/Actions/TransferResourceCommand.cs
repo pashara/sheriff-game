@@ -58,6 +58,7 @@ namespace Sheriff.GameFlow
             _result = new EmulateParams()
             {
                 source = param.source,
+                category = param.category,
                 destination = param.destination,
                 gameResource = param.gameResource,
             };

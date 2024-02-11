@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sheriff.DataBase;
 using Sheriff.ECS;
@@ -40,6 +41,7 @@ namespace Sheriff.GameFlow.PlayerUIControls
             FillOptions();
             SubscribeInput();
             SubscribeValidations();
+            ApplyValidation();
         }
 
         
@@ -127,14 +129,16 @@ namespace Sheriff.GameFlow.PlayerUIControls
 
         private void SubscribeInput()
         {
+            _targetPlayer.Value = _playersOptions.ElementAtOrDefault(playerDestinationDropdown.value).Item1?.playerId?.Value ?? new PlayerEntityId(-1);
             playerDestinationDropdown.onValueChanged.AsObservable().Subscribe(index =>
             {
                 _targetPlayer.Value = _playersOptions.ElementAt(index).Item1?.playerId?.Value ?? new PlayerEntityId(-1);
             }).AddTo(_disposable);
             
+            _potentialResource.Value = _resourcesOptions.ElementAtOrDefault(resourcesDropdown.value).Item1;
             resourcesDropdown.onValueChanged.AsObservable().Subscribe(index =>
             {
-                _targetPlayer.Value = _playersOptions.ElementAt(index).Item1?.playerId?.Value ?? new PlayerEntityId(-1);
+                _potentialResource.Value = _resourcesOptions.ElementAt(index).Item1;
             }).AddTo(_disposable);
 
             transferButton.onClick.AsObservable().Subscribe(x =>
@@ -146,15 +150,22 @@ namespace Sheriff.GameFlow.PlayerUIControls
 
         private async void Transfer()
         {
-            using (LoadingOverlay.Lock())
+            try
             {
-                var commandResult = await uiToEcsController.TransferResource(
-                    _playerEntity.playerId.Value, 
-                    _targetPlayer.Value, 
-                    _potentialResource.Value);
+                using (LoadingOverlay.Lock())
+                {
+                    var commandResult = await uiToEcsController.TransferResource(
+                        _playerEntity.playerId.Value,
+                        _targetPlayer.Value,
+                        _potentialResource.Value);
+
+                    if (!commandResult)
+                        return;
+                }
+            }
+            catch (Exception e)
+            {
                 
-                if (!commandResult)
-                    return;
             }
         }
 

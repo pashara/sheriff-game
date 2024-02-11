@@ -85,7 +85,6 @@ namespace Sheriff.GameFlow.States.ClassicGame
         public void LinkSlave(Player[] players)
         {
             _linkWithVisualService.LinkSlave(players);
-            
         }
 
 

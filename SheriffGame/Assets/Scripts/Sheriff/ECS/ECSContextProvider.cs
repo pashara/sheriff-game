@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Entitas;
+using Sheriff.ECS.Components;
 using Sheriff.GameFlow;
 using UnityEngine;
 using Zenject;
@@ -27,10 +28,10 @@ namespace Sheriff.ECS
         public void FillData(ContextSerializeData serializeData)
         {
             {
-                foreach (var context in Context.allContexts)
-                {
-                    context.DestroyAllEntities();
-                }
+                // foreach (var context in Context.allContexts)
+                // {
+                //     context.DestroyAllEntities();
+                // }
 
                 foreach (var context in Context.allContexts)
                     context.OnEntityCreated -= GameOnOnEntityCreated;
@@ -62,7 +63,16 @@ namespace Sheriff.ECS
 
                         if (entity != null)
                         {
-                            entity.RemoveAllComponents();
+                            foreach (var component in entity.GetComponents())
+                            {
+                                var hasButtonAttribute = Attribute.IsDefined(component.GetType(), typeof(ECSSerializeAttribute));
+                                if (hasButtonAttribute)
+                                {
+                                    var index = d.Item1.IndexOf(component.GetType());
+                                    entity.RemoveComponent(index);
+                                }
+                            }
+                            // entity.RemoveAllComponents();
                         }
                         else
                         {

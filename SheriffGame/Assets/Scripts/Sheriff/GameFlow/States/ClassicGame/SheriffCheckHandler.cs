@@ -128,16 +128,22 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 // .ToDictionary(x => x.Key, x => x.Count());
 
             Dictionary<GameResourceType, int> badElementsCount = new();
-
+            List<GameResourceType> actualCardsList = new();
+            
+            foreach (var actualCard in actualCards)
+                for (int i = 0; i < actualCard.Value; i++)
+                    actualCardsList.Add(actualCard.Key);
             
             //Check by declared list
             foreach (var declaredElement in declaredElements)
+                for (int i = 0; i < declaredElement.Value; i++)
+                    actualCardsList.Remove(declaredElement.Key);
+
+            foreach (var gameResourceType in actualCardsList)
             {
-                actualCards.TryGetValue(declaredElement.Key, out var v);
-                if (v == declaredElement.Value) continue;
-                var delta = Mathf.Abs(v - declaredElement.Value);
-                if (delta == 0) continue;
-                badElementsCount[declaredElement.Key] = delta;
+                if (!badElementsCount.ContainsKey(gameResourceType))
+                    badElementsCount[gameResourceType] = 0;
+                badElementsCount[gameResourceType]++;
             }
 
             // // check by cards

@@ -19,16 +19,14 @@ namespace Sheriff.GameFlow.ResultUIControl
         public void Open()
         {
             root.gameObject.SetActive(true);
-            var priority = _container.Instantiate<ResultCalculateHandler>().Calculate();
+            var playerCalculations = _container.Instantiate<ResultCalculateHandler>().Calculate();
 
-            int place = 1;
-            foreach (var playerId in priority)
+            foreach (var calculations in playerCalculations)
             {
-                var player = _ecsContextProvider.Context.player.GetEntityWithPlayerId(playerId);
+                var player = _ecsContextProvider.Context.player.GetEntityWithPlayerId(calculations.PlayerEntityId);
                 var instance = _container.InstantiatePrefabForComponent<PlayerStatisticsView>(prefab, elementsRoot);
                 _spawnedElements.Add(instance);
-                instance.Fill(place, player);
-                place++;
+                instance.Fill(calculations, player);
             }
         }
 

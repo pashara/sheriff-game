@@ -21,6 +21,8 @@ namespace Sheriff.GameFlow.ResultUIControl
             public QueenBonus QueenBonus = null;
             
             public TotalCardsInfo TotalCardsInfo;
+
+            public int totalBonus;
         }
         
         [Serializable]
@@ -53,15 +55,30 @@ namespace Sheriff.GameFlow.ResultUIControl
         public List<Recalculations> Calculate()
         {
             var calculations = _ecsContextProvider.Context.player.GetEntities().Select(CalculatePlayer).ToList();
+            ApplyAllBonuses(calculations);
+            return calculations;
+        }
 
+        void ApplyAllBonuses(List<Recalculations> calculations)
+        {
+            calculations.ForEach(x =>
+            {
+                x.totalBonus = x.TotalCardsInfo.allowedCardsCost + x.TotalCardsInfo.deniedCardsCost;
+            });
+            
+            
             // var bonuses = CalculateBonuses(calculations);
             // var kingBonus = bonuses.FirstOrDefault();
             // var queenBonus = bonuses.LastOrDefault();
             // ApplyKingBonus(kingBonus.Recalculation, kingBonus.ResourceType, kingBonus.Amount);
             // ApplyQueenBonus(queenBonus.Recalculation, queenBonus.ResourceType, queenBonus.Amount);
             
-            
-            return calculations;
+            calculations.Sort((a, b) => b.totalBonus - a.totalBonus);
+
+            for (var i = 0; i < calculations.Count; i++)
+            {
+                calculations[i].Place = i + 1;
+            }
         }
 
         private void ApplyKingBonus(Recalculations source, GameResourceType resourceType, int amount)

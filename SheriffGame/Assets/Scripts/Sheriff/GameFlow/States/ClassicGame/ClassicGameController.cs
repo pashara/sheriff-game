@@ -6,6 +6,7 @@ using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
 using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame.States;
+using Sheriff.GameFlow.States.ClassicGame.States.Finish;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
 using Sheriff.GameFlow.States.ClassicGame.States.Shopping;
@@ -108,6 +109,11 @@ namespace Sheriff.GameFlow.States.ClassicGame
             OnReady(typeof(T));
         }
 
+        public void Finish()
+        {
+            _gameStateMachine.Enter<FinishGameState>();
+        }
+        
         public void OnReady(Type type)
         {
             if (type == typeof(InitializeGameState))

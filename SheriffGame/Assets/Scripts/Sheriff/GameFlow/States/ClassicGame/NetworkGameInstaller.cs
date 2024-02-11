@@ -5,6 +5,7 @@ using Sheriff.DataBase;
 using Sheriff.ECS;
 using Sheriff.GameFlow;
 using Sheriff.GameFlow.CommandsApplier;
+using Sheriff.GameFlow.ResultUIControl;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using ThirdParty.Randoms;
@@ -20,6 +21,7 @@ namespace Sheriff
         [SerializeField] private PlayerSpawnService playerSpawnService;
         [SerializeField] private GameStartEmulateConfig gameStartEmulateConfig;
         [SerializeField] private ClassicGameControllerWrapper classicGameControllerWrapper;
+        [SerializeField] private ResultUIController resultUIController;
         
         [SerializeField] private PunGameManager punGameManager;
         [SerializeField] private GameObject punUi;
@@ -27,6 +29,7 @@ namespace Sheriff
         {
             var sessionInfo = Container.Resolve<IGameSessionDataProvider>();
             Container.BindInterfacesTo<CardsProvider>().FromInstance(_cardsProvider);
+            Container.BindInterfacesAndSelfTo<ResultUIController>().FromInstance(resultUIController);
             
             Container.BindInterfacesAndSelfTo<RandomService>().FromInstance(new RandomService(0));
             Container.BindInterfacesAndSelfTo<ClassicGameStateMachine>().AsSingle();

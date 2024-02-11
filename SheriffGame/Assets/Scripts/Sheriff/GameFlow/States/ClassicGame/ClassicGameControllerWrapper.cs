@@ -95,6 +95,12 @@ namespace Sheriff.GameFlow.States.ClassicGame
         }
 
         [Button]
+        public void Finish()
+        {
+            _classicGameController.Finish();
+        }
+
+        [Button]
         public void GoNext()
         {
             _classicGameController.OnReady(_stateMachine.ActualState.Value.GetType());

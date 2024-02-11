@@ -2,6 +2,7 @@
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.States;
+using Sheriff.GameFlow.States.ClassicGame.States.Finish;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;
 using Sheriff.GameFlow.States.ClassicGame.States.Shopping;
@@ -46,6 +47,7 @@ namespace Sheriff.GameFlow
             _gameStateMachine.Put(subContainer.Instantiate<SetSheriffStatusState>());
             _gameStateMachine.Put(subContainer.Instantiate<SheriffCheckState>());
             _gameStateMachine.Put(subContainer.Instantiate<InitializeGameState>());
+            _gameStateMachine.Put(subContainer.Instantiate<FinishGameState>());
         }
     }
 }

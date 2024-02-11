@@ -23,18 +23,23 @@ namespace Sheriff.GameFlow.ResultUIControl
         [Inject] private DiContainer _container;
         [Inject] private ICardConfigProvider _cardConfigProvider;
         private List<IDisposable> spawned = new();
-        
-        public void Fill(ResultCalculateHandler.Recalculations place, PlayerEntity player)
+
+        public void Fill(ResultCalculateHandler.Recalculations calculations, PlayerEntity player)
         {
-            placeLabel.SetText($"{place}");
+            placeLabel.SetText($"{calculations.Place}");
             nickNameLabel.SetText(player.nickname.Value);
 
-            var cardsCalculations = place.TotalCardsInfo;
+            var cardsCalculations = calculations.TotalCardsInfo;
+
+            onHandCardsLabel.SetText(
+                $"${cardsCalculations.allowedCardsCost + cardsCalculations.deniedCardsCost} " +
+                $"({cardsCalculations.allowedCardsCount + cardsCalculations.deniedCardsCount})");
             
-            onHandCardsLabel.SetText($"${cardsCalculations.allowedCardsCost + cardsCalculations.deniedCardsCost} ({cardsCalculations.allowedCardsCount + cardsCalculations.deniedCardsCount})");
-            allowedCardsCountLabel.SetText($"${cardsCalculations.allowedCardsCost} ({cardsCalculations.allowedCardsCount})");
-            deniedCardsCountLabel.SetText($"${cardsCalculations.deniedCardsCost} ({cardsCalculations.deniedCardsCount})");
-            
+            allowedCardsCountLabel.SetText(
+                $"${cardsCalculations.allowedCardsCost} ({cardsCalculations.allowedCardsCount})");
+            deniedCardsCountLabel.SetText(
+                $"${cardsCalculations.deniedCardsCost} ({cardsCalculations.deniedCardsCount})");
+
 
             foreach (var resource in player.transferredResources.Value.AllowedResources)
                 SpawnCardStatistic(resource.Key, resource.Value, allowedCardsRoot);
@@ -42,8 +47,7 @@ namespace Sheriff.GameFlow.ResultUIControl
             foreach (var resource in player.transferredResources.Value.NotAllowedResources)
                 SpawnCardStatistic(resource.Key, resource.Value, deniedCardsRoot);
         }
-
-
+        
 
         void SpawnCardStatistic(GameResourceType gameResourceType, int count, Transform root)
         {

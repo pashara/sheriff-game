@@ -121,8 +121,7 @@ namespace Sheriff.ClientServer.Game
             if (changedProps.TryGetValue(SheriffGame.PLAYER_VIEW_ID, out var viewIdObj) && viewIdObj is int viewIdInt)
             {
                 var playerController = _playersAssociations[targetPlayer].playerController;
-                var view = playerController.GetComponent<CharacterView>();
-                view?.Apply(viewIdInt);
+                playerController.CharacterView.Apply(viewIdInt);
             }
 
             if (!PhotonNetwork.IsMasterClient)

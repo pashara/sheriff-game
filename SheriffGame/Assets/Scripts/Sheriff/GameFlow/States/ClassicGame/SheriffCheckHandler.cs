@@ -36,9 +36,6 @@ namespace Sheriff.GameFlow.States.ClassicGame
         public long FromPlayerId;
         [JsonProperty("to_player_id")]
         public long ToPlayerId;
-        
-        [JsonProperty("bad_cards")]
-        public List<CardEntityId> BadCards;
     }
 
     [Serializable]

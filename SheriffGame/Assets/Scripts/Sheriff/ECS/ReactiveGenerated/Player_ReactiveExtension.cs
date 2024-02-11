@@ -30,27 +30,33 @@ public partial class PlayerEntity
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.MaxCardsPopPerStepComponent> OnMaxCardsPopPerStep() =>
         this.OnChange<Sheriff.ECS.Components.MaxCardsPopPerStepComponent>(8);
 
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.NicknameComponent> OnNickname() =>
+        this.OnChange<Sheriff.ECS.Components.NicknameComponent>(9);
+
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.OnHandCardsComponent> OnOnHandCards() =>
-        this.OnChange<Sheriff.ECS.Components.OnHandCardsComponent>(9);
+        this.OnChange<Sheriff.ECS.Components.OnHandCardsComponent>(10);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerControllerComponent> OnPlayerController() =>
-        this.OnChange<Sheriff.ECS.Components.PlayerControllerComponent>(10);
+        this.OnChange<Sheriff.ECS.Components.PlayerControllerComponent>(11);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerIdComponent> OnPlayerId() =>
-        this.OnChange<Sheriff.ECS.Components.PlayerIdComponent>(11);
+        this.OnChange<Sheriff.ECS.Components.PlayerIdComponent>(12);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerPositionIdComponent> OnPlayerPositionId() =>
-        this.OnChange<Sheriff.ECS.Components.PlayerPositionIdComponent>(12);
+        this.OnChange<Sheriff.ECS.Components.PlayerPositionIdComponent>(13);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.ReadyForCheckComponent> OnReadyForCheck() =>
-        this.OnChange<Sheriff.ECS.Components.ReadyForCheckComponent>(13);
+        this.OnChange<Sheriff.ECS.Components.ReadyForCheckComponent>(14);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SelectedCardsComponent> OnSelectedCards() =>
-        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(14);
+        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(15);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffCheckResultComponent> OnSheriffCheckResult() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffCheckResultComponent>(15);
+        this.OnChange<Sheriff.ECS.Components.SheriffCheckResultComponent>(16);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffComponent> OnSheriff() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(16);
+        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(17);
+
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.TransferredResourcesComponent> OnTransferredResources() =>
+        this.OnChange<Sheriff.ECS.Components.TransferredResourcesComponent>(18);
 }

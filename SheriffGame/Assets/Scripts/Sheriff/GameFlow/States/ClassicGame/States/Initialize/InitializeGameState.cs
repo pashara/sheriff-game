@@ -108,6 +108,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             var entity = _ecsContextProvider.Context.player.CreateEntity();
             var id = entity.id.ID;
             entity.AddPlayerId(id);
+            entity.ReplaceNickname(entity.playerId.Value.ToString());
             entity.ReplaceGoldCashCurrency(0);
             entity.ReplaceMaxCardsPopPerStep(5);
             entity.AddActualStateProvider(actualStateProvider);

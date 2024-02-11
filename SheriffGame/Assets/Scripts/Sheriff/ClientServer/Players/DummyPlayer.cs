@@ -1,6 +1,7 @@
 ﻿using System;
 using NaughtyCharacter;
 using Photon.Pun;
+using Sheriff.GameFlow.Players;
 using UnityEngine;
 using Zenject;
 

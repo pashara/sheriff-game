@@ -11,14 +11,14 @@ public partial class PlayerEntity {
     public Sheriff.ECS.Components.PlayerControllerComponent playerController { get { return (Sheriff.ECS.Components.PlayerControllerComponent)GetComponent(PlayerComponentsLookup.PlayerController); } }
     public bool hasPlayerController { get { return HasComponent(PlayerComponentsLookup.PlayerController); } }
 
-    public void AddPlayerController(NaughtyCharacter.PlayerController newValue) {
+    public void AddPlayerController(Sheriff.GameFlow.Players.PlayerController newValue) {
         var index = PlayerComponentsLookup.PlayerController;
         var component = (Sheriff.ECS.Components.PlayerControllerComponent)CreateComponent(index, typeof(Sheriff.ECS.Components.PlayerControllerComponent));
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplacePlayerController(NaughtyCharacter.PlayerController newValue) {
+    public void ReplacePlayerController(Sheriff.GameFlow.Players.PlayerController newValue) {
         var index = PlayerComponentsLookup.PlayerController;
         var component = (Sheriff.ECS.Components.PlayerControllerComponent)CreateComponent(index, typeof(Sheriff.ECS.Components.PlayerControllerComponent));
         component.Value = newValue;

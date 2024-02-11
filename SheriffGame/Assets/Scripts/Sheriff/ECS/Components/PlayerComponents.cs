@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 using NaughtyCharacter;
+using Newtonsoft.Json;
 using Sheriff.GameFlow;
+using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame;
+using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components
 {
@@ -119,5 +123,98 @@ namespace Sheriff.ECS.Components
     public class SheriffCheckResultComponent : IComponent
     {
         public SherifCheckResult Value;
+    }
+
+    [Player]
+    [ECSSerialize]
+    public class TransferredResourcesComponent : IComponent
+    {
+        public TransferredObjects Value;
+    }
+
+    [Player]
+    [ECSSerialize]
+    public class NicknameComponent : IComponent
+    {
+        public string Value;
+    }
+
+
+    [Serializable]
+    public class TransferredObjects
+    {
+        [JsonProperty("allowed")]
+        public Dictionary<GameResourceType, int> AllowedResources;
+        [JsonProperty("not_allowed")]
+        public Dictionary<GameResourceType, int> NotAllowedResources;
+
+
+        public bool TryGetValue(GameResourceType gameResourceType, out int count)
+        {
+            if (AllowedResources != null && AllowedResources.TryGetValue(gameResourceType, out var c1))
+            {
+                count = c1;
+                return true;
+            }
+            
+            if (NotAllowedResources != null && NotAllowedResources.TryGetValue(gameResourceType, out var c2))
+            {
+                count = c2;
+                return true;
+            }
+
+            count = 0;
+            return false;
+        }
+
+        public void Inc(GameResourceCategory category, GameResourceType gameResourceType, int count = 1)
+        {
+            Dictionary<GameResourceType, int> source = null;
+            if (category == GameResourceCategory.Allowed)
+            {
+                AllowedResources ??= new();
+                source = AllowedResources;
+            }
+            else if (category == GameResourceCategory.Smuggling)
+            {
+                NotAllowedResources ??= new();
+                source = NotAllowedResources;
+            }
+
+            if (source != null)
+            {
+                if (!source.TryGetValue(gameResourceType, out var cc))
+                {
+                    source[gameResourceType] = 0;
+                }
+
+                source[gameResourceType] += count;
+            }
+        }
+
+        public void Dec(GameResourceCategory category, GameResourceType gameResourceType, int count = 1)
+        {
+            Dictionary<GameResourceType, int> source = null;
+            if (category == GameResourceCategory.Allowed)
+            {
+                AllowedResources ??= new();
+                source = AllowedResources;
+            }
+            else if (category == GameResourceCategory.Smuggling)
+            {
+                NotAllowedResources ??= new();
+                source = NotAllowedResources;
+            }
+
+            if (source != null)
+            {
+                if (!source.TryGetValue(gameResourceType, out var cc))
+                {
+                    source[gameResourceType] = 0;
+                }
+
+                source[gameResourceType] -= count;
+            }
+        }
     }
 }

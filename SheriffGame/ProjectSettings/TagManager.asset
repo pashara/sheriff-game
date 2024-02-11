@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -46,4 +47,10 @@ TagManager:
     locked: 0
   - name: OverCard
     uniqueID: 2499125065
+    locked: 0
+  - name: UI
+    uniqueID: 468301385
+    locked: 0
+  - name: OverlayUI
+    uniqueID: 1511689159
     locked: 0

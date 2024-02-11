@@ -17,16 +17,18 @@ public static class PlayerComponentsLookup {
     public const int GoldCashCurrency = 6;
     public const int Id = 7;
     public const int MaxCardsPopPerStep = 8;
-    public const int OnHandCards = 9;
-    public const int PlayerController = 10;
-    public const int PlayerId = 11;
-    public const int PlayerPositionId = 12;
-    public const int ReadyForCheck = 13;
-    public const int SelectedCards = 14;
-    public const int SheriffCheckResult = 15;
-    public const int Sheriff = 16;
+    public const int Nickname = 9;
+    public const int OnHandCards = 10;
+    public const int PlayerController = 11;
+    public const int PlayerId = 12;
+    public const int PlayerPositionId = 13;
+    public const int ReadyForCheck = 14;
+    public const int SelectedCards = 15;
+    public const int SheriffCheckResult = 16;
+    public const int Sheriff = 17;
+    public const int TransferredResources = 18;
 
-    public const int TotalComponents = 17;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
@@ -38,6 +40,7 @@ public static class PlayerComponentsLookup {
         "GoldCashCurrency",
         "Id",
         "MaxCardsPopPerStep",
+        "Nickname",
         "OnHandCards",
         "PlayerController",
         "PlayerId",
@@ -45,7 +48,8 @@ public static class PlayerComponentsLookup {
         "ReadyForCheck",
         "SelectedCards",
         "SheriffCheckResult",
-        "Sheriff"
+        "Sheriff",
+        "TransferredResources"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -58,6 +62,7 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.GoldCashCurrencyComponent),
         typeof(Sheriff.ECS.Components.IdComponent),
         typeof(Sheriff.ECS.Components.MaxCardsPopPerStepComponent),
+        typeof(Sheriff.ECS.Components.NicknameComponent),
         typeof(Sheriff.ECS.Components.OnHandCardsComponent),
         typeof(Sheriff.ECS.Components.PlayerControllerComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
@@ -65,6 +70,7 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.ReadyForCheckComponent),
         typeof(Sheriff.ECS.Components.SelectedCardsComponent),
         typeof(Sheriff.ECS.Components.SheriffCheckResultComponent),
-        typeof(Sheriff.ECS.Components.SheriffComponent)
+        typeof(Sheriff.ECS.Components.SheriffComponent),
+        typeof(Sheriff.ECS.Components.TransferredResourcesComponent)
     };
 }

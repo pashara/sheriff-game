@@ -2,6 +2,7 @@
 using NaughtyCharacter;
 using Photon.Pun;
 using Photon.Realtime;
+using Sheriff.GameFlow.Players;
 
 namespace Sheriff.ClientServer
 {

@@ -4,6 +4,7 @@ using NaughtyCharacter;
 using Photon.Realtime;
 using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
+using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame.States;
 using Sheriff.GameFlow.States.ClassicGame.States.SetSherif;
 using Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck;

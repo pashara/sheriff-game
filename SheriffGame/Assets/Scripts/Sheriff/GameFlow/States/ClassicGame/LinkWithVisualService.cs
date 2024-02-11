@@ -6,6 +6,7 @@ using Photon.Realtime;
 using Sheriff.ClientServer;
 using Sheriff.ClientServer.Players;
 using Sheriff.ECS;
+using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using UnityEngine;
 
@@ -49,6 +50,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
             {
                 var playerEntity = players[j];
                 var controller = spawnedPlayers[j];
+                controller.Link(playerEntity);
                 _playerSpawnService.Link(playerEntity, controller);
             }
         }
@@ -75,6 +77,7 @@ namespace Sheriff.GameFlow.States.ClassicGame
                 
                 var data = _playersAssociations[playerPun];
                 data.playerEntity = playerEntity;
+                data.playerController.Link(data.playerEntity);
                 _playerSpawnService.Link(playerEntity, data.playerController);
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace NaughtyCharacter
 {
     [CreateAssetMenu(fileName = "PlayerController", menuName = "NaughtyCharacter/PlayerController")]
-    public class PlayerController : Controller
+    internal class PlayerController : Controller
     {
         public float ControlRotationSensitivity = 1.0f;
 

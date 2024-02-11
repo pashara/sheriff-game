@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Sheriff.ECS;
+using Sheriff.ECS.Components;
 using Sheriff.GameFlow.States.ClassicGame;
+using Sheriff.GameResources;
 using Zenject;
 
 namespace Sheriff.GameFlow
@@ -55,47 +58,129 @@ namespace Sheriff.GameFlow
         {
             if (_result?.CheckResult == null)
                 return;
+            
+            
+            Dictionary<GameResourceType, int> allowedProducts = new();
+            Dictionary<GameResourceType, int> smugglingProducts = new();
+
+            PlayerEntity dealerEntity = null;
+
+            void AddIf(Dictionary<GameResourceType, int> a, GameResourceType b, int c)
+            {
+                if (!a.TryGetValue(b, out var cc))
+                {
+                    cc = 0;
+                }
+
+                a[b] = cc + c;
+            }
+            
 
             if (_result.CheckResult is SkipCheckSherifResult skipCheckSherifResult)
             {
-                
-                var dealerEntity = _ecsContextProvider.Context.player
+                dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(skipCheckSherifResult.DealerId);
                 dealerEntity.isReadyForCheck = false;
                 dealerEntity.ReplaceSheriffCheckResult(skipCheckSherifResult);
-                return;
-            }
 
-            if (_result.CheckResult is SherifLooseCheckResult sherifLoseCheckResult)
+                if (dealerEntity.hasSelectedCards)
+                {
+                    foreach (var cardId in dealerEntity.selectedCards.Value)
+                    {
+                        var card = _ecsContextProvider.Context.card.GetEntityWithCardId(cardId);
+                        if (card.resourceCategory.Value == GameResourceCategory.Allowed)
+                        {
+                            AddIf(allowedProducts, card.resourceType.Value, 1);
+                        }
+                        else if (card.resourceCategory.Value == GameResourceCategory.Smuggling)
+                        {
+                            AddIf(smugglingProducts, card.resourceType.Value, 1);
+                        }
+                    }
+                }
+            }
+            else if (_result.CheckResult is SherifLooseCheckResult sherifLoseCheckResult)
             {
                 var sheriffEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifLoseCheckResult.FromPlayerId);
                 
-                var dealerEntity = _ecsContextProvider.Context.player
+                dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifLoseCheckResult.ToPlayerId);
 
-                // sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value - sherifLoseCheckResult.Coins);
-                // dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value + sherifLoseCheckResult.Coins);
-                dealerEntity.isReadyForCheck = false;
-                dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
-                return;
+                sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value - sherifLoseCheckResult.Coins);
+                dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value + sherifLoseCheckResult.Coins);
+                
+                
+                if (dealerEntity.hasSelectedCards)
+                {
+                    foreach (var cardId in dealerEntity.selectedCards.Value)
+                    {
+                        var card = _ecsContextProvider.Context.card.GetEntityWithCardId(cardId);
+                        if (card.resourceCategory.Value == GameResourceCategory.Allowed)
+                        {
+                            AddIf(allowedProducts, card.resourceType.Value, 1);
+                        }
+                        else if (card.resourceCategory.Value == GameResourceCategory.Smuggling)
+                        {
+                            AddIf(smugglingProducts, card.resourceType.Value, 1);
+                        }
+                    }
+                }
             }
-            
-            if (_result.CheckResult is DealerLooseCheckResult sherifWinCheckResult)
+            else if (_result.CheckResult is DealerLooseCheckResult sherifWinCheckResult)
             {
                 var sheriffEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifWinCheckResult.ToPlayerId);
                 
-                var dealerEntity = _ecsContextProvider.Context.player
+                dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifWinCheckResult.FromPlayerId);
 
-                // sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value + sherifWinCheckResult.Coins);
-                // dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value - sherifWinCheckResult.Coins);
+                sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value + sherifWinCheckResult.Coins);
+                dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value - sherifWinCheckResult.Coins);
+                
+                
+                if (dealerEntity.hasSelectedCards)
+                {
+                    foreach (var cardId in dealerEntity.selectedCards.Value)
+                    {
+                        if (sherifWinCheckResult.BadCards.Contains(cardId))
+                            continue;
+                        
+                        var card = _ecsContextProvider.Context.card.GetEntityWithCardId(cardId);
+                        if (card.resourceCategory.Value == GameResourceCategory.Allowed)
+                        {
+                            AddIf(allowedProducts, card.resourceType.Value, 1);
+                        }
+                        else if (card.resourceCategory.Value == GameResourceCategory.Smuggling)
+                        {
+                            AddIf(smugglingProducts, card.resourceType.Value, 1);
+                        }
+                    }
+                }
+            }
+
+            if (dealerEntity != null)
+            {
                 dealerEntity.isReadyForCheck = false;
                 dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
-                return;
+
+                if (!dealerEntity.hasTransferredResources)
+                    dealerEntity.ReplaceTransferredResources(new TransferredObjects());
+
+                var actualState = dealerEntity.transferredResources.Value;
+
+                foreach (var allowedProduct in allowedProducts)
+                {
+                    actualState.Inc(GameResourceCategory.Allowed, allowedProduct.Key, allowedProduct.Value);
+                }
+
+                foreach (var smugglingProduct in smugglingProducts)
+                {
+                    actualState.Inc(GameResourceCategory.Smuggling, smugglingProduct.Key, smugglingProduct.Value);
+                }
+
+                dealerEntity.ReplaceTransferredResources(actualState);
             }
         }
-
     }
 }

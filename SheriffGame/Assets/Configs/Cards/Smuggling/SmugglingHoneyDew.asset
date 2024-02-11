@@ -20,3 +20,6 @@ MonoBehaviour:
     fine: 4
     cardPrefab: {fileID: 6084791556672406974, guid: 8faedb2c59f68314e9ee68f1cb6db9e3,
       type: 3}
+    uiCardPrefab: {fileID: 7106863251896333213, guid: 981042afddd53f7458b0b424851d167a,
+      type: 3}
+    icon: {fileID: 21300000, guid: cee0a6de5989fcd458b3c43ba7825a12, type: 3}

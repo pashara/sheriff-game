@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using NaughtyCharacter;
+using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using UnityEngine;
 using Zenject;

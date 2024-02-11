@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MainUI",
+                    "type": "Button",
+                    "id": "cd23d488-c2e3-43f7-81b2-f5980aebefeb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Hit",
                     "type": "Button",
                     "id": "818e92af-b219-4f3f-9a6d-4c5763f31a60",
@@ -265,6 +274,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dd2c5d3e-0e7d-4c6c-819f-838e4aaf9993",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MainUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

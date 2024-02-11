@@ -66,6 +66,7 @@ public partial class Contexts {
     public const string CardOwner = "CardOwner";
     public const string Id = "Id";
     public const string PlayerId = "PlayerId";
+    public const string PlayerNetworkId = "PlayerNetworkId";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
@@ -100,6 +101,11 @@ public partial class Contexts {
             PlayerId,
             player.GetGroup(PlayerMatcher.PlayerId),
             (e, c) => ((Sheriff.ECS.Components.PlayerIdComponent)c).Value));
+
+        player.AddEntityIndex(new Entitas.PrimaryEntityIndex<PlayerEntity, string>(
+            PlayerNetworkId,
+            player.GetGroup(PlayerMatcher.PlayerNetworkId),
+            (e, c) => ((Sheriff.ECS.Components.PlayerNetworkIdComponent)c).Value));
     }
 }
 
@@ -131,6 +137,10 @@ public static class ContextsExtensions {
 
     public static PlayerEntity GetEntityWithPlayerId(this PlayerContext context, Sheriff.ECS.Components.PlayerEntityId Value) {
         return ((Entitas.PrimaryEntityIndex<PlayerEntity, Sheriff.ECS.Components.PlayerEntityId>)context.GetEntityIndex(Contexts.PlayerId)).GetEntity(Value);
+    }
+
+    public static PlayerEntity GetEntityWithPlayerNetworkId(this PlayerContext context, string Value) {
+        return ((Entitas.PrimaryEntityIndex<PlayerEntity, string>)context.GetEntityIndex(Contexts.PlayerNetworkId)).GetEntity(Value);
     }
 }
 //------------------------------------------------------------------------------

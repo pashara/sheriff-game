@@ -77,15 +77,14 @@ namespace Sheriff.GameFlow.States.ClassicGame
         {
             _gameStateMachine.Enter<InitializeGameState, InitializeGamePayload>(new InitializeGamePayload()
             {
-                PlayersCount = players.Length
+                PlayersCount = players.Length,
+                BeforeSync = () => _linkWithVisualService.LinkMaster(players)
             });
-            
-            _linkWithVisualService.Link(players);
         }
 
-        public void Link(Player[] players)
+        public void LinkSlave(Player[] players)
         {
-            _linkWithVisualService.Link(players);
+            _linkWithVisualService.LinkSlave(players);
             
         }
 

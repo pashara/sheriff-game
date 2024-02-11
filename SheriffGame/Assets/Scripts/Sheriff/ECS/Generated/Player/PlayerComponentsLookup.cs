@@ -21,14 +21,16 @@ public static class PlayerComponentsLookup {
     public const int OnHandCards = 10;
     public const int PlayerController = 11;
     public const int PlayerId = 12;
-    public const int PlayerPositionId = 13;
-    public const int ReadyForCheck = 14;
-    public const int SelectedCards = 15;
-    public const int SheriffCheckResult = 16;
-    public const int Sheriff = 17;
-    public const int TransferredResources = 18;
+    public const int PlayerNetworkId = 13;
+    public const int PlayerPositionId = 14;
+    public const int ReadyForCheck = 15;
+    public const int SelectedCards = 16;
+    public const int SheriffCheckResult = 17;
+    public const int Sheriff = 18;
+    public const int TransferredResources = 19;
+    public const int WorldPlayerPlaceController = 20;
 
-    public const int TotalComponents = 19;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
@@ -44,12 +46,14 @@ public static class PlayerComponentsLookup {
         "OnHandCards",
         "PlayerController",
         "PlayerId",
+        "PlayerNetworkId",
         "PlayerPositionId",
         "ReadyForCheck",
         "SelectedCards",
         "SheriffCheckResult",
         "Sheriff",
-        "TransferredResources"
+        "TransferredResources",
+        "WorldPlayerPlaceController"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -66,11 +70,13 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.OnHandCardsComponent),
         typeof(Sheriff.ECS.Components.PlayerControllerComponent),
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
+        typeof(Sheriff.ECS.Components.PlayerNetworkIdComponent),
         typeof(Sheriff.ECS.Components.PlayerPositionIdComponent),
         typeof(Sheriff.ECS.Components.ReadyForCheckComponent),
         typeof(Sheriff.ECS.Components.SelectedCardsComponent),
         typeof(Sheriff.ECS.Components.SheriffCheckResultComponent),
         typeof(Sheriff.ECS.Components.SheriffComponent),
-        typeof(Sheriff.ECS.Components.TransferredResourcesComponent)
+        typeof(Sheriff.ECS.Components.TransferredResourcesComponent),
+        typeof(Sheriff.ECS.Components.WorldPlayerPlaceControllerComponent)
     };
 }

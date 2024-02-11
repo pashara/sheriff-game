@@ -49,17 +49,18 @@ namespace Sheriff.GameFlow.States.ClassicGame
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
 
             var loadData = serializeDataProvider;
-            _classicGameController.Link(players);
+            _classicGameController.LinkSlave(players);
             _classicGameController.ApplyGameState(loadData.StateType);
         }
         
 
-        public void ApplyGame(ContextSerializeData serializeDataProvider)
+        public void ApplyGame(ContextSerializeData serializeDataProvider, Player[] players)
         {
             _classicGameController = _container.Resolve<ClassicGameController>();
             _stateMachine = _container.Resolve<ClassicGameStateMachine>();
 
             var loadData = serializeDataProvider;
+            _classicGameController.LinkSlave(players);
             _classicGameController.ApplyGameState(loadData.StateType);
         }
 

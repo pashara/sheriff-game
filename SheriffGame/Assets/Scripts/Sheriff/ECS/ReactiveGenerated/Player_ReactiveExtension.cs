@@ -42,21 +42,27 @@ public partial class PlayerEntity
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerIdComponent> OnPlayerId() =>
         this.OnChange<Sheriff.ECS.Components.PlayerIdComponent>(12);
 
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerNetworkIdComponent> OnPlayerNetworkId() =>
+        this.OnChange<Sheriff.ECS.Components.PlayerNetworkIdComponent>(13);
+
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.PlayerPositionIdComponent> OnPlayerPositionId() =>
-        this.OnChange<Sheriff.ECS.Components.PlayerPositionIdComponent>(13);
+        this.OnChange<Sheriff.ECS.Components.PlayerPositionIdComponent>(14);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.ReadyForCheckComponent> OnReadyForCheck() =>
-        this.OnChange<Sheriff.ECS.Components.ReadyForCheckComponent>(14);
+        this.OnChange<Sheriff.ECS.Components.ReadyForCheckComponent>(15);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SelectedCardsComponent> OnSelectedCards() =>
-        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(15);
+        this.OnChange<Sheriff.ECS.Components.SelectedCardsComponent>(16);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffCheckResultComponent> OnSheriffCheckResult() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffCheckResultComponent>(16);
+        this.OnChange<Sheriff.ECS.Components.SheriffCheckResultComponent>(17);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.SheriffComponent> OnSheriff() =>
-        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(17);
+        this.OnChange<Sheriff.ECS.Components.SheriffComponent>(18);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.TransferredResourcesComponent> OnTransferredResources() =>
-        this.OnChange<Sheriff.ECS.Components.TransferredResourcesComponent>(18);
+        this.OnChange<Sheriff.ECS.Components.TransferredResourcesComponent>(19);
+
+    public IReadOnlyReactiveProperty<Sheriff.ECS.Components.WorldPlayerPlaceControllerComponent> OnWorldPlayerPlaceController() =>
+        this.OnChange<Sheriff.ECS.Components.WorldPlayerPlaceControllerComponent>(20);
 }

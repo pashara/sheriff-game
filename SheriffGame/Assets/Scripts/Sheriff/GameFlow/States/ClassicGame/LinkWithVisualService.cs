@@ -33,8 +33,6 @@ namespace Sheriff.GameFlow.States.ClassicGame
         
         public void Link(List<PlayerController> spawnedPlayers)
         {
-            _gameViewController.LinkAllPlayers();
-
             var players = _ecsContextProvider.Context.player.GetEntities().ToList();
             players.Sort((a, b) => 
                     (int)(a.playerId.Value.EntityID - b.playerId.Value.EntityID));
@@ -55,10 +53,8 @@ namespace Sheriff.GameFlow.States.ClassicGame
             }
         }
         
-        public void Link(Player[] punPlayers)
+        public void LinkMaster(Player[] punPlayers)
         {
-            _gameViewController.LinkAllPlayers();
-        
             var players = _ecsContextProvider.Context.player.GetEntities().ToList();
             players.Sort((a, b) => 
                     (int)(a.playerId.Value.EntityID - b.playerId.Value.EntityID));
@@ -66,6 +62,10 @@ namespace Sheriff.GameFlow.States.ClassicGame
             for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerPlaceControllers.Count, players.Count); i++)
             {
                 var control = _gameViewController.WorldPlayerPlaceControllers[i];
+                players[i].ReplaceWorldPlayerPlaceController(control);
+                players[i].ReplacePlayerNetworkId(punPlayers[i].NickName);
+                players[i].ReplaceNickname(punPlayers[i].NickName);
+                
                 control.Link(players[i]);
             }
 
@@ -74,6 +74,33 @@ namespace Sheriff.GameFlow.States.ClassicGame
             {
                 var playerPun = punPlayers[j];
                 var playerEntity = players[j];
+                
+                var data = _playersAssociations[playerPun];
+                data.playerEntity = playerEntity;
+                data.playerController.Link(data.playerEntity);
+                _playerSpawnService.Link(playerEntity, data.playerController);
+            }
+        }
+        
+        public void LinkSlave(Player[] punPlayers)
+        {
+            var players = _ecsContextProvider.Context.player.GetEntities().ToList();
+            players.Sort((a, b) => 
+                (int)(a.playerId.Value.EntityID - b.playerId.Value.EntityID));
+            
+        
+            for (int i = 0; i < Mathf.Min(_gameViewController.WorldPlayerPlaceControllers.Count, players.Count); i++)
+            {
+                var control = _gameViewController.WorldPlayerPlaceControllers[i];
+                players[i].ReplaceWorldPlayerPlaceController(control);
+                control.Link(players[i]);
+            }
+
+
+            for (int j = 0; j < punPlayers.Length; j++)
+            {
+                var playerPun = punPlayers[j];
+                var playerEntity = _ecsContextProvider.Context.player.GetEntityWithPlayerNetworkId(playerPun.NickName);
                 
                 var data = _playersAssociations[playerPun];
                 data.playerEntity = playerEntity;

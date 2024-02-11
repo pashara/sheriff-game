@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
@@ -15,6 +16,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
     public class InitializeGamePayload : IStatePayload
     {
         public int PlayersCount = 0;
+        public Action BeforeSync;
     }
     public class InitializeGameState : ClassicGameState, IPayloadableState<InitializeGamePayload>
     {
@@ -27,6 +29,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         private readonly LinkWithVisualService _linkWithVisualService;
         private readonly IPunSender _punManager;
         private int _playersCount;
+        private Action _beforeSync;
 
         public InitializeGameState(
             IRandomService randomService,
@@ -130,6 +133,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             CreateCards();
             GiveGoldToPlayers();
 
+            _beforeSync?.Invoke();
             _punManager.SendInitialGameState();
             
             GiveCardsToPlayers();
@@ -166,6 +170,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
         public void Configure(InitializeGamePayload payload)
         {
             _playersCount = payload.PlayersCount;
+            _beforeSync = payload.BeforeSync;
         }
     }
 }

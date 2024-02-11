@@ -298,7 +298,7 @@ namespace Sheriff.ClientServer.Game
             
             var data = json.GetLoadData();
             _ecsContextProvider.FillData(data);
-            classicGameControllerWrapper.ApplyGame(data);
+            classicGameControllerWrapper.ApplyGame(data, PhotonNetwork.PlayerList);
         }
         
         

@@ -7,6 +7,8 @@ using Newtonsoft.Json;
 using Sheriff.GameFlow;
 using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame;
+using Sheriff.GameFlow.States.ClassicGame.World;
+using Sheriff.GameFlow.States.ClassicGame.World.Cards;
 using Sheriff.GameResources;
 
 namespace Sheriff.ECS.Components
@@ -17,6 +19,13 @@ namespace Sheriff.ECS.Components
     {
         [PrimaryEntityIndex]
         public PlayerEntityId Value;
+    }
+    [Player]
+    [ECSSerialize]
+    public class PlayerNetworkIdComponent : IComponent
+    {
+        [PrimaryEntityIndex]
+        public string Value;
     }
 
     [Player]
@@ -137,6 +146,12 @@ namespace Sheriff.ECS.Components
     public class NicknameComponent : IComponent
     {
         public string Value;
+    }
+
+    [Player]
+    public class WorldPlayerPlaceControllerComponent : IComponent
+    {
+        public WorldPlayerPlaceControllers Value;
     }
 
 

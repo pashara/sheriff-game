@@ -5,6 +5,7 @@ using Entitas.CodeGeneration.Attributes;
 using NaughtyCharacter;
 using Newtonsoft.Json;
 using Sheriff.GameFlow;
+using Sheriff.GameFlow.GameStatistics;
 using Sheriff.GameFlow.Players;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.World;
@@ -154,6 +155,13 @@ namespace Sheriff.ECS.Components
         public WorldPlayerPlaceControllers Value;
     }
 
+
+    [Player]
+    [ECSSerialize]
+    public class PlayerStatisticsComponent : IComponent
+    {
+        public PlayerStatistics Value;
+    }
 
     [Serializable]
     public class TransferredObjects

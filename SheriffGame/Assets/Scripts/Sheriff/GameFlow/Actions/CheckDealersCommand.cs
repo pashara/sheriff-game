@@ -62,7 +62,9 @@ namespace Sheriff.GameFlow
             
             Dictionary<GameResourceType, int> allowedProducts = new();
             Dictionary<GameResourceType, int> smugglingProducts = new();
+            Dictionary<GameResourceType, int> rejectedCards = new();
 
+            PlayerEntity sheriffEntity = null;
             PlayerEntity dealerEntity = null;
 
             void AddIf(Dictionary<GameResourceType, int> a, GameResourceType b, int c)
@@ -78,6 +80,9 @@ namespace Sheriff.GameFlow
 
             if (_result.CheckResult is SkipCheckSherifResult skipCheckSherifResult)
             {
+                sheriffEntity = _ecsContextProvider.Context.player
+                    .GetEntityWithPlayerId(skipCheckSherifResult.SheriffId);
+                
                 dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(skipCheckSherifResult.DealerId);
                 dealerEntity.isReadyForCheck = false;
@@ -101,14 +106,19 @@ namespace Sheriff.GameFlow
             }
             else if (_result.CheckResult is SherifLooseCheckResult sherifLoseCheckResult)
             {
-                var sheriffEntity = _ecsContextProvider.Context.player
+                sheriffEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifLoseCheckResult.FromPlayerId);
                 
                 dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifLoseCheckResult.ToPlayerId);
 
                 sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value - sherifLoseCheckResult.Coins);
+                sheriffEntity.playerStatistics.Value.OnAutoMoneyTransaction(sheriffEntity.playerId.Value,
+                    dealerEntity.playerId.Value, sherifLoseCheckResult.Coins);
+                
                 dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value + sherifLoseCheckResult.Coins);
+                dealerEntity.playerStatistics.Value.OnAutoMoneyTransaction(sheriffEntity.playerId.Value,
+                    dealerEntity.playerId.Value, sherifLoseCheckResult.Coins);
                 
                 
                 if (dealerEntity.hasSelectedCards)
@@ -129,24 +139,32 @@ namespace Sheriff.GameFlow
             }
             else if (_result.CheckResult is DealerLooseCheckResult sherifWinCheckResult)
             {
-                var sheriffEntity = _ecsContextProvider.Context.player
+                sheriffEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifWinCheckResult.ToPlayerId);
                 
                 dealerEntity = _ecsContextProvider.Context.player
                     .GetEntityWithPlayerId(sherifWinCheckResult.FromPlayerId);
 
                 sheriffEntity.ReplaceGoldCashCurrency(sheriffEntity.goldCashCurrency.Value + sherifWinCheckResult.Coins);
+                dealerEntity.playerStatistics.Value.OnAutoMoneyTransaction(dealerEntity.playerId.Value,
+                    sheriffEntity.playerId.Value, sherifWinCheckResult.Coins);
+                
                 dealerEntity.ReplaceGoldCashCurrency(dealerEntity.goldCashCurrency.Value - sherifWinCheckResult.Coins);
+                dealerEntity.playerStatistics.Value.OnAutoMoneyTransaction(dealerEntity.playerId.Value,
+                    sheriffEntity.playerId.Value, sherifWinCheckResult.Coins);
                 
                 
                 if (dealerEntity.hasSelectedCards)
                 {
                     foreach (var cardId in dealerEntity.selectedCards.Value)
                     {
-                        if (sherifWinCheckResult.BadCards.Contains(cardId))
-                            continue;
-                        
                         var card = _ecsContextProvider.Context.card.GetEntityWithCardId(cardId);
+                        if (sherifWinCheckResult.BadCards.Contains(cardId))
+                        {
+                            AddIf(rejectedCards, card.resourceType.Value, 1);
+                            continue;
+                        }
+
                         if (card.resourceCategory.Value == GameResourceCategory.Allowed)
                         {
                             AddIf(allowedProducts, card.resourceType.Value, 1);
@@ -159,27 +177,53 @@ namespace Sheriff.GameFlow
                 }
             }
 
-            if (dealerEntity != null)
+            dealerEntity.isReadyForCheck = false;
+            dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
+
+            if (!dealerEntity.hasTransferredResources)
+                dealerEntity.ReplaceTransferredResources(new TransferredObjects());
+
+            var actualState = dealerEntity.transferredResources.Value;
+
+            foreach (var allowedProduct in allowedProducts)
             {
-                dealerEntity.isReadyForCheck = false;
-                dealerEntity.ReplaceSheriffCheckResult(_result.CheckResult);
+                actualState.Inc(GameResourceCategory.Allowed, allowedProduct.Key, allowedProduct.Value);
+            }
 
-                if (!dealerEntity.hasTransferredResources)
-                    dealerEntity.ReplaceTransferredResources(new TransferredObjects());
+            foreach (var smugglingProduct in smugglingProducts)
+            {
+                actualState.Inc(GameResourceCategory.Smuggling, smugglingProduct.Key, smugglingProduct.Value);
+            }
 
-                var actualState = dealerEntity.transferredResources.Value;
+            dealerEntity.ReplaceTransferredResources(actualState);
+            
 
-                foreach (var allowedProduct in allowedProducts)
-                {
-                    actualState.Inc(GameResourceCategory.Allowed, allowedProduct.Key, allowedProduct.Value);
-                }
-
-                foreach (var smugglingProduct in smugglingProducts)
-                {
-                    actualState.Inc(GameResourceCategory.Smuggling, smugglingProduct.Key, smugglingProduct.Value);
-                }
-
-                dealerEntity.ReplaceTransferredResources(actualState);
+            try
+            {
+                Dictionary<GameResourceType, int> passedElements = new();
+                foreach (var product in allowedProducts)
+                    passedElements[product.Key] = passedElements.TryGetValue(product.Key, out var v)
+                        ? v + product.Value
+                        : product.Value;
+                
+                foreach (var product in smugglingProducts)
+                    passedElements[product.Key] = passedElements.TryGetValue(product.Key, out var v)
+                        ? v + product.Value
+                        : product.Value;
+                
+                
+                dealerEntity.playerStatistics.Value.AddTransferredPerRound(passedElements, rejectedCards);
+                
+                dealerEntity.playerStatistics.Value.OnCheck(_result.CheckResult);
+                sheriffEntity.playerStatistics.Value.OnSheriffCheck(_result.CheckResult);
+                
+                
+                dealerEntity.ReplacePlayerStatistics(dealerEntity.playerStatistics.Value);
+                sheriffEntity.ReplacePlayerStatistics(sheriffEntity.playerStatistics.Value);
+            }
+            catch (Exception e)
+            {
+                
             }
         }
     }

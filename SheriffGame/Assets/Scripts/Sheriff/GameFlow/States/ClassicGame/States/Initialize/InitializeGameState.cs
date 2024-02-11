@@ -5,6 +5,7 @@ using Sheriff.ClientServer.Game;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameFlow.CommandsApplier;
+using Sheriff.GameFlow.GameStatistics;
 using Sheriff.GameResources;
 using Sheriff.Rules.ClassicRules;
 using ThirdParty.Randoms;
@@ -111,6 +112,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
             var entity = _ecsContextProvider.Context.player.CreateEntity();
             var id = entity.id.ID;
             entity.AddPlayerId(id);
+            entity.ReplacePlayerStatistics(new PlayerStatistics());
             entity.ReplaceNickname(entity.playerId.Value.ToString());
             entity.ReplaceGoldCashCurrency(0);
             entity.ReplaceMaxCardsPopPerStep(5);

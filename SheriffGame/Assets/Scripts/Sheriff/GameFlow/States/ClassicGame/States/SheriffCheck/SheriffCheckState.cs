@@ -35,7 +35,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     var allowedActions = new AllowedActionsProvider();
                     allowedActions.ApplyAllowedActions(new List<Type>()
                     {
-                        typeof(AffectGoldCommand),
                     });
                     playerEntity.isReadyForCheck = true;
                     playerEntity.ReplaceAllowedActions(allowedActions);
@@ -45,7 +44,6 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
                     var allowedActions = new AllowedActionsProvider();
                     allowedActions.ApplyAllowedActions(new List<Type>()
                     {
-                        typeof(AffectGoldCommand),
                         typeof(CheckDealersCommand),
                     });
                     playerEntity.ReplaceAllowedActions(allowedActions);

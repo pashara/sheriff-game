@@ -23,14 +23,15 @@ public static class PlayerComponentsLookup {
     public const int PlayerId = 12;
     public const int PlayerNetworkId = 13;
     public const int PlayerPositionId = 14;
-    public const int ReadyForCheck = 15;
-    public const int SelectedCards = 16;
-    public const int SheriffCheckResult = 17;
-    public const int Sheriff = 18;
-    public const int TransferredResources = 19;
-    public const int WorldPlayerPlaceController = 20;
+    public const int PlayerStatistics = 15;
+    public const int ReadyForCheck = 16;
+    public const int SelectedCards = 17;
+    public const int SheriffCheckResult = 18;
+    public const int Sheriff = 19;
+    public const int TransferredResources = 20;
+    public const int WorldPlayerPlaceController = 21;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "ActualStateProvider",
@@ -48,6 +49,7 @@ public static class PlayerComponentsLookup {
         "PlayerId",
         "PlayerNetworkId",
         "PlayerPositionId",
+        "PlayerStatistics",
         "ReadyForCheck",
         "SelectedCards",
         "SheriffCheckResult",
@@ -72,6 +74,7 @@ public static class PlayerComponentsLookup {
         typeof(Sheriff.ECS.Components.PlayerIdComponent),
         typeof(Sheriff.ECS.Components.PlayerNetworkIdComponent),
         typeof(Sheriff.ECS.Components.PlayerPositionIdComponent),
+        typeof(Sheriff.ECS.Components.PlayerStatisticsComponent),
         typeof(Sheriff.ECS.Components.ReadyForCheckComponent),
         typeof(Sheriff.ECS.Components.SelectedCardsComponent),
         typeof(Sheriff.ECS.Components.SheriffCheckResultComponent),

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
-using Sheriff.GameResources;
-using Sirenix.OdinInspector;
 using Zenject;
 
 namespace Sheriff.GameFlow

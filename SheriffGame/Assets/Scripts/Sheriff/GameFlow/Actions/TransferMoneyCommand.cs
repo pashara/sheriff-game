@@ -83,6 +83,12 @@ namespace Sheriff.GameFlow
             }
 
             destinationEntity.ReplaceGoldCashCurrency(destinationValue + _result.amount);
+            
+            sourceEntity.playerStatistics.Value.OnManualMoneyTransaction(_result.source, _result.destination, _result.amount);
+            sourceEntity.ReplacePlayerStatistics(sourceEntity.playerStatistics.Value);
+            
+            destinationEntity.playerStatistics.Value.OnManualMoneyTransaction(_result.source, _result.destination, _result.amount);
+            destinationEntity.ReplacePlayerStatistics(destinationEntity.playerStatistics.Value);
         }
     }
 }

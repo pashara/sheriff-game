@@ -55,11 +55,13 @@ namespace Sheriff.GameFlow.PlayerUIControls
             ClearCards();
             if (transferredCards != null)
             {
-                foreach (var resource in transferredCards.AllowedResources)
-                    SpawnCard(resource.Key, resource.Value, allowedElementsRoot);
+                if (transferredCards.AllowedResources != null)
+                    foreach (var resource in transferredCards.AllowedResources)
+                        SpawnCard(resource.Key, resource.Value, allowedElementsRoot);
                 
-                foreach (var resource in transferredCards.NotAllowedResources)
-                    SpawnCard(resource.Key, resource.Value, smugglingElementsRoot);
+                if (transferredCards.NotAllowedResources != null)
+                    foreach (var resource in transferredCards.NotAllowedResources)
+                        SpawnCard(resource.Key, resource.Value, smugglingElementsRoot);
             }
         }
         

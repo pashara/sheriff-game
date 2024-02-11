@@ -143,10 +143,8 @@ namespace Sheriff.ECS.Components
     [Serializable]
     public class TransferredObjects
     {
-        [JsonProperty("allowed")]
-        public Dictionary<GameResourceType, int> AllowedResources;
-        [JsonProperty("not_allowed")]
-        public Dictionary<GameResourceType, int> NotAllowedResources;
+        [JsonProperty("allowed")] public Dictionary<GameResourceType, int> AllowedResources = new();
+        [JsonProperty("not_allowed")] public Dictionary<GameResourceType, int> NotAllowedResources = new();
 
 
         public bool TryGetValue(GameResourceType gameResourceType, out int count)

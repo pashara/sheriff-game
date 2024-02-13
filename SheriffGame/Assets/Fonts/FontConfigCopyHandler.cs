@@ -11,12 +11,17 @@ namespace Fonts
     public class FontConfigCopyHandler : ScriptableObject
     {
         [SerializeField] private TMP_FontAsset assetSource;
+        [SerializeField] private TMP_FontAsset destination;
 
         [SerializeField] private List<Glyph> glyphs;
 
         [Button]
-        private void Apply(TMP_FontAsset element)
+        private void Apply()
         {
+            if (destination == null)
+                return;
+
+            var element = destination;
             foreach (var glyph in glyphs)
             {
                 var index = element.glyphTable.FindIndex(x => x.index == glyph.index);
@@ -27,13 +32,17 @@ namespace Fonts
                 g.metrics = new GlyphMetrics(glyph.metrics.width, glyph.metrics.height,
                     glyph.metrics.horizontalBearingX, glyph.metrics.horizontalBearingY,
                     glyph.metrics.horizontalAdvance);
+
+
+                element.glyphTable[index] = g;
             }
         }
 
         [Button]
         void ReadConfig()
         {
-            glyphs = assetSource.glyphTable.Select(x => new Glyph(x)).ToList();
+            if (assetSource != null) 
+                glyphs = assetSource.glyphTable.Select(x => new Glyph(x)).ToList();
         }
     }
 }

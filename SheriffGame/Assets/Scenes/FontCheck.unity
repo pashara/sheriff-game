@@ -180,10 +180,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042B\u042C\u042A\u042D\u042E\u042F1234560\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042B\u042C\u042A\u042D\u042E\u042F1234560\u0410\u0410\u0410\u0410"
+  m_text: "\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042B\u042C\u042A\u042D\u042E\u042F1234567890\u0410\u0411\u0412\u0413\u0414\u0415\u0401\u0416\u0417\u0418\u0419\u041A\u041B\u041C\u041D\u041E\u041F\u0420\u0421\u0422\u0423\u0424\u0425\u0426\u0427\u0428\u0429\u042B\u042C\u042A\u042D\u042E\u042F1234560123456\u0410\u0411\u0410\u0411\u0410\u0410\u0410\u0411"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 82e3c340f87de594cac753c24825dc7a, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: a22315e9ca9e36c4ca72dafebcdc31bf, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: d936e729521eff542a3c4b6dc0d6f1c3, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -213,7 +213,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 17
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 503
 --- !u!114 &642988903
 MonoBehaviour:
   m_ObjectHideFlags: 0

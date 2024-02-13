@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Sheriff.DataBase;
 using Sheriff.GameFlow.ResultUIControl.Cards;
 using Sheriff.GameResources;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Sheriff.GameFlow.ResultUIControl
@@ -20,13 +20,13 @@ namespace Sheriff.GameFlow.ResultUIControl
         [SerializeField] private TMP_Text onHandCardsLabel;
         [SerializeField] private TMP_Text allowedCardsCountLabel;
         [SerializeField] private TMP_Text deniedCardsCountLabel;
+        [SerializeField] private TMP_Text totalPointsLabel;
         [Inject] private DiContainer _container;
-        [Inject] private ICardConfigProvider _cardConfigProvider;
-        private List<IDisposable> spawned = new();
+        private readonly List<PlayerCardStatisticElement> _spawned = new();
 
         public void Fill(ResultCalculateHandler.Recalculations calculations, PlayerEntity player)
         {
-            placeLabel.SetText($"{calculations.Place}");
+            placeLabel.SetText($"#{calculations.Place}");
             nickNameLabel.SetText(player.nickname.Value);
 
             var cardsCalculations = calculations.TotalCardsInfo;
@@ -39,30 +39,42 @@ namespace Sheriff.GameFlow.ResultUIControl
                 $"${cardsCalculations.allowedCardsCost} ({cardsCalculations.allowedCardsCount})");
             deniedCardsCountLabel.SetText(
                 $"${cardsCalculations.deniedCardsCost} ({cardsCalculations.deniedCardsCount})");
+            
+            totalPointsLabel.SetText($"TOTAL: {calculations.totalBonus}");
 
 
             foreach (var resource in player.transferredResources.Value.AllowedResources)
-                SpawnCardStatistic(resource.Key, resource.Value, allowedCardsRoot);
+                SpawnCardStatistic(resource.Key, resource.Value, allowedCardsRoot, calculations);
 
             foreach (var resource in player.transferredResources.Value.NotAllowedResources)
-                SpawnCardStatistic(resource.Key, resource.Value, deniedCardsRoot);
+                SpawnCardStatistic(resource.Key, resource.Value, deniedCardsRoot, calculations);
         }
         
 
-        void SpawnCardStatistic(GameResourceType gameResourceType, int count, Transform root)
+        void SpawnCardStatistic(GameResourceType gameResourceType, int count, Transform root, ResultCalculateHandler.Recalculations calculations)
         {
             if (count <= 0)
                 return;
             
             var statisticElement = _container
                 .InstantiatePrefabForComponent<PlayerCardStatisticElement>(cardStatisticElement, root);
-            statisticElement.Initialize(gameResourceType, count);
-            spawned.Add(statisticElement);
+            statisticElement.Initialize(gameResourceType, count, calculations);
+            _spawned.Add(statisticElement);
         }
         
         public void Dispose()
         {
             Destroy(gameObject);
+        }
+
+        public void UpdateLayout()
+        {
+            foreach (var element in _spawned)
+            {
+                element.UpdateLayout();
+            }
+            LayoutRebuilder.MarkLayoutForRebuild(allowedCardsRoot as RectTransform);
+            LayoutRebuilder.MarkLayoutForRebuild(deniedCardsRoot as RectTransform);
         }
     }
 }

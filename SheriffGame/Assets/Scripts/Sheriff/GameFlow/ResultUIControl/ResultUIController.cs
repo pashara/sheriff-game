@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Sheriff.ECS;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Sheriff.GameFlow.ResultUIControl
@@ -14,9 +16,20 @@ namespace Sheriff.GameFlow.ResultUIControl
         [Inject] private EcsContextProvider _ecsContextProvider;
         [Inject] private DiContainer _container;
         private readonly List<PlayerStatisticsView> _spawnedElements = new();
-        
+
+
         [Button]
-        public void Open()
+        private void UpdateAll()
+        {
+            foreach (var spawnedElement in _spawnedElements)
+            {
+                spawnedElement.UpdateLayout();
+            }
+            LayoutRebuilder.MarkLayoutForRebuild(elementsRoot as RectTransform);
+        }
+
+        [Button]
+        public async void Open()
         {
             root.gameObject.SetActive(true);
             var playerCalculations = _container.Instantiate<ResultCalculateHandler>().Calculate();
@@ -28,6 +41,9 @@ namespace Sheriff.GameFlow.ResultUIControl
                 _spawnedElements.Add(instance);
                 instance.Fill(calculations, player);
             }
+
+            await UniTask.DelayFrame(1);
+            UpdateAll();
         }
 
         [Button]

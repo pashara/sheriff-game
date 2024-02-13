@@ -28,6 +28,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SetSherif
             _ecsContextProvider = ecsContextProvider;
         }
         
+        public override string Title => "Set sheriff";
+        
         public async override void Enter()
         {
             var gameEntity = _ecsContextProvider.Context.game.gameIdEntity;

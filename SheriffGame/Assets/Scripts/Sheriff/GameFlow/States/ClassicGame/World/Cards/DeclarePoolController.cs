@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Sheriff.DataBase;
 using Sheriff.ECS;
 using Sheriff.GameFlow.States.ClassicGame.View;
 using Sheriff.GameResources;
@@ -22,6 +23,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
         [SerializeField] private SelectToDeclareWorldCardsInputController selectToDeclareWorldCardsInputController;
         
         [Inject] private EcsContextProvider _ecsContextProvider;
+        [Inject] private ICardConfigProvider _cardConfigProvider;
         private readonly List<CardView> _cardsToBag = new();
         private List<(TMP_Dropdown.OptionData, GameResourceType x)> _allowedElements;
 
@@ -147,7 +149,13 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                 .gameIdEntity
                 .allowedToDeclareGameResources
                 .Value
-                .Select(x => (new TMP_Dropdown.OptionData(x.ToString()), x)).ToList();
+                .Select(x =>
+                {
+                    var resourceData = _cardConfigProvider.Get(x);
+                    var resourceName = resourceData?.Title ?? x.ToString();
+                    var resourceImage = resourceData?.Icon ?? null;
+                    return (new TMP_Dropdown.OptionData(resourceName, resourceImage), x);
+                }).ToList();
 
 
             declareDropdown.options = _allowedElements.Select(x => x.Item1).ToList();

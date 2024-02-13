@@ -22,4 +22,4 @@ MonoBehaviour:
       type: 3}
     uiCardPrefab: {fileID: 7106863251896333213, guid: ea6335f9d1cd20144ad0065738e66de5,
       type: 3}
-    icon: {fileID: 21300000, guid: c2a372c9aa461294e85dd163902b9867, type: 3}
+    icon: {fileID: 21300000, guid: 9ed2ead95eec18e44a32ea4ead42549e, type: 3}

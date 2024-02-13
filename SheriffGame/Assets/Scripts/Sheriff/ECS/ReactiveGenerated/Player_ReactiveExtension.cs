@@ -13,7 +13,7 @@ public partial class PlayerEntity
         this.OnChange<Sheriff.ECS.Components.CardsPopPerStepComponent>(2);
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.DealerComponent> OnDealer() =>
-        this.OnChange<Sheriff.ECS.Components.DealerComponent>(3);
+        this.OnChange<Sheriff.ECS.Components.DealerComponent>(3); 
 
     public IReadOnlyReactiveProperty<Sheriff.ECS.Components.DeclareResourcesByPlayerComponent> OnDeclareResourcesByPlayer() =>
         this.OnChange<Sheriff.ECS.Components.DeclareResourcesByPlayerComponent>(4);

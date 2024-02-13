@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6894, y: 1.6894, z: 1.6894}
+  m_LocalScale: {x: 3.316968, y: 3.316968, z: 3.316968}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8218096288890869000}
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: -882009537
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b94b46f4eaf9b7847b32797157d68f55, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 536bde9bc21bdd44893d285b1e967546, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,11 +142,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5043795866739690694, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5080079485835534013, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5388106941873731728, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -8637623366448213048, guid: 82e3c340f87de594cac753c24825dc7a,
+        type: 2}
     - target: {fileID: 6268720898537234600, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
         type: 3}
       propertyPath: m_Name
       value: AppleCard
       objectReference: {fileID: 0}
+    - target: {fileID: 7236878195872441066, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: -8637623366448213048, guid: 82e3c340f87de594cac753c24825dc7a,
+        type: 2}
     - target: {fileID: 7781483342368306816, guid: c9133b899fdb7a040acc7c8dd6c6cba8,
         type: 3}
       propertyPath: m_IsActive

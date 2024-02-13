@@ -17,6 +17,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Shopping
             _ecsContextProvider = ecsContextProvider;
         }
         
+        public override string Title => "Стадия Торгов";
+        
         public override void Enter()
         {
             foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())

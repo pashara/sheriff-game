@@ -64,10 +64,10 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
                 GameResourceType.Cheese,
                 GameResourceType.Bread,
                 GameResourceType.Chicken,
-                GameResourceType.Pepper,
-                GameResourceType.Honeydew,
-                GameResourceType.Silk,
-                GameResourceType.Сrossbow,
+                // GameResourceType.Pepper,
+                // GameResourceType.Honeydew,
+                // GameResourceType.Silk,
+                // GameResourceType.Сrossbow,
             });
             gameEntity.ReplaceRound(0);
 
@@ -121,6 +121,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States
 
             return id;
         }
+
+        public override string Title => "Initialize";
 
         public override void Enter()
         {

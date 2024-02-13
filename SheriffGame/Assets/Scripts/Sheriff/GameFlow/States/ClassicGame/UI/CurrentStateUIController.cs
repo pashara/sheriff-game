@@ -35,7 +35,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.UI
             {
                 x?.Value?.ActualState?.Subscribe(y =>
                 {
-                    label.SetText(y?.GetType()?.Name ?? "null");
+                    label.SetText(y?.Title ?? "null");
                 }).AddTo(this);
             }).AddTo(this);
         }

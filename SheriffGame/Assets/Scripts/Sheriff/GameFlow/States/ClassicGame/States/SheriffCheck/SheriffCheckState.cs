@@ -26,6 +26,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.SheriffCheck
             _commandsApplyService = commandsApplyService;
         }
         
+        public override string Title => "Стадия Досмотра";
+        
         public override void Enter()
         {
             foreach (var playerEntity in _ecsContextProvider.Context.player.GetEntities())

@@ -5,6 +5,8 @@ using Sheriff.DataBase;
 using Sheriff.ECS;
 using Sheriff.ECS.Components;
 using Sheriff.GameResources;
+using Sheriff.GameStructures;
+using UnityEngine;
 using Zenject;
 
 namespace Sheriff.GameFlow.ResultUIControl
@@ -52,27 +54,31 @@ namespace Sheriff.GameFlow.ResultUIControl
         
         [Inject] private EcsContextProvider _ecsContextProvider;
         [Inject] private ICardConfigProvider _cardConfigProvider;
+        [Inject] private ResultBonusesConfig _resultBonusesConfig;
+        
+        
         public List<Recalculations> Calculate()
         {
             var calculations = _ecsContextProvider.Context.player.GetEntities().Select(CalculatePlayer).ToList();
             ApplyAllBonuses(calculations);
+            ApplyPlaces(calculations);
             return calculations;
         }
 
-        void ApplyAllBonuses(List<Recalculations> calculations)
+        private void ApplyAllBonuses(List<Recalculations> calculations)
         {
             calculations.ForEach(x =>
             {
                 x.totalBonus = x.TotalCardsInfo.allowedCardsCost + x.TotalCardsInfo.deniedCardsCost;
             });
             
-            
-            // var bonuses = CalculateBonuses(calculations);
-            // var kingBonus = bonuses.FirstOrDefault();
-            // var queenBonus = bonuses.LastOrDefault();
-            // ApplyKingBonus(kingBonus.Recalculation, kingBonus.ResourceType, kingBonus.Amount);
-            // ApplyQueenBonus(queenBonus.Recalculation, queenBonus.ResourceType, queenBonus.Amount);
-            
+            var bonuses = CalculateBonuses(calculations);
+            ApplyKingBonus(bonuses, calculations);
+            ApplyQueenBonus(bonuses, calculations);
+        }
+
+        void ApplyPlaces(List<Recalculations> calculations)
+        {
             calculations.Sort((a, b) => b.totalBonus - a.totalBonus);
 
             for (var i = 0; i < calculations.Count; i++)
@@ -81,86 +87,95 @@ namespace Sheriff.GameFlow.ResultUIControl
             }
         }
 
-        private void ApplyKingBonus(Recalculations source, GameResourceType resourceType, int amount)
+        private void ApplyKingBonus(List<(GameResourceType, int)> bonusInfo, List<Recalculations> recalculationsList)
         {
-            source.KingBonus = new KingBonus()
+            var bonusConfig = _resultBonusesConfig.KingBonus.bonusInfo;
+            var elements = bonusConfig.Select(x => x.resourceType).ToHashSet();
+            var element = bonusInfo.FirstOrDefault(x => elements.Contains(x.Item1));
+            if (element.Item1 == GameResourceType.None)
+                return;
+
+            bonusInfo.Remove(element);
+
+            var potentialElements = recalculationsList
+                .Where(x => x.TotalCardsInfo.TransferredResources.TryGetValue(element.Item1, out var v) &&
+                            v == element.Item2).ToList();
+
+            var count = potentialElements.Count;
+            var config = bonusConfig.FirstOrDefault(x => x.resourceType == element.Item1);
+            var potentialBonus = config?.bonus ?? 0;
+            
+            foreach (var recalculation in potentialElements)
             {
-                bonus = 0,
-                resourceType = resourceType
-            };
+                var bonus = potentialBonus / count;
+                recalculation.totalBonus += bonus;
+                recalculation.KingBonus = new KingBonus()
+                {
+                    bonus = bonus,
+                    resourceType = element.Item1,
+                };
+            }
         }
 
 
-        private void ApplyQueenBonus(Recalculations source, GameResourceType resourceType, int amount)
+        private void ApplyQueenBonus(List<(GameResourceType, int)> bonusInfo, List<Recalculations> recalculationsList)
         {
-            source.QueenBonus = new QueenBonus()
+            var bonusConfig = _resultBonusesConfig.QueenBonus.bonusInfo;
+            var elements = bonusConfig.Select(x => x.resourceType).ToHashSet();
+            var element = bonusInfo.FirstOrDefault(x => elements.Contains(x.Item1));
+            if (element.Item1 == GameResourceType.None)
+                return;
+
+            bonusInfo.Remove(element);
+
+            var potentialElements = recalculationsList
+                .Where(x => x.TotalCardsInfo.TransferredResources.TryGetValue(element.Item1, out var v) &&
+                            v == element.Item2).ToList();
+
+            var count = potentialElements.Count;
+            var config = bonusConfig.FirstOrDefault(x => x.resourceType == element.Item1);
+            var potentialBonus = config?.bonus ?? 0;
+            
+            foreach (var recalculation in potentialElements)
             {
-                bonus = 0,
-                resourceType = resourceType
-            };
+                var bonus = potentialBonus / count;
+                recalculation.totalBonus += bonus;
+                recalculation.QueenBonus = new QueenBonus()
+                {
+                    bonus = bonus,
+                    resourceType = element.Item1,
+                };
+            }
         }
 
 
 
-//         List<(GameResourceType ResourceType, int Amount, Recalculations Recalculation)> CalculateBonuses(List<Recalculations> recalculationsList)
-//         {
-//             HashSet<GameResourceType> gameResourceTypes = new()
-//             {
-//                 GameResourceType.Apple,
-//                 GameResourceType.Bread,
-//                 GameResourceType.Chicken,
-//                 GameResourceType.Cheese,
-//             };
-//             // Создать список для хранения результатов
-//             List<(GameResourceType ResourceType, int Amount, Recalculations Recalculation)> results =
-//                 new List<(GameResourceType, int, Recalculations)>();
-//
-// // Создать словарь для хранения общего количества ресурсов для каждого типа
-//             Dictionary<GameResourceType, int> totalResources = new Dictionary<GameResourceType, int>();
-//
-// // Пройти по каждому элементу в списке Recalculations
-//             foreach (var recalculations in recalculationsList)
-//             {
-//                 // Перебрать каждую запись в TransferredResources
-//                 foreach (var resourcePair in recalculations.TotalCardsInfo.TransferredResources)
-//                 {
-//                     if (!gameResourceTypes.Contains(resourcePair.Key))
-//                         continue;
-//                     // Если ресурс уже есть в словаре, добавить к его значению
-//                     if (totalResources.ContainsKey(resourcePair.Key))
-//                     {
-//                         totalResources[resourcePair.Key] += resourcePair.Value;
-//                     }
-//                     // В противном случае, добавить ресурс в словарь
-//                     else
-//                     {
-//                         totalResources.Add(resourcePair.Key, resourcePair.Value);
-//                     }
-//                 }
-//             }
-//
-// // Отсортировать словарь по убыванию значения (количества ресурсов)
-//             var sortedResources = totalResources.OrderByDescending(pair => pair.Value);
-//
-// // Взять первые две записи из отсортированного словаря
-//             var firstPlace = sortedResources.ElementAt(0);
-//             var secondPlace = sortedResources.ElementAt(1);
-//
-// // Найти элемент Recalculations для первого места
-//             var firstPlaceRecalculation = recalculationsList.FirstOrDefault(rec =>
-//                 rec.TotalCardsInfo.TransferredResources.ContainsKey(firstPlace.Key));
-//
-// // Найти элемент Recalculations для второго места
-//             var secondPlaceRecalculation = recalculationsList.FirstOrDefault(rec =>
-//                 rec.TotalCardsInfo.TransferredResources.ContainsKey(secondPlace.Key));
-//
-// // Добавить результаты в список
-//             results.Add((firstPlace.Key, firstPlace.Value, firstPlaceRecalculation));
-//             results.Add((secondPlace.Key, secondPlace.Value, secondPlaceRecalculation));
-//
-// // Теперь в results содержится информация о первом и втором месте по продукту GameResourceType,
-// // его количеству и соответствующих элементах Recalculations.
-//         }
+        List<(GameResourceType, int)> CalculateBonuses(List<Recalculations> recalculationsList)
+        {
+            // Создать список для хранения результатов
+            List<(List<Recalculations>, GameResourceType)> results = new();
+
+            Dictionary<GameResourceType, int> maxResources = new Dictionary<GameResourceType, int>();
+
+            foreach (var recalculations in recalculationsList)
+            {
+                // Перебрать каждую запись в TransferredResources
+                foreach (var resourcePair in recalculations.TotalCardsInfo.TransferredResources)
+                {
+                    if (maxResources.ContainsKey(resourcePair.Key))
+                    {
+                        maxResources[resourcePair.Key] = Mathf.Max(maxResources[resourcePair.Key], resourcePair.Value);
+                    }
+                    else
+                    {
+                        maxResources[resourcePair.Key] = resourcePair.Value;
+                    }
+                }
+            }
+
+            var sortedResources = maxResources.OrderByDescending(pair => pair.Value);
+            return sortedResources.Select(x => (x.Key, x.Value)).ToList();
+        }
 
 
         Recalculations CalculatePlayer(PlayerEntity player)

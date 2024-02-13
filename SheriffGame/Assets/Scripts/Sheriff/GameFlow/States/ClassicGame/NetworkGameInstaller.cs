@@ -8,6 +8,7 @@ using Sheriff.GameFlow.CommandsApplier;
 using Sheriff.GameFlow.ResultUIControl;
 using Sheriff.GameFlow.States.ClassicGame;
 using Sheriff.GameFlow.States.ClassicGame.View;
+using Sheriff.GameStructures;
 using ThirdParty.Randoms;
 using UnityEngine;
 using Zenject;
@@ -17,6 +18,7 @@ namespace Sheriff
     public class NetworkGameInstaller : MonoInstaller
     {
         [SerializeField] private CardsProvider _cardsProvider;
+        [SerializeField] private ResultBonusesConfig resultBonusesConfig;
         [SerializeField] private GameViewController gameViewController;
         [SerializeField] private PlayerSpawnService playerSpawnService;
         [SerializeField] private GameStartEmulateConfig gameStartEmulateConfig;
@@ -28,6 +30,7 @@ namespace Sheriff
         public override void InstallBindings()
         {
             var sessionInfo = Container.Resolve<IGameSessionDataProvider>();
+            Container.BindInterfacesAndSelfTo<ResultBonusesConfig>().FromInstance(resultBonusesConfig);
             Container.BindInterfacesTo<CardsProvider>().FromInstance(_cardsProvider);
             Container.BindInterfacesAndSelfTo<ResultUIController>().FromInstance(resultUIController);
             

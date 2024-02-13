@@ -12,6 +12,8 @@ namespace Sheriff.GameFlow.States.ClassicGame.States.Finish
             _resultUIController = resultUIController;
         }
         
+        public override string Title => "Финал";
+        
         public async override void Enter()
         {
             _resultUIController.Open();

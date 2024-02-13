@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e57da58437a4c2782af7a263b66dc72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  declareDropdown: {fileID: 3357448026645549742}
+  declareDropdown: {fileID: 4173652329009729719}
   sheriffReminderTEMP: {fileID: 5560938326131984739}
   declareButton: {fileID: 8827168920070894562}
   uiRoot: {fileID: 3390503655311034339}
@@ -1049,9 +1049,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45ef56e22ddb4247b893fe596fa273ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3357448026645549742 stripped
+--- !u!1 &3390503655311034339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 353149733280553331, guid: f41fc50836e64b14fab7f89fad4f25cb,
+    type: 3}
+  m_PrefabInstance: {fileID: 3164868164547534480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4173652329009729719 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 392890563361705022, guid: f41fc50836e64b14fab7f89fad4f25cb,
+  m_CorrespondingSourceObject: {fileID: 1297059223851961895, guid: f41fc50836e64b14fab7f89fad4f25cb,
     type: 3}
   m_PrefabInstance: {fileID: 3164868164547534480}
   m_PrefabAsset: {fileID: 0}
@@ -1061,12 +1067,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b743370ac3e4ec2a1668f5455a8ef8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3390503655311034339 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 353149733280553331, guid: f41fc50836e64b14fab7f89fad4f25cb,
-    type: 3}
-  m_PrefabInstance: {fileID: 3164868164547534480}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5560938326131984739 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7406087270375069683, guid: f41fc50836e64b14fab7f89fad4f25cb,

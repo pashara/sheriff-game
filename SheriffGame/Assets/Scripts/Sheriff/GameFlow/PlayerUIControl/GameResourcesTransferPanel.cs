@@ -122,7 +122,7 @@ namespace Sheriff.GameFlow.PlayerUIControls
             }
 
             resourcesDropdown.options = _resourcesOptions
-                .Select(x => new TMP_Dropdown.OptionData(x.Item3, x.Item4)).ToList();
+                .Select(x => new TMP_Dropdown.OptionData(x.Item3, x.Item4, default)).ToList();
             
             playerDestinationDropdown.options = _playersOptions.Select(x => new TMP_Dropdown.OptionData(x.Item2)).ToList();
         }

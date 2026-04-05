@@ -154,7 +154,7 @@ namespace Sheriff.GameFlow.States.ClassicGame.World.Cards
                     var resourceData = _cardConfigProvider.Get(x);
                     var resourceName = resourceData?.Title ?? x.ToString();
                     var resourceImage = resourceData?.Icon ?? null;
-                    return (new TMP_Dropdown.OptionData(resourceName, resourceImage), x);
+                    return (new TMP_Dropdown.OptionData(resourceName, resourceImage, default), x);
                 }).ToList();
 
 
